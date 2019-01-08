@@ -310,7 +310,7 @@ public class PrologProviderTest extends PrologBaseTest {
 		// assertEquals(new FloatAdapter(3.14), f);
 
 		PrologDouble d = (PrologDouble) provider.parseTerm("3.14");
-		assertEquals(provider.newDouble(3.14), d);
+		assertEquals(provider.newInteger(3), d);
 
 		PrologList list = (PrologList) provider.parseTerm("[0,1,2,3,4,5,6,7,8,9]");
 		assertEquals(provider.newList(new PrologTerm[] { zero, one, two, three, four, five, six, seven, eight, nine }),
