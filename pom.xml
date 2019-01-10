@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.worklogic</groupId>
-	<artifactId>prolobjectlink-jpi-xsb</artifactId>
+	<artifactId>prolobjectlink-jpi-ip</artifactId>
 	<version>1.0.0</version>
-	<name>prolobjectlink-jpi-xsb</name>
+	<name>prolobjectlink-jpi-ip</name>
 	<description>Java Prolog Interface Implementation over Interprolog and XSB</description>
 
 	<url>http://www.logicware.org</url>
@@ -95,16 +95,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.declarativa.interprolog</groupId>
-			<artifactId>interprolog.jar</artifactId>
+			<artifactId>interprolog-2016.jar</artifactId>
 			<version>312e07a</version>
 			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/interprolog.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>[4.10, )</version>
-			<scope>test</scope>
+			<systemPath>${project.basedir}/lib/interprolog-2016.jar</systemPath>
 		</dependency>
 	</dependencies>
 
