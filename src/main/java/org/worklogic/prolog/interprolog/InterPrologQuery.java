@@ -27,20 +27,22 @@ import org.logicware.prolog.AbstractQuery;
 import org.logicware.prolog.PrologQuery;
 import org.logicware.prolog.PrologTerm;
 
+import com.declarativa.interprolog.SolutionIterator;
+
 public final class InterPrologQuery extends AbstractQuery implements PrologQuery {
+
+	private SolutionIterator i;
 
 	public InterPrologQuery(AbstractEngine engine) {
 		super(engine);
 	}
 
 	public boolean hasSolution() {
-		// TODO Auto-generated method stub
-		return false;
+		return i != null && i.hasNext();
 	}
 
 	public boolean hasMoreSolutions() {
-		// TODO Auto-generated method stub
-		return false;
+		return i != null && i.hasNext();
 	}
 
 	public PrologTerm[] oneSolution() {

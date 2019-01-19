@@ -20,14 +20,43 @@
 package org.worklogic.prolog.interprolog;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+import java.util.LinkedList;
+
+import org.logicware.prolog.UnknownTermError;
+import org.worklogic.logging.LoggerConstants;
+import org.worklogic.logging.LoggerUtils;
 
 import com.declarativa.interprolog.TermModel;
+import com.igormaznitsa.prologparser.DefaultParserContext;
+import com.igormaznitsa.prologparser.GenericPrologParser;
+import com.igormaznitsa.prologparser.ParserContext;
+import com.igormaznitsa.prologparser.PrologParser;
+import com.igormaznitsa.prologparser.terms.PrologAtom;
+import com.igormaznitsa.prologparser.terms.PrologCompound;
+import com.igormaznitsa.prologparser.terms.PrologTerm;
+import com.igormaznitsa.prologparser.tokenizer.Op;
 
 public final class InterPrologParser {
 
 	public TermModel parseTerm(String term) {
-		// TODO Auto-generated method stub
-		return null;
+		TermModel result = null;
+		try {
+			Reader reader = new StringReader(term);
+			PrologParser parser = new GenericPrologParser(reader,
+					new DefaultParserContext(ParserContext.FLAG_CURLY_BRACKETS, Op.SWI));
+			if (parser.hasNext()) {
+				PrologTerm t = parser.next();
+				result = fromTerm(t);
+			}
+			parser.close();
+		} catch (IOException e) {
+			LoggerUtils.error(getClass(), LoggerConstants.IO, e);
+		}
+		return result;
 	}
 
 	public TermModel[] parseTerms(TermModel term) {
@@ -35,8 +64,20 @@ public final class InterPrologParser {
 	}
 
 	public TermModel[] parseTerms(String stringTerms) {
-		// TODO Auto-generated method stub
-		return null;
+		TermModel[] result = new TermModel[0];
+		LinkedList<TermModel> list = new LinkedList<TermModel>();
+		try {
+			Reader reader = new StringReader(stringTerms);
+			PrologParser parser = new GenericPrologParser(reader,
+					new DefaultParserContext(ParserContext.FLAG_CURLY_BRACKETS, Op.SWI));
+			for (PrologTerm prologTerm : parser) {
+				list.add(fromTerm(prologTerm));
+			}
+			parser.close();
+		} catch (IOException e) {
+			LoggerUtils.error(getClass(), LoggerConstants.IO, e);
+		}
+		return list.toArray(result);
 	}
 
 	public InterPrologProgram parseProgram(String file) {
@@ -44,8 +85,103 @@ public final class InterPrologParser {
 	}
 
 	public InterPrologProgram parseProgram(File in) {
-		// TODO Auto-generated method stub
-		return null;
+		PrologParser parser = null;
+		InterPrologProgram program = new InterPrologProgram();
+		try {
+			Reader reader = new FileReader(in);
+			parser = new GenericPrologParser(reader,
+					new DefaultParserContext(ParserContext.FLAG_CURLY_BRACKETS, Op.SWI));
+			for (PrologTerm prologTerm : parser) {
+				program.add(fromTerm(prologTerm));
+			}
+		} catch (IOException e) {
+			LoggerUtils.error(getClass(), LoggerConstants.IO, e);
+		} finally {
+			if (parser != null) {
+				try {
+					parser.close();
+				} catch (IOException e) {
+					LoggerUtils.error(getClass(), LoggerConstants.IO, e);
+				}
+			}
+		}
+		return program;
+	}
+
+	public TermModel fromTerm(PrologTerm term) {
+		switch (term.getType()) {
+		case ATOM:
+			PrologAtom atom = (PrologAtom) term;
+			String functor = atom.getText();
+			if (functor.equals("nil")) {
+				return new TermModel("nil");
+			} else if (functor.equals("!")) {
+				return new TermModel("!");
+			} else if (functor.equals("fail")) {
+				return new TermModel("fail");
+			} else if (functor.equals("true")) {
+				return new TermModel("true");
+			} else if (functor.equals("false")) {
+				return new TermModel("false");
+			} else if (functor.equals("[]")) {
+				return new TermModel("[]");
+			} 
+			
+			
+//		case FLOAT_TYPE:
+//			return new TermModel(((PrologFloat) term).getFloatValue());
+//		case INTEGER_TYPE:
+//			return new TermModel(((PrologInteger) term).getIntValue());
+//		case DOUBLE_TYPE:
+//			return new TermModel(((PrologDouble) term).getDoubleValue());
+//		case LONG_TYPE:
+//			return new TermModel(((PrologLong) term).getLongValue());
+			
+			
+			else {
+				return new TermModel(((PrologAtom) term).getText());
+			}
+		case VAR:
+//			String name = ((PrologVariable) term).getName();
+//			TermModel variable = sharedPrologVariables.get(name);
+//			if (variable == null) {
+//				variable = new Variable(name);
+//				sharedPrologVariables.put(name, variable);
+//			}
+//			return variable;
+
+			System.out.println("Variable");
+			System.out.println(term);
+			return null;
+
+		case LIST:
+			PrologCompound compound = (PrologCompound) term;
+			PrologTerm[] array = new PrologTerm[compound.getArity()];
+			for (int i = 0; i < array.length; i++) {
+				array[i] = compound.getTermAt(i);
+			}
+			TermModel list = new TermModel(".", fromTermArray(array));
+			return list;
+		case STRUCT:
+			compound = (PrologCompound) term;
+			array = new PrologTerm[compound.getArity()];
+			functor = term.getFunctor().toString();
+			for (int i = 0; i < array.length; i++) {
+				array[i] = compound.getTermAt(i);
+			}
+			TermModel[] arguments = fromTermArray(array);
+			return new TermModel(functor, arguments);
+		default:
+			throw new UnknownTermError(term);
+		}
+	}
+
+	public TermModel[] fromTermArray(PrologTerm[] terms) {
+		TermModel[] prologTerms = new TermModel[terms.length];
+		for (int i = 0; i < terms.length; i++) {
+			prologTerms[i] = fromTerm(terms[i]);
+		}
+		return prologTerms;
 	}
 
 }

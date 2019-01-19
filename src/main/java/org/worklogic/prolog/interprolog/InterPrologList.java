@@ -42,26 +42,19 @@ public class InterPrologList extends InterPrologTerm implements PrologList {
 
 	protected InterPrologList(PrologProvider provider, TermModel[] arguments) {
 		super(LIST_TYPE, provider);
-		value = EMPTY;
-		for (int i = arguments.length - 1; i >= 0; --i) {
-			value = new TermModel(LIST_FUNCTOR, new TermModel[] { arguments[i], value });
-		}
+		value = new TermModel(LIST_FUNCTOR, arguments, true);
 	}
 
 	protected InterPrologList(PrologProvider provider, PrologTerm[] arguments) {
 		super(LIST_TYPE, provider);
-		value = EMPTY;
-		for (int i = arguments.length - 1; i >= 0; --i) {
-			value = new TermModel(LIST_FUNCTOR,
-					new TermModel[] { unwrap(arguments[i], InterPrologTerm.class).value, value });
-		}
+		value = new TermModel(LIST_FUNCTOR, fromTermArray(arguments, TermModel[].class), true);
 	}
 
 	protected InterPrologList(PrologProvider provider, PrologTerm head, PrologTerm tail) {
 		super(LIST_TYPE, provider);
 		TermModel h = unwrap(head, InterPrologTerm.class).value;
 		TermModel t = unwrap(tail, InterPrologTerm.class).value;
-		value = new TermModel(LIST_FUNCTOR, new TermModel[] { h, t });
+		value = new TermModel(LIST_FUNCTOR, new TermModel[] { h, t }, true);
 	}
 
 	protected InterPrologList(PrologProvider provider, PrologTerm[] arguments, PrologTerm tail) {
@@ -86,11 +79,11 @@ public class InterPrologList extends InterPrologTerm implements PrologList {
 	}
 
 	public Iterator<PrologTerm> iterator() {
-		return new SwiPrologListIter(value);
+		return new InterPrologListIter(value);
 	}
 
 	public PrologTerm getHead() {
-		return provider.toTerm(value.getChild(1), PrologTerm.class);
+		return provider.toTerm(value.getChild(0), PrologTerm.class);
 	}
 
 	public PrologTerm getTail() {
@@ -98,23 +91,16 @@ public class InterPrologList extends InterPrologTerm implements PrologList {
 	}
 
 	public int getArity() {
-		return value.getChildCount();
+		return 2;
 	}
 
 	public String getFunctor() {
-		return ".";
+		return LIST_FUNCTOR;
 	}
 
+	@Override
 	public String getIndicator() {
 		return getFunctor() + "/" + getArity();
-	}
-
-	public boolean hasIndicator(String functor, int arity) {
-		return getFunctor().equals(functor) && getArity() == arity;
-	}
-
-	public PrologTerm[] getArguments() {
-		return toTermArray(value.flatList(), PrologTerm[].class);
 	}
 
 	public String toString() {
@@ -130,21 +116,17 @@ public class InterPrologList extends InterPrologTerm implements PrologList {
 		return string.append("]").toString();
 	}
 
-	private class SwiPrologListIter extends AbstractIterator<PrologTerm> implements Iterator<PrologTerm> {
+	private class InterPrologListIter extends AbstractIterator<PrologTerm> implements Iterator<PrologTerm> {
 
-		private TermModel ptr;
+		private final TermModel[] a;
 		private int index;
-		private int length;
 
-		private SwiPrologListIter(TermModel l) {
-			ptr = l;
-			if (l.isList()) {
-				length = l.getChildCount();
-			}
+		private InterPrologListIter(TermModel l) {
+			a = l.children;
 		}
 
 		public boolean hasNext() {
-			return index < length;
+			return index < a.length;
 		}
 
 		public PrologTerm next() {
@@ -153,10 +135,7 @@ public class InterPrologList extends InterPrologTerm implements PrologList {
 				throw new NoSuchElementException();
 			}
 
-			PrologTerm term = toTerm(ptr.getChild(1), PrologTerm.class);
-			ptr = (TermModel) ptr.getChild(2);
-			index++;
-			return term;
+			return toTerm(a[index++], PrologTerm.class);
 		}
 
 	}
