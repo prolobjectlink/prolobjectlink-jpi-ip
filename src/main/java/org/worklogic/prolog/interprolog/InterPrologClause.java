@@ -24,7 +24,7 @@ import org.logicware.prolog.PrologClause;
 import org.logicware.prolog.PrologProvider;
 import org.logicware.prolog.PrologTerm;
 
-public class InterPrologClause extends AbstractClause implements PrologClause {
+public final class InterPrologClause extends AbstractClause implements PrologClause {
 
 	protected InterPrologClause(PrologProvider provider, PrologTerm head) {
 		super(provider, head, false, false, false);
@@ -39,8 +39,8 @@ public class InterPrologClause extends AbstractClause implements PrologClause {
 		super(provider, head, dynamic, multifile, discontiguous);
 	}
 
-	protected InterPrologClause(PrologProvider provider, PrologTerm head, PrologTerm body, boolean dynamic, boolean multifile,
-			boolean discontiguous) {
+	protected InterPrologClause(PrologProvider provider, PrologTerm head, PrologTerm body, boolean dynamic,
+			boolean multifile, boolean discontiguous) {
 		super(provider, head, body, dynamic, multifile, discontiguous);
 	}
 }
