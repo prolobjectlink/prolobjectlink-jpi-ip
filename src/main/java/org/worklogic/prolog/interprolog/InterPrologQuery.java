@@ -33,7 +33,7 @@ public final class InterPrologQuery extends AbstractQuery implements PrologQuery
 
 	private SolutionIterator i;
 
-	public InterPrologQuery(AbstractEngine engine) {
+	public InterPrologQuery(AbstractEngine engine, String cache, String string) {
 		super(engine);
 	}
 

@@ -42,10 +42,14 @@ import com.igormaznitsa.prologparser.tokenizer.Op;
 
 public final class InterPrologParser {
 
-	public TermModel parseTerm(String term) {
+	public TermModel parseTerm(final String term) {
 		TermModel result = null;
 		try {
-			Reader reader = new StringReader(term);
+			String temp = term;
+			if (temp.lastIndexOf('.') != temp.length() - 1) {
+				temp += ".";
+			}
+			Reader reader = new StringReader(temp);
 			PrologParser parser = new GenericPrologParser(reader,
 					new DefaultParserContext(ParserContext.FLAG_CURLY_BRACKETS, Op.SWI));
 			if (parser.hasNext()) {
@@ -125,20 +129,11 @@ public final class InterPrologParser {
 				return new TermModel("false");
 			} else if (functor.equals("[]")) {
 				return new TermModel("[]");
-			} 
-			
-			
-//		case FLOAT_TYPE:
-//			return new TermModel(((PrologFloat) term).getFloatValue());
-//		case INTEGER_TYPE:
-//			return new TermModel(((PrologInteger) term).getIntValue());
-//		case DOUBLE_TYPE:
-//			return new TermModel(((PrologDouble) term).getDoubleValue());
-//		case LONG_TYPE:
-//			return new TermModel(((PrologLong) term).getLongValue());
-			
-			
-			else {
+			} else if (functor.matches("0 | [1-9][0-9]*")) {
+				return new TermModel(Integer.valueOf(functor));
+			} else if (functor.matches("[0-9]+ \\. [0-9]*")) {
+				return new TermModel(Double.valueOf(functor));
+			} else {
 				return new TermModel(((PrologAtom) term).getText());
 			}
 		case VAR:

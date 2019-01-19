@@ -39,13 +39,11 @@ public abstract class InterPrologProvider extends AbstractProvider implements Pr
 	}
 
 	public PrologTerm parseTerm(String term) {
-		// TODO Auto-generated method stub
-		return null;
+		return toTerm(new InterPrologParser().parseTerm(term), PrologTerm.class);
 	}
 
 	public PrologTerm[] parseTerms(String stringTerms) {
-		// TODO Auto-generated method stub
-		return null;
+		return toTermArray(new InterPrologParser().parseTerms(stringTerms), PrologTerm[].class);
 	}
 
 	public boolean isCompliant() {
