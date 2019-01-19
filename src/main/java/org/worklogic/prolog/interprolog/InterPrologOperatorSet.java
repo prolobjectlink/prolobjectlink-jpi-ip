@@ -27,7 +27,7 @@ import java.util.Set;
 import org.logicware.prolog.PrologOperator;
 import org.logicware.prolog.PrologOperatorSet;
 
-final class InterPrologOperatorSet extends AbstractSet<PrologOperator> implements PrologOperatorSet {
+public final class InterPrologOperatorSet extends AbstractSet<PrologOperator> implements PrologOperatorSet {
 
 	protected final Set<PrologOperator> operators;
 

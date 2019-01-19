@@ -48,9 +48,8 @@ import org.logicware.prolog.PrologTermType;
 import org.worklogic.ArrayIterator;
 import org.worklogic.logging.LoggerUtils;
 
+import com.declarativa.interprolog.AbstractPrologEngine;
 import com.declarativa.interprolog.TermModel;
-import com.xsb.interprolog.AbstractNativeEngine;
-import com.xsb.interprolog.NativeEngine;
 
 /**
  * 
@@ -68,11 +67,8 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	// cache file in OS temporal directory
 	private static String cache = null;
 
-	// path to binary engine directory
-	private static String xsbPath;
-
 	// XSB native engine
-	private final AbstractNativeEngine engine;
+	public final AbstractPrologEngine engine;
 
 	// parser to obtain terms from text
 	private final InterPrologParser parser = new InterPrologParser();
@@ -84,7 +80,6 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	private static String consultCacheComma;
 	static {
 		try {
-			xsbPath = "C:/Program Files (x86)/XSB/config/x64-pc-windows/bin";
 			File f = File.createTempFile("prolobjectlink-jpi-jpl7-cache-", ".pl");
 			cache = f.getCanonicalPath().replace(File.separatorChar, '/');
 			consultCacheComma = "consult('" + cache + "'),";
@@ -93,28 +88,14 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 		}
 	}
 
-	protected InterPrologEngine(PrologProvider provider) {
+	protected InterPrologEngine(PrologProvider provider, AbstractPrologEngine engine) {
 		super(provider);
-		engine = new NativeEngine(xsbPath);
-		if (engine.deterministicGoal(
-				"writeln('Hello XSB'), javaMessage('java.lang.System'-out,println(string('Hi Java, I am native!')))")) {
-			System.out.println("Native engine is OK!");
-			System.out.println(engine.getPrologVersion());
-		} else {
-			System.out.println("Native engine is NOT OK!");
-		}
+		this.engine = engine;
 	}
 
-	protected InterPrologEngine(PrologProvider provider, String path) {
+	protected InterPrologEngine(PrologProvider provider, AbstractPrologEngine engine, String path) {
 		super(provider);
-		engine = new NativeEngine(xsbPath);
-		if (engine.deterministicGoal(
-				"writeln('Hello XSB'), javaMessage('java.lang.System'-out,println(string('Hi Java, I am native!')))")) {
-			System.out.println("Native engine is OK!");
-			System.out.println(engine.getPrologVersion());
-		} else {
-			System.out.println("Native engine is NOT OK!");
-		}
+		this.engine = engine;
 		consult(path);
 	}
 
