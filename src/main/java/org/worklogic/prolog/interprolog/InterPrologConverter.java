@@ -48,6 +48,7 @@ import org.logicware.prolog.PrologLong;
 import org.logicware.prolog.PrologQuery;
 import org.logicware.prolog.PrologStructure;
 import org.logicware.prolog.PrologTerm;
+import org.logicware.prolog.PrologVariable;
 import org.logicware.prolog.UnknownTermError;
 
 import com.declarativa.interprolog.TermModel;
@@ -87,16 +88,13 @@ public abstract class InterPrologConverter extends AbstractConverter<TermModel> 
 		} else if (prologTerm.isLong()) {
 			return new InterPrologFloat(provider, prologTerm.longValue());
 		} else if (prologTerm.isVar()) {
-//			String name = ((Variable) prologTerm).name();
-//			PrologVariable variable = sharedVariables.get(name);
-//			if (variable == null) {
-//				variable = new InterPrologVariable(provider, name);
-//				sharedVariables.put(variable.getName(), variable);
-//			}
-//			return variable;
-			System.out.println("Variable");
-			System.out.println(prologTerm);
-			return null;
+			String name = ((TermVariable) prologTerm).getName();
+			PrologVariable variable = sharedVariables.get(name);
+			if (variable == null) {
+				variable = new InterPrologVariable(provider, name);
+				sharedVariables.put(variable.getName(), variable);
+			}
+			return variable;
 		} else if (prologTerm.isList()) {
 			return new InterPrologList(provider, prologTerm.flatList());
 		} else if (prologTerm.getChildCount() > 0) {
@@ -163,18 +161,14 @@ public abstract class InterPrologConverter extends AbstractConverter<TermModel> 
 		case LONG_TYPE:
 			return new TermModel(((PrologLong) term).getLongValue());
 		case VARIABLE_TYPE:
-//			String name = ((PrologVariable) term).getName();
-//			TermModel variable = sharedPrologVariables.get(name);
-//			if (variable == null) {
-//				variable = new Variable(name);
-//				sharedPrologVariables.put(name, variable);
-//			}
-//			return variable;
-
-			System.out.println("Variable");
-			System.out.println(term);
-			return null;
-
+			String name = ((PrologVariable) term).getName();
+			int position = ((PrologVariable) term).getPosition();
+			TermModel variable = sharedPrologVariables.get(name);
+			if (variable == null) {
+				variable = new TermVariable(name, position);
+				sharedPrologVariables.put(name, variable);
+			}
+			return variable;
 		case LIST_TYPE:
 			PrologTerm[] array = term.getArguments();
 			TermModel list = new TermModel(".", fromTermArray(array));
@@ -197,8 +191,15 @@ public abstract class InterPrologConverter extends AbstractConverter<TermModel> 
 	}
 
 	public final TermModel fromTerm(PrologTerm head, PrologTerm[] body) {
-		// TODO Auto-generated method stub
-		return null;
+		TermModel clauseHead = fromTerm(head);
+		if (body != null && body.length > 0) {
+			TermModel clauseBody = fromTerm(body[body.length - 1]);
+			for (int i = body.length - 2; i >= 0; --i) {
+				clauseBody = new TermModel(",", new TermModel[] { fromTerm(body[i]), clauseBody });
+			}
+			return new TermModel(":-", new TermModel[] { clauseHead, clauseBody });
+		}
+		return clauseHead;
 	}
 
 }

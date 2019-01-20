@@ -76,13 +76,10 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	// main memory prolog program
 	protected InterPrologProgram program = new InterPrologProgram();
 
-	// formulated string for < consult(cache), >
-	private static String consultCacheComma;
 	static {
 		try {
 			File f = File.createTempFile("prolobjectlink-jpi-jpl7-cache-", ".pl");
 			cache = f.getCanonicalPath().replace(File.separatorChar, '/');
-			consultCacheComma = "consult('" + cache + "'),";
 		} catch (IOException e) {
 			LoggerUtils.error(InterPrologEngine.class, IO, e);
 		}
@@ -221,22 +218,21 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	}
 
 	public final void operator(int priority, String specifier, String operator) {
-		engine.deterministicGoal(consultCacheComma + "op(" + priority + "," + specifier + ", " + operator + ")");
+		engine.deterministicGoal("op(" + priority + "," + specifier + ", " + operator + ")");
 	}
 
 	public final boolean currentPredicate(String functor, int arity) {
-		return engine.deterministicGoal(consultCacheComma + "current_predicate(" + functor + "/" + arity + ")");
+		return engine.deterministicGoal("current_predicate(" + functor + "/" + arity + ")");
 	}
 
 	public final boolean currentOperator(int priority, String specifier, String operator) {
-		return engine.deterministicGoal(
-				consultCacheComma + "current_op(" + priority + "," + specifier + ", " + operator + ")");
+		return engine.deterministicGoal("current_op(" + priority + "," + specifier + ", " + operator + ")");
 	}
 
 	public final Set<PrologOperator> currentOperators() {
 		PrologEngine internalScopeEngine = provider.newEngine();
 		Set<PrologOperator> operators = new HashSet<PrologOperator>();
-		String stringQuery = consultCacheComma + "findall(P/S/O,current_op(P,S,O)," + KEY + ")";
+		String stringQuery = "findall(P/S/O,current_op(P,S,O)," + KEY + ")";
 		PrologQuery query = internalScopeEngine.query(stringQuery);
 		Map<String, PrologTerm>[] solution = query.allVariablesSolutions();
 		for (Map<String, PrologTerm> map : solution) {

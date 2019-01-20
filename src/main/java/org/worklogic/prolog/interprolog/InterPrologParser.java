@@ -24,6 +24,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import org.logicware.prolog.UnknownTermError;
@@ -37,10 +38,19 @@ import com.igormaznitsa.prologparser.ParserContext;
 import com.igormaznitsa.prologparser.PrologParser;
 import com.igormaznitsa.prologparser.terms.PrologAtom;
 import com.igormaznitsa.prologparser.terms.PrologCompound;
+import com.igormaznitsa.prologparser.terms.PrologFloat;
+import com.igormaznitsa.prologparser.terms.PrologInt;
 import com.igormaznitsa.prologparser.terms.PrologTerm;
+import com.igormaznitsa.prologparser.terms.PrologVar;
 import com.igormaznitsa.prologparser.tokenizer.Op;
 
 public final class InterPrologParser {
+
+	protected final HashMap<String, TermModel> sharedPrologVariables;
+
+	protected InterPrologParser() {
+		sharedPrologVariables = new HashMap<String, TermModel>();
+	}
 
 	public TermModel parseTerm(final String term) {
 		TermModel result = null;
@@ -115,40 +125,39 @@ public final class InterPrologParser {
 	public TermModel fromTerm(PrologTerm term) {
 		switch (term.getType()) {
 		case ATOM:
-			PrologAtom atom = (PrologAtom) term;
-			String functor = atom.getText();
-			if (functor.equals("nil")) {
-				return new TermModel("nil");
-			} else if (functor.equals("!")) {
-				return new TermModel("!");
-			} else if (functor.equals("fail")) {
-				return new TermModel("fail");
-			} else if (functor.equals("true")) {
-				return new TermModel("true");
-			} else if (functor.equals("false")) {
-				return new TermModel("false");
-			} else if (functor.equals("[]")) {
-				return new TermModel("[]");
-			} else if (functor.matches("0 | [1-9][0-9]*")) {
-				return new TermModel(Integer.valueOf(functor));
-			} else if (functor.matches("[0-9]+ \\. [0-9]*")) {
-				return new TermModel(Double.valueOf(functor));
+			if (term instanceof PrologInt) {
+				PrologInt i = (PrologInt) term;
+				return new TermModel(i.getNumber());
+			} else if (term instanceof PrologFloat) {
+				PrologFloat f = (PrologFloat) term;
+				return new TermModel(f.getNumber());
 			} else {
-				return new TermModel(((PrologAtom) term).getText());
+				String functor = term.getText();
+				if (functor.equals("nil")) {
+					return new TermModel("nil");
+				} else if (functor.equals("!")) {
+					return new TermModel("!");
+				} else if (functor.equals("fail")) {
+					return new TermModel("fail");
+				} else if (functor.equals("true")) {
+					return new TermModel("true");
+				} else if (functor.equals("false")) {
+					return new TermModel("false");
+				} else if (functor.equals("[]")) {
+					return new TermModel("[]");
+				} else {
+					return new TermModel(((PrologAtom) term).getText());
+				}
 			}
 		case VAR:
-//			String name = ((PrologVariable) term).getName();
-//			TermModel variable = sharedPrologVariables.get(name);
-//			if (variable == null) {
-//				variable = new Variable(name);
-//				sharedPrologVariables.put(name, variable);
-//			}
-//			return variable;
-
-			System.out.println("Variable");
-			System.out.println(term);
-			return null;
-
+			String name = ((PrologVar) term).getText();
+			int position = ((PrologVar) term).getPos();// FIXME CATCH THE VAR POSITION IN STRUCTURE ???
+			TermModel variable = sharedPrologVariables.get(name);
+			if (variable == null) {
+				variable = new TermVariable(name, position);
+				sharedPrologVariables.put(name, variable);
+			}
+			return variable;
 		case LIST:
 			PrologCompound compound = (PrologCompound) term;
 			PrologTerm[] array = new PrologTerm[compound.getArity()];
@@ -160,7 +169,7 @@ public final class InterPrologParser {
 		case STRUCT:
 			compound = (PrologCompound) term;
 			array = new PrologTerm[compound.getArity()];
-			functor = term.getFunctor().toString();
+			String functor = term.getFunctor().toString();
 			for (int i = 0; i < array.length; i++) {
 				array[i] = compound.getTermAt(i);
 			}
