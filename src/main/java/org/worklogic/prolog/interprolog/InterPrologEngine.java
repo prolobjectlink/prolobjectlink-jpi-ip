@@ -328,6 +328,7 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	public final void dispose() {
 		File c = new File(cache);
 		c.deleteOnExit();
+		engine.shutdown();
 		program.clear();
 	}
 
