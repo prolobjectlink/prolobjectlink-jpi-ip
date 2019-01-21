@@ -37,10 +37,12 @@ import static org.logicware.prolog.PrologTermType.VARIABLE_TYPE;
 import java.util.Map;
 
 import org.logicware.prolog.AbstractTerm;
+import org.logicware.prolog.PrologEngine;
 import org.logicware.prolog.PrologNumber;
 import org.logicware.prolog.PrologProvider;
 import org.logicware.prolog.PrologTerm;
 
+import com.declarativa.interprolog.SolutionIterator;
 import com.declarativa.interprolog.TermModel;
 
 public class InterPrologTerm extends AbstractTerm implements PrologTerm {
@@ -128,7 +130,26 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	public boolean isEvaluable() {
-		// TODO Auto-generated method stub
+		String key = "X";
+		PrologEngine engine = provider.newEngine();
+		String stringQuery = "findall(P/S/O,current_op(P,S,O)," + key + "), buildTermModel(" + key + ",TM)";
+		SolutionIterator si = engine.unwrap(InterPrologEngine.class).engine.goal(stringQuery, "[TM]");
+		while (si.hasNext()) {
+			Object[] bindings = si.next();
+			for (Object object : bindings) {
+				if (object instanceof TermModel) {
+					TermModel list = (TermModel) object;
+					while (list.getChildCount() > 0) {
+						TermModel solvedTerm = (TermModel) list.getChild(0);
+						String n = (String) solvedTerm.children[1].node;
+						if (getFunctor().equals(n)) {
+							return true;
+						}
+						list = (TermModel) list.getChild(1);
+					}
+				}
+			}
+		}
 		return false;
 	}
 
@@ -141,7 +162,7 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	public PrologTerm[] getArguments() {
-		return toTermArray(value.children, PrologTerm[].class);
+		return getArity() > 0 ? toTermArray(value.children, PrologTerm[].class) : new PrologTerm[0];
 	}
 
 	public boolean unify(PrologTerm term) {
@@ -154,15 +175,15 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	public final int compareTo(PrologTerm term) {
-	
+
 		int termType = term.getType();
-	
+
 		if ((type >> 8) < (termType >> 8)) {
 			return -1;
 		} else if ((type >> 8) > (termType >> 8)) {
 			return 1;
 		}
-	
+
 		switch (type) {
 		case NIL_TYPE:
 		case CUT_TYPE:
@@ -170,7 +191,7 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 		case TRUE_TYPE:
 		case FALSE_TYPE:
 		case ATOM_TYPE:
-	
+
 			// alphabetic functor comparison
 			int result = value.node.toString().compareTo(term.getFunctor());
 			if (result < 0) {
@@ -179,77 +200,77 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 				return 1;
 			}
 			break;
-	
+
 		case FLOAT_TYPE:
-	
+
 			checkNumberType(term);
 			float thisFloatValue = ((Number) value.node).floatValue();
 			float otherFloatValue = ((PrologNumber) term).getFloatValue();
-	
+
 			if (thisFloatValue < otherFloatValue) {
 				return -1;
 			} else if (thisFloatValue > otherFloatValue) {
 				return 1;
 			}
-	
+
 			break;
-	
+
 		case LONG_TYPE:
-	
+
 			checkNumberType(term);
 			long thisValue = value.longValue();
 			long otherValue = ((PrologNumber) term).getLongValue();
-	
+
 			if (thisValue < otherValue) {
 				return -1;
 			} else if (thisValue > otherValue) {
 				return 1;
 			}
-	
+
 			break;
-	
+
 		case DOUBLE_TYPE:
-	
+
 			checkNumberType(term);
 			double thisDoubleValue = ((Number) value.node).doubleValue();
 			double otherDoubleValue = ((PrologNumber) term).getDoubleValue();
-	
+
 			if (thisDoubleValue < otherDoubleValue) {
 				return -1;
 			} else if (thisDoubleValue > otherDoubleValue) {
 				return 1;
 			}
-	
+
 			break;
-	
+
 		case INTEGER_TYPE:
-	
+
 			checkNumberType(term);
 			int thisIntergerValue = value.intValue();
 			int otherIntegerValue = ((PrologNumber) term).getIntValue();
-	
+
 			if (thisIntergerValue < otherIntegerValue) {
 				return -1;
 			} else if (thisIntergerValue > otherIntegerValue) {
 				return 1;
 			}
-	
+
 			break;
-	
+
 		case LIST_TYPE:
 		case EMPTY_TYPE:
 		case STRUCTURE_TYPE:
-	
+
 			PrologTerm thisCompound = this;
 			PrologTerm otherCompound = term;
-	
+
 			// comparison by arity
 			if (thisCompound.getArity() < otherCompound.getArity()) {
 				return -1;
 			} else if (thisCompound.getArity() > otherCompound.getArity()) {
 				return 1;
 			}
-	
+
 			// alphabetic functor comparison
 			result = thisCompound.getFunctor().compareTo(otherCompound.getFunctor());
 			if (result < 0) {
@@ -257,11 +278,11 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 			} else if (result > 0) {
 				return 1;
 			}
-	
+
 			// arguments comparison
 			PrologTerm[] thisArguments = thisCompound.getArguments();
 			PrologTerm[] otherArguments = otherCompound.getArguments();
-	
+
 			for (int i = 0; i < thisArguments.length; i++) {
 				PrologTerm thisArgument = thisArguments[i];
 				PrologTerm otherArgument = otherArguments[i];
@@ -273,9 +294,9 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 				}
 			}
 			break;
-	
+
 		case VARIABLE_TYPE:
-	
+
 			InterPrologTerm thisVariable = unwrap(InterPrologTerm.class);
 			InterPrologTerm otherVariable = unwrap(term, InterPrologTerm.class);
 			if (thisVariable.vIndex < otherVariable.vIndex) {
@@ -284,12 +305,12 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 				return 1;
 			}
 			break;
-	
+
 		default:
 			return 0;
-	
+
 		}
-	
+
 		return 0;
 	}
 

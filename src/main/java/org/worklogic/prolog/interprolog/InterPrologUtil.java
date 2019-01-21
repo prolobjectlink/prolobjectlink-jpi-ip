@@ -19,11 +19,8 @@
  */
 package org.worklogic.prolog.interprolog;
 
-import static org.logicware.prolog.AbstractConverter.SIMPLE_ATOM_REGEX;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.logicware.prolog.PrologProvider;
 import org.logicware.prolog.PrologTerm;
@@ -46,6 +43,11 @@ final class InterPrologUtil {
 
 	static final PrologTerm toTerm(PrologProvider provider, Object object) {
 
+		if (object instanceof TermModel) {
+			TermModel xt = (TermModel) object;
+			object = xt.node;
+		}
+
 		// null pointer
 		if (object == null) {
 			return new InterPrologNil(provider);
@@ -54,44 +56,7 @@ final class InterPrologUtil {
 		// string data type
 		else if (object instanceof String) {
 			String string = (String) object;
-			int index = string.indexOf('(');
-			if (index > -1) {
-				String functor = string.substring(0, index);
-				String arguments = string.substring(index);
-				if (!functor.matches(SIMPLE_ATOM_REGEX)) {
-					StringBuilder buffer = new StringBuilder();
-					buffer.append('\'');
-					buffer.append(functor);
-					buffer.append('\'');
-					String quoted = "" + buffer + "";
-					buffer.append(arguments);
-					string = "" + buffer + "";
-					FUNCTORS.put(functor, quoted);
-
-					// interprolog need treatment for complex functors
-					for (Entry<String, String> entry : FUNCTORS.entrySet()) {
-
-						// retrieve cached functors
-						String key = entry.getKey();
-						String value = entry.getValue();
-
-						// first and unique term pattern
-						String firstRegex = "(" + key + "";
-						if (string.contains(firstRegex)) {
-							string = string.replaceAll(key, value);
-						}
-
-						// non-first term pattern
-						String nonFirstRegex = "," + key + "";
-						if (string.contains(nonFirstRegex)) {
-							string = string.replaceAll(key, value);
-						}
-
-					}
-				}
-			}
-
-			return provider.parseTerm(string);
+			return new InterPrologAtom(provider, string);
 		}
 
 		// primitives and wrappers data types

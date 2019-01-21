@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.logicware.prolog.AbstractEngine;
@@ -38,8 +37,6 @@ import org.logicware.prolog.PredicateIndicator;
 import org.logicware.prolog.PrologClause;
 import org.logicware.prolog.PrologEngine;
 import org.logicware.prolog.PrologIndicator;
-import org.logicware.prolog.PrologList;
-import org.logicware.prolog.PrologNumber;
 import org.logicware.prolog.PrologOperator;
 import org.logicware.prolog.PrologProvider;
 import org.logicware.prolog.PrologQuery;
@@ -49,6 +46,7 @@ import org.worklogic.ArrayIterator;
 import org.worklogic.logging.LoggerUtils;
 
 import com.declarativa.interprolog.AbstractPrologEngine;
+import com.declarativa.interprolog.SolutionIterator;
 import com.declarativa.interprolog.TermModel;
 
 /**
@@ -78,7 +76,7 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 
 	static {
 		try {
-			File f = File.createTempFile("prolobjectlink-jpi-jpl7-cache-", ".pl");
+			File f = File.createTempFile("prolobjectlink-jpi-ip-cache-", ".pl");
 			cache = f.getCanonicalPath().replace(File.separatorChar, '/');
 		} catch (IOException e) {
 			LoggerUtils.error(InterPrologEngine.class, IO, e);
@@ -230,26 +228,21 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	}
 
 	public final Set<PrologOperator> currentOperators() {
-		PrologEngine internalScopeEngine = provider.newEngine();
 		Set<PrologOperator> operators = new HashSet<PrologOperator>();
-		String stringQuery = "findall(P/S/O,current_op(P,S,O)," + KEY + ")";
-		PrologQuery query = internalScopeEngine.query(stringQuery);
-		Map<String, PrologTerm>[] solution = query.allVariablesSolutions();
-		for (Map<String, PrologTerm> map : solution) {
-			for (PrologTerm operatorList : map.values()) {
-				if (!operatorList.isVariable() && operatorList.isList()) {
-					PrologList l = (PrologList) operatorList;
-					for (PrologTerm operator : l) {
-
-						PrologTerm prio = operator.getArgument(0).getArgument(0);
-						PrologTerm pos = operator.getArgument(0).getArgument(1);
-						PrologTerm op = operator.getArgument(1);
-
-						int p = ((PrologNumber) prio).getIntValue();
-						String s = pos.getFunctor();
-						String n = op.getFunctor();
-
+		String stringQuery = "findall(P/S/O,current_op(P,S,O)," + KEY + "), buildTermModel(" + KEY + ",TM)";
+		SolutionIterator si = engine.goal(stringQuery, "[TM]");
+		while (si.hasNext()) {
+			Object[] bindings = si.next();
+			for (Object object : bindings) {
+				if (object instanceof TermModel) {
+					TermModel list = (TermModel) object;
+					while (list.getChildCount() > 0) {
+						TermModel solvedTerm = (TermModel) list.getChild(0);
+						Integer p = (Integer) solvedTerm.children[0].children[0].node;
+						String s = (String) solvedTerm.children[0].children[1].node;
+						String n = (String) solvedTerm.children[1].node;
 						PrologOperator o = new InterPrologOperator(p, s, n);
+						list = (TermModel) list.getChild(1);
 						operators.add(o);
 					}
 				}
@@ -287,16 +280,19 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 
 	private Set<PrologIndicator> predicates() {
 		Set<PrologIndicator> indicators = new HashSet<PrologIndicator>();
-		String stringQuery = "consult('" + cache + "')," + "findall(X/Y,current_predicate(X/Y)," + KEY + ")";
-		PrologQuery query = new InterPrologQuery(this, cache, stringQuery);
-		if (query.hasSolution()) {
-			Map<String, PrologTerm>[] s = query.allVariablesSolutions();
-			for (Map<String, PrologTerm> map : s) {
-				for (PrologTerm term : map.values()) {
-					if (term.isCompound()) {
-						int arity = term.getArity();
-						String functor = term.getFunctor();
+		String stringQuery = "findall(X/Y,current_predicate(X/Y)," + KEY + "), buildTermModel(" + KEY + ",TM)";
+		SolutionIterator si = engine.goal(stringQuery, "[TM]");
+		while (si.hasNext()) {
+			Object[] bindings = si.next();
+			for (Object object : bindings) {
+				if (object instanceof TermModel) {
+					TermModel list = (TermModel) object;
+					while (list.getChildCount() > 0) {
+						TermModel solvedTerm = (TermModel) list.getChild(0);
+						String functor = (String) solvedTerm.children[0].node;
+						Integer arity = (Integer) solvedTerm.children[1].node;
 						PredicateIndicator pi = new PredicateIndicator(functor, arity);
+						list = (TermModel) list.getChild(1);
 						indicators.add(pi);
 					}
 				}

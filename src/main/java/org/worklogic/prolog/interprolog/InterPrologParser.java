@@ -46,10 +46,10 @@ import com.igormaznitsa.prologparser.tokenizer.Op;
 
 public final class InterPrologParser {
 
-	protected final HashMap<String, TermModel> sharedPrologVariables;
+	protected final HashMap<String, TermVariable> sharedPrologVariables;
 
 	protected InterPrologParser() {
-		sharedPrologVariables = new HashMap<String, TermModel>();
+		sharedPrologVariables = new HashMap<String, TermVariable>();
 	}
 
 	public TermModel parseTerm(final String term) {
@@ -77,11 +77,15 @@ public final class InterPrologParser {
 		return parseTerms("" + term + "");
 	}
 
-	public TermModel[] parseTerms(String stringTerms) {
+	public TermModel[] parseTerms(final String stringTerms) {
 		TermModel[] result = new TermModel[0];
 		LinkedList<TermModel> list = new LinkedList<TermModel>();
 		try {
-			Reader reader = new StringReader(stringTerms);
+			String temp = stringTerms;
+			if (temp.lastIndexOf('.') != temp.length() - 1) {
+				temp += ".";
+			}
+			Reader reader = new StringReader(temp);
 			PrologParser parser = new GenericPrologParser(reader,
 					new DefaultParserContext(ParserContext.FLAG_CURLY_BRACKETS, Op.SWI));
 			for (PrologTerm prologTerm : parser) {
@@ -152,7 +156,7 @@ public final class InterPrologParser {
 		case VAR:
 			String name = ((PrologVar) term).getText();
 			int position = ((PrologVar) term).getPos();// FIXME CATCH THE VAR POSITION IN STRUCTURE ???
-			TermModel variable = sharedPrologVariables.get(name);
+			TermVariable variable = sharedPrologVariables.get(name);
 			if (variable == null) {
 				variable = new TermVariable(name, position);
 				sharedPrologVariables.put(name, variable);

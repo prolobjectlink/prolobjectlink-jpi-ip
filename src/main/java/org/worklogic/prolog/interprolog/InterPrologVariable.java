@@ -72,7 +72,7 @@ public class InterPrologVariable extends InterPrologTerm implements PrologVariab
 	}
 
 	public int getPosition() {
-		throw new UnsupportedOperationException("getPosition()");
+		return vIndex;
 	}
 
 	public boolean isAnonymous() {

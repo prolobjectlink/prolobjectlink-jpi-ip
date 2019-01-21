@@ -127,7 +127,7 @@ public abstract class InterPrologConverter extends AbstractConverter<TermModel> 
 			}
 
 			for (int i = 0; i < arity; i++) {
-				arguments[i] = (TermModel) compound.getChild(i + 1);
+				arguments[i] = (TermModel) compound.getChild(i);
 			}
 			return new InterPrologStructure(provider, functor, arguments);
 

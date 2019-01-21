@@ -122,7 +122,7 @@ public class InterPrologList extends InterPrologTerm implements PrologList {
 		private int index;
 
 		private InterPrologListIter(TermModel l) {
-			a = l.children;
+			a = l.getChildCount() > 0 ? l.children : new TermModel[0];
 		}
 
 		public boolean hasNext() {
