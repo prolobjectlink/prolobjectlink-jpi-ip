@@ -50,7 +50,7 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 	protected int vIndex;
 	protected TermModel value;
 	protected PrologTerm vValue;
-	protected static int vIdexer = 0;
+	protected static int vIndexer = 0;
 
 	protected InterPrologTerm(int type, PrologProvider provider) {
 		super(type, provider);
@@ -59,11 +59,6 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 	protected InterPrologTerm(int type, PrologProvider provider, TermModel value) {
 		super(type, provider);
 		this.value = value;
-	}
-
-	protected InterPrologTerm(int type, PrologProvider provider, int vIndex) {
-		this(type, provider);
-		this.vIndex = vIndex;
 	}
 
 	public String getIndicator() {
@@ -126,7 +121,7 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	public boolean isCompound() {
-		return getArity() > 0;
+		return !isNumber() && getArity() > 0;
 	}
 
 	public boolean isEvaluable() {
@@ -142,7 +137,7 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 					while (list.getChildCount() > 0) {
 						TermModel solvedTerm = (TermModel) list.getChild(0);
 						String n = (String) solvedTerm.children[1].node;
-						if (getFunctor().equals(n)) {
+						if (!isNumber() && getFunctor().equals(n)) {
 							return true;
 						}
 						list = (TermModel) list.getChild(1);

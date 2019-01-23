@@ -199,7 +199,6 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 				buffer.append(',');
 			}
 		}
-		buffer.append(".");
 		return query("" + buffer + "");
 	}
 
@@ -211,7 +210,6 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 			buffer.append(',');
 			buffer.append(i.next());
 		}
-		buffer.append(".");
 		return query("" + buffer + "");
 	}
 

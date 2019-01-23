@@ -19,6 +19,9 @@
  */
 package org.worklogic.prolog.interprolog;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.logicware.prolog.AbstractProvider;
 import org.logicware.prolog.PrologAtom;
 import org.logicware.prolog.PrologConverter;
@@ -33,6 +36,8 @@ import org.logicware.prolog.PrologTerm;
 import org.logicware.prolog.PrologVariable;
 
 public abstract class InterPrologProvider extends AbstractProvider implements PrologProvider {
+
+	protected static final Map<String, String> varCache = new HashMap<String, String>();
 
 	public InterPrologProvider(PrologConverter<?> converter) {
 		super(converter);

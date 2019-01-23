@@ -30,25 +30,16 @@ import org.logicware.prolog.PrologVariable;
 
 public class InterPrologVariable extends InterPrologTerm implements PrologVariable {
 
-	private String name;
-
-	public InterPrologVariable(PrologProvider provider) {
-		this(provider, "_");
+	public InterPrologVariable(PrologProvider provider, int position) {
+		super(VARIABLE_TYPE, provider, new TermVariable("_", position));
 	}
 
 	public InterPrologVariable(PrologProvider provider, String name) {
-		super(VARIABLE_TYPE, provider, vIdexer++);
-		this.name = name;
-	}
-
-	public InterPrologVariable(PrologProvider provider, int position) {
-		super(VARIABLE_TYPE, provider, position);
-		this.name = "_";
+		super(VARIABLE_TYPE, provider, new TermVariable(name, vIndexer++));
 	}
 
 	public InterPrologVariable(PrologProvider provider, String name, int position) {
-		super(VARIABLE_TYPE, provider, position);
-		this.name = name;
+		super(VARIABLE_TYPE, provider, new TermVariable(name, position));
 	}
 
 	public PrologTerm[] getArguments() {
@@ -80,37 +71,12 @@ public class InterPrologVariable extends InterPrologTerm implements PrologVariab
 	}
 
 	public final String getName() {
-		return name;
+		return ((TermVariable) value).getName();
 	}
 
 	public final void setName(String name) {
-		this.name = name;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		InterPrologVariable other = (InterPrologVariable) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name)) {
-			return false;
-		}
-		return true;
+		TermVariable old = (TermVariable) value;
+		value = new TermVariable(name, old.getPosition());
 	}
 
 }

@@ -19,6 +19,8 @@
  */
 package org.worklogic.prolog.interprolog;
 
+import static org.worklogic.prolog.interprolog.InterPrologProvider.varCache;
+
 import java.io.Serializable;
 
 import com.declarativa.interprolog.TermModel;
@@ -32,6 +34,7 @@ public class TermVariable extends TermModel implements Serializable {
 
 	public TermVariable(String name, int position) {
 		super(new VariableNode(position));
+		varCache.put("Var" + position, name);
 		this.position = position;
 		this.name = name;
 	}

@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.logicware.prolog.AbstractEngine;
 import org.logicware.prolog.AbstractQuery;
@@ -38,7 +39,7 @@ public final class InterPrologQuery extends AbstractQuery implements PrologQuery
 	private InterPrologParser ip = new InterPrologParser();
 	private final List<String> variables = new ArrayList<String>();
 	private List<Map<String, Object>> allSolutions = new ArrayList<Map<String, Object>>();
-	private final Iterator<Map<String, Object>> itr;
+	private Iterator<Map<String, Object>> itr;
 
 	private void enumerateVariables(List<String> vector, TermModel term) {
 		if (!(term instanceof TermVariable)) {
@@ -53,15 +54,24 @@ public final class InterPrologQuery extends AbstractQuery implements PrologQuery
 		}
 	}
 
-	public InterPrologQuery(AbstractEngine engine, String cache, String string) {
+	InterPrologQuery(AbstractEngine engine, String cache, String string) {
 		super(engine);
-		InterPrologEngine pe = engine.unwrap(InterPrologEngine.class);
 
+		// replace cached inter-prolog variables with real variable name
+		for (Entry<String, String> entry : InterPrologProvider.varCache.entrySet()) {
+			if (string.contains(entry.getKey())) {
+				string = string.replace(entry.getKey(), entry.getValue());
+			}
+		}
+
+		// parse the string query and enumerates variable
 		TermModel[] models = ip.parseTerms(string);
 		for (TermModel term : models) {
 			enumerateVariables(variables, term);
 		}
 
+		// formulating find all query
+		InterPrologEngine pe = engine.unwrap(InterPrologEngine.class);
 		pe.engine.consultAbsolute(cache);
 		String key = "_KEY_";
 		StringBuilder b = new StringBuilder();
@@ -81,6 +91,7 @@ public final class InterPrologQuery extends AbstractQuery implements PrologQuery
 		b.append(key);
 		b.append(')');
 
+		// query and create term model
 		SolutionIterator si = pe.engine.goal(b + ", buildTermModel(" + key + ",TM)", "[TM]");
 		while (si.hasNext()) {
 			Object[] bindings = si.next();
@@ -95,15 +106,15 @@ public final class InterPrologQuery extends AbstractQuery implements PrologQuery
 							solution.put(variables.get(index--), solvedTerm.getChild(1));
 							solvedTerm = (TermModel) solvedTerm.getChild(0);
 						}
-						solution.put(variables.get(index--), solvedTerm);
+						solution.put(variables.get(index), solvedTerm);
 						list = (TermModel) list.getChild(1);
 						allSolutions.add(solution);
-						index = 0;
 					}
 				}
 			}
 		}
 
+		// catch solution iterator
 		itr = allSolutions.iterator();
 
 	}
@@ -263,9 +274,7 @@ public final class InterPrologQuery extends AbstractQuery implements PrologQuery
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + allSolutions.hashCode();
-		result = prime * result + ip.hashCode();
-		result = prime * result + variables.hashCode();
+		result = prime * result + ((allSolutions == null) ? 0 : allSolutions.hashCode());
 		return result;
 	}
 
@@ -278,11 +287,10 @@ public final class InterPrologQuery extends AbstractQuery implements PrologQuery
 		if (getClass() != obj.getClass())
 			return false;
 		InterPrologQuery other = (InterPrologQuery) obj;
-		if (!allSolutions.equals(other.allSolutions)) {
-			return false;
-		} else if (!ip.equals(other.ip)) {
-			return false;
-		} else if (!variables.equals(other.variables)) {
+		if (allSolutions == null) {
+			if (other.allSolutions != null)
+				return false;
+		} else if (!allSolutions.equals(other.allSolutions)) {
 			return false;
 		}
 		return true;
