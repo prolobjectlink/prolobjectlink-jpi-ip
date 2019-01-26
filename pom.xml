@@ -44,7 +44,7 @@
 		<developerConnection>scm:git:https://github.com/prolobjectlink/${project.name}.git</developerConnection>
 		<connection>scm:git:https://github.com/prolobjectlink/${project.name}.git</connection>
 		<url>https://github.com/prolobjectlink/${project.name}</url>
-		
+
 	</scm>
 
 	<ciManagement>
@@ -88,22 +88,17 @@
 			<artifactId>prolobjectlink-jpi</artifactId>
 			<version>[1.0.0, )</version>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.igormaznitsa</groupId> -->
-<!-- 			<artifactId>prologparser</artifactId> -->
-<!-- 			<version>1.3.2</version> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>com.igormaznitsa</groupId>
+			<artifactId>prologparser</artifactId>
+			<version>2.0.0</version>
+		</dependency>
 		<dependency>
 			<groupId>com.declarativa.interprolog</groupId>
 			<artifactId>interprolog-2016.jar</artifactId>
 			<version>312e07a</version>
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/interprolog-2016.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>com.igormaznitsa</groupId>
-			<artifactId>prologparser</artifactId>
-			<version>2.0.0</version>
 		</dependency>
 	</dependencies>
 
@@ -247,7 +242,7 @@
 							</mainClass>
 						</manifest>
 						<manifestEntries>
-							<Built-By>WorkLogic Project</Built-By>
+							<Built-By>Prolobjectlink Project</Built-By>
 						</manifestEntries>
 						<manifestSections>
 							<manifestSection>
@@ -255,10 +250,10 @@
 								<manifestEntries>
 									<Specification-Title>Prolobjectlink-JPI-TuProlog Library</Specification-Title>
 									<Specification-Version>${project.version}</Specification-Version>
-									<Specification-Vendor>WorkLogic Project</Specification-Vendor>
+									<Specification-Vendor>Prolobjectlink Project</Specification-Vendor>
 									<Implementation-Title>Prolobjectlink-JPI-TuProlog</Implementation-Title>
 									<Implementation-Version>${project.version}</Implementation-Version>
-									<Implementation-Vendor>WorkLogic Project</Implementation-Vendor>
+									<Implementation-Vendor>Prolobjectlink Project</Implementation-Vendor>
 								</manifestEntries>
 							</manifestSection>
 						</manifestSections>

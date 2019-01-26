@@ -96,24 +96,25 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 
 	public final void include(String path) {
 		program.add(parser.parseProgram(path));
-		engine.consultAbsolute(path);
 		persist(cache);
 	}
 
 	public final void consult(String path) {
 		program = parser.parseProgram(path);
-		engine.consultAbsolute(path);
 		persist(cache);
 	}
 
 	public final void persist(String path) {
 		PrintWriter writer = null;
 		try {
+//			writer = new PrintWriter(System.out);
 			writer = new PrintWriter(new FileOutputStream(path, false));
 			writer.print(program);
 		} catch (FileNotFoundException e) {
 			LoggerUtils.error(getClass(), IO + cache, e);
-		} finally {
+		}
+
+		finally {
 			if (writer != null) {
 				writer.close();
 			}
@@ -164,7 +165,7 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 		TermModel b = BODY;
 		if (t.getFunctorArity().equals(":-/2")) {
 			h = t.children[0];
-			b = t.children[2];
+			b = t.children[1];
 		}
 		return new InterPrologQuery(
 

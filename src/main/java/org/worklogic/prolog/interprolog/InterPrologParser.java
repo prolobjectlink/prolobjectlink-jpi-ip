@@ -24,8 +24,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.logicware.prolog.UnknownTermError;
 import org.worklogic.logging.LoggerConstants;
@@ -163,21 +165,23 @@ public final class InterPrologParser {
 			}
 			return variable;
 		case LIST:
-			PrologCompound compound = (PrologCompound) term;
-			PrologTerm[] array = new PrologTerm[compound.getArity()];
-			for (int i = 0; i < array.length; i++) {
-				array[i] = compound.getTermAt(i);
+			PrologCompound l = (PrologCompound) term;
+			List<TermModel> arrayList = new ArrayList<TermModel>();
+			while (l.getArity() > 0) {
+				arrayList.add(fromTerm(l.getTermAt(0)));
+				l = (PrologCompound) l.getTermAt(1);
 			}
-			TermModel list = new TermModel(".", fromTermArray(array));
+			TermModel[] array = arrayList.toArray(new TermModel[0]);
+			TermModel list = new TermModel(".", array);
 			return list;
 		case STRUCT:
-			compound = (PrologCompound) term;
-			array = new PrologTerm[compound.getArity()];
+			PrologCompound compound = (PrologCompound) term;
+			PrologTerm[] args = new PrologTerm[compound.getArity()];
 			String functor = term.getFunctor().toString();
-			for (int i = 0; i < array.length; i++) {
-				array[i] = compound.getTermAt(i);
+			for (int i = 0; i < args.length; i++) {
+				args[i] = compound.getTermAt(i);
 			}
-			TermModel[] arguments = fromTermArray(array);
+			TermModel[] arguments = fromTermArray(args);
 			return new TermModel(functor, arguments);
 		default:
 			throw new UnknownTermError(term);

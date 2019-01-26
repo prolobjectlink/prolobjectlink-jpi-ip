@@ -199,8 +199,8 @@ public final class InterPrologProgram extends AbstractSet<List<TermModel>> {
 					TermModel term = j.next();
 					String key = term.getFunctorArity();
 					if (term.getChildCount() == 2 && key.equals(":-/2")) {
-						TermModel h = (TermModel) term.getChild(1);
-						TermModel b = (TermModel) term.getChild(2);
+						TermModel h = (TermModel) term.getChild(0);
+						TermModel b = (TermModel) term.getChild(1);
 						families.append(h);
 						families.append(" :- ");
 						families.append('\n');
