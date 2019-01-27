@@ -34,23 +34,21 @@ import static org.logicware.prolog.PrologTermType.STRUCTURE_TYPE;
 import static org.logicware.prolog.PrologTermType.TRUE_TYPE;
 import static org.logicware.prolog.PrologTermType.VARIABLE_TYPE;
 
-import java.util.Map;
+import java.math.BigDecimal;
 
 import org.logicware.prolog.AbstractConverter;
 import org.logicware.prolog.PrologAtom;
 import org.logicware.prolog.PrologConverter;
 import org.logicware.prolog.PrologDouble;
-import org.logicware.prolog.PrologEngine;
 import org.logicware.prolog.PrologFloat;
 import org.logicware.prolog.PrologInteger;
-import org.logicware.prolog.PrologList;
 import org.logicware.prolog.PrologLong;
-import org.logicware.prolog.PrologQuery;
 import org.logicware.prolog.PrologStructure;
 import org.logicware.prolog.PrologTerm;
 import org.logicware.prolog.PrologVariable;
 import org.logicware.prolog.UnknownTermError;
 
+import com.declarativa.interprolog.SolutionIterator;
 import com.declarativa.interprolog.TermModel;
 
 /**
@@ -79,14 +77,14 @@ public abstract class InterPrologConverter extends AbstractConverter<TermModel> 
 			return new InterPrologAtom(provider, functor);
 		} else if (prologTerm.equals(InterPrologList.EMPTY)) {
 			return new InterPrologEmpty(provider);
-		} else if (prologTerm.node instanceof Float) {
-			return new InterPrologFloat(provider, ((Float) prologTerm.node).floatValue());
-		} else if (prologTerm.node instanceof Double) {
-			return new InterPrologFloat(provider, ((Double) prologTerm.node).doubleValue());
+		} else if ((prologTerm.node instanceof Float) || (prologTerm.node instanceof BigDecimal)) {
+			return new InterPrologFloat(provider, ((Number) prologTerm.node).floatValue());
+		} else if ((prologTerm.node instanceof Double) || (prologTerm.node instanceof BigDecimal)) {
+			return new InterPrologDouble(provider, ((Number) prologTerm.node).doubleValue());
 		} else if (prologTerm.isInteger()) {
 			return new InterPrologInteger(provider, prologTerm.intValue());
 		} else if (prologTerm.isLong()) {
-			return new InterPrologFloat(provider, prologTerm.longValue());
+			return new InterPrologLong(provider, prologTerm.longValue());
 		} else if (prologTerm.isVar()) {
 			String name = ((TermVariable) prologTerm).getName();
 			PrologVariable variable = sharedVariables.get(name);
@@ -106,20 +104,23 @@ public abstract class InterPrologConverter extends AbstractConverter<TermModel> 
 
 			if (arity == 2) {
 				String key = "LIST";
-				PrologEngine engine = provider.newEngine();
-				String stringQuery = "findall(OP,current_op(_,_,OP)," + key + ")";
-				PrologQuery query = engine.query(stringQuery);
-				Map<String, PrologTerm>[] solution = query.allVariablesSolutions();
-				for (Map<String, PrologTerm> map : solution) {
-					for (PrologTerm operatorList : map.values()) {
-						if (!operatorList.isVariable() && operatorList.isList()) {
-							PrologList l = (PrologList) operatorList;
-							for (PrologTerm operator : l) {
-								if (operator.getFunctor().equals(functor)) {
-									TermModel left = (TermModel) compound.getChild(1);
-									TermModel right = (TermModel) compound.getChild(2);
+				String stringQuery = "findall(P/S/O,current_op(P,S,O)," + key + "), buildTermModel(" + key + ",TM)";
+				SolutionIterator si = provider.newEngine().unwrap(InterPrologEngine.class).engine.goal(stringQuery,
+						"[TM]");
+				while (si.hasNext()) {
+					Object[] bindings = si.next();
+					for (Object object : bindings) {
+						if (object instanceof TermModel) {
+							TermModel list = (TermModel) object;
+							while (list.getChildCount() > 0) {
+								TermModel solvedTerm = (TermModel) list.getChild(0);
+								String n = (String) solvedTerm.children[1].node;
+								if (n.equals(functor)) {
+									TermModel left = (TermModel) compound.getChild(0);
+									TermModel right = (TermModel) compound.getChild(1);
 									return new InterPrologStructure(provider, left, functor, right);
 								}
+								list = (TermModel) list.getChild(1);
 							}
 						}
 					}

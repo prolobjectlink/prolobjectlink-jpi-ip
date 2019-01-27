@@ -50,7 +50,7 @@ public final class InterPrologProgram extends AbstractSet<List<TermModel>> {
 	private String getKey(TermModel clause) {
 		String key = clause.getFunctorArity();
 		if (key.equals(":-/2")) {
-			key = ((TermModel) clause.getChild(1)).getFunctorArity();
+			key = ((TermModel) clause.getChild(0)).getFunctorArity();
 		}
 		return key;
 	}

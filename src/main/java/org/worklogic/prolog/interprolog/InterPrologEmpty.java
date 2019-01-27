@@ -21,37 +21,11 @@ package org.worklogic.prolog.interprolog;
 
 import org.logicware.prolog.PrologList;
 import org.logicware.prolog.PrologProvider;
-import org.logicware.prolog.PrologTerm;
 
 public class InterPrologEmpty extends InterPrologList implements PrologList {
 
 	protected InterPrologEmpty(PrologProvider provider) {
 		super(provider);
-	}
-
-	@Override
-	public PrologTerm[] getArguments() {
-		return new PrologTerm[0];
-	}
-
-	@Override
-	public int getArity() {
-		return 0;
-	}
-
-	@Override
-	public String getFunctor() {
-		return "[]";
-	}
-
-	@Override
-	public String getIndicator() {
-		return getFunctor() + "/" + getArity();
-	}
-
-	@Override
-	public boolean hasIndicator(String functor, int arity) {
-		return getFunctor().equals(functor) && getArity() == arity;
 	}
 
 }

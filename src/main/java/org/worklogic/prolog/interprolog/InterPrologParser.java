@@ -149,8 +149,6 @@ public final class InterPrologParser {
 					return new TermModel("true");
 				} else if (functor.equals("false")) {
 					return new TermModel("false");
-				} else if (functor.equals("[]")) {
-					return new TermModel("[]");
 				} else {
 					return new TermModel(((PrologAtom) term).getText());
 				}
@@ -166,13 +164,16 @@ public final class InterPrologParser {
 			return variable;
 		case LIST:
 			PrologCompound l = (PrologCompound) term;
+			if (l.getArity() < 1) {
+				return new TermModel("[]", new TermModel[0]);
+			}
 			List<TermModel> arrayList = new ArrayList<TermModel>();
 			while (l.getArity() > 0) {
 				arrayList.add(fromTerm(l.getTermAt(0)));
 				l = (PrologCompound) l.getTermAt(1);
 			}
 			TermModel[] array = arrayList.toArray(new TermModel[0]);
-			TermModel list = new TermModel(".", array);
+			TermModel list = new TermModel(".", array, true);
 			return list;
 		case STRUCT:
 			PrologCompound compound = (PrologCompound) term;

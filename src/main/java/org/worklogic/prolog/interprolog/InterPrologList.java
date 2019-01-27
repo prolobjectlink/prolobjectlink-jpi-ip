@@ -34,6 +34,7 @@ import com.declarativa.interprolog.TermModel;
 public class InterPrologList extends InterPrologTerm implements PrologList {
 
 	public static final TermModel EMPTY = new TermModel("[]", true);
+	public static final String EMPTY_FUNCTOR = "[]";
 	public static final String LIST_FUNCTOR = ".";
 
 	protected InterPrologList(PrologProvider provider) {
@@ -42,12 +43,20 @@ public class InterPrologList extends InterPrologTerm implements PrologList {
 
 	protected InterPrologList(PrologProvider provider, TermModel[] arguments) {
 		super(LIST_TYPE, provider);
-		value = new TermModel(LIST_FUNCTOR, arguments, true);
+		if (arguments == null || arguments.length == 0) {
+			value = new TermModel(EMPTY_FUNCTOR, arguments, true);
+		} else {
+			value = new TermModel(LIST_FUNCTOR, arguments, true);
+		}
 	}
 
 	protected InterPrologList(PrologProvider provider, PrologTerm[] arguments) {
 		super(LIST_TYPE, provider);
-		value = new TermModel(LIST_FUNCTOR, fromTermArray(arguments, TermModel[].class), true);
+		if (arguments == null || arguments.length == 0) {
+			value = new TermModel(EMPTY_FUNCTOR, null, true);
+		} else {
+			value = new TermModel(LIST_FUNCTOR, fromTermArray(arguments, TermModel[].class), true);
+		}
 	}
 
 	protected InterPrologList(PrologProvider provider, PrologTerm head, PrologTerm tail) {
@@ -67,7 +76,13 @@ public class InterPrologList extends InterPrologTerm implements PrologList {
 	}
 
 	public int size() {
-		return value.getChildCount();
+		int size = 0;
+		TermModel list = value;
+		while (list.getChildCount() > 0) {
+			list = (TermModel) list.getChild(1);
+			size++;
+		}
+		return size;
 	}
 
 	public void clear() {
@@ -90,16 +105,16 @@ public class InterPrologList extends InterPrologTerm implements PrologList {
 		return provider.toTerm(value.getChild(2), PrologTerm.class);
 	}
 
-	public int getArity() {
-		return 2;
+	public final int getArity() {
+		return value.children == null || value.children.length == 0 ? 0 : 2;
 	}
 
-	public String getFunctor() {
-		return LIST_FUNCTOR;
+	public final String getFunctor() {
+		return "" + value.node + "";
 	}
 
 	@Override
-	public String getIndicator() {
+	public final String getIndicator() {
 		return getFunctor() + "/" + getArity();
 	}
 

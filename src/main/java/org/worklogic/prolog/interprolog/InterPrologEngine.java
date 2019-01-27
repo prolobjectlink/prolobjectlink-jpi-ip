@@ -107,7 +107,6 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	public final void persist(String path) {
 		PrintWriter writer = null;
 		try {
-//			writer = new PrintWriter(System.out);
 			writer = new PrintWriter(new FileOutputStream(path, false));
 			writer.print(program);
 		} catch (FileNotFoundException e) {
