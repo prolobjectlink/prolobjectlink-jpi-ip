@@ -17,9 +17,9 @@
  * limitations under the License.
  * #L%
  */
-package org.worklogic.prolog.interprolog;
+package org.prolobjectlink.prolog.interprolog;
 
-import static org.worklogic.prolog.interprolog.InterPrologProvider.varCache;
+import static org.prolobjectlink.prolog.interprolog.InterPrologProvider.varCache;
 
 import java.io.Serializable;
 

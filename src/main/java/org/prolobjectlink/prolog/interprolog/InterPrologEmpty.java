@@ -17,23 +17,15 @@
  * limitations under the License.
  * #L%
  */
-package org.worklogic.prolog.interprolog;
+package org.prolobjectlink.prolog.interprolog;
 
-import static org.logicware.prolog.PrologTermType.LONG_TYPE;
+import org.prolobjectlink.prolog.PrologList;
+import org.prolobjectlink.prolog.PrologProvider;
 
-import org.logicware.prolog.PrologLong;
-import org.logicware.prolog.PrologProvider;
+public class InterPrologEmpty extends InterPrologList implements PrologList {
 
-import com.declarativa.interprolog.TermModel;
-
-public final class InterPrologLong extends InterPrologInteger implements PrologLong {
-
-	public InterPrologLong(PrologProvider provider) {
-		super(LONG_TYPE, provider, new TermModel(0L));
-	}
-
-	public InterPrologLong(PrologProvider provider, Number value) {
-		super(LONG_TYPE, provider, new TermModel(value.longValue()));
+	protected InterPrologEmpty(PrologProvider provider) {
+		super(provider);
 	}
 
 }

@@ -17,15 +17,15 @@
  * limitations under the License.
  * #L%
  */
-package org.worklogic.prolog.interprolog;
+package org.prolobjectlink.prolog.interprolog;
 
 import java.util.AbstractSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.logicware.prolog.PrologOperator;
-import org.logicware.prolog.PrologOperatorSet;
+import org.prolobjectlink.prolog.PrologOperator;
+import org.prolobjectlink.prolog.PrologOperatorSet;
 
 public final class InterPrologOperatorSet extends AbstractSet<PrologOperator> implements PrologOperatorSet {
 

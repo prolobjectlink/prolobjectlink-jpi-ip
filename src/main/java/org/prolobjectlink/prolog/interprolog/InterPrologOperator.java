@@ -17,19 +17,15 @@
  * limitations under the License.
  * #L%
  */
-package org.worklogic.prolog.interprolog;
+package org.prolobjectlink.prolog.interprolog;
 
-import static org.logicware.prolog.PrologTermType.CUT_TYPE;
+import org.prolobjectlink.prolog.AbstractOperator;
+import org.prolobjectlink.prolog.PrologOperator;
 
-import org.logicware.prolog.PrologProvider;
-import org.logicware.prolog.PrologTerm;
+public final class InterPrologOperator extends AbstractOperator implements PrologOperator {
 
-import com.declarativa.interprolog.TermModel;
-
-public final class InterPrologCut extends InterPrologTerm implements PrologTerm {
-
-	protected InterPrologCut(PrologProvider provider) {
-		super(CUT_TYPE, provider, new TermModel("!"));
+	public InterPrologOperator(int priority, String specifier, String operator) {
+		super(priority, specifier, operator);
 	}
 
 }

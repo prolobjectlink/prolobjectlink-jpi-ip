@@ -17,19 +17,19 @@
  * limitations under the License.
  * #L%
  */
-package org.worklogic.prolog.interprolog;
+package org.prolobjectlink.prolog.interprolog;
 
-import static org.logicware.prolog.PrologTermType.NIL_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.FALSE_TYPE;
 
-import org.logicware.prolog.PrologProvider;
-import org.logicware.prolog.PrologTerm;
+import org.prolobjectlink.prolog.PrologProvider;
+import org.prolobjectlink.prolog.PrologTerm;
 
 import com.declarativa.interprolog.TermModel;
 
-public final class InterPrologNil extends InterPrologTerm implements PrologTerm {
+public final class InterPrologFalse extends InterPrologTerm implements PrologTerm {
 
-	InterPrologNil(PrologProvider provider) {
-		super(NIL_TYPE, provider, new TermModel("nil"));
+	protected InterPrologFalse(PrologProvider provider) {
+		super(FALSE_TYPE, provider, new TermModel("false"));
 	}
 
 }

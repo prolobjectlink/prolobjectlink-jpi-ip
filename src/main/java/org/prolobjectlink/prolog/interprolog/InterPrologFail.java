@@ -17,15 +17,19 @@
  * limitations under the License.
  * #L%
  */
-package org.worklogic.prolog.interprolog;
+package org.prolobjectlink.prolog.interprolog;
 
-import org.logicware.prolog.AbstractOperator;
-import org.logicware.prolog.PrologOperator;
+import static org.prolobjectlink.prolog.PrologTermType.FAIL_TYPE;
 
-public final class InterPrologOperator extends AbstractOperator implements PrologOperator {
+import org.prolobjectlink.prolog.PrologProvider;
+import org.prolobjectlink.prolog.PrologTerm;
 
-	public InterPrologOperator(int priority, String specifier, String operator) {
-		super(priority, specifier, operator);
+import com.declarativa.interprolog.TermModel;
+
+public final class InterPrologFail extends InterPrologTerm implements PrologTerm {
+
+	protected InterPrologFail(PrologProvider provider) {
+		super(FAIL_TYPE, provider, new TermModel("fail"));
 	}
 
 }

@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package org.worklogic.prolog.interprolog;
+package org.prolobjectlink.prolog.interprolog;
 
 import java.io.File;
 import java.io.FileReader;
@@ -29,9 +29,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.logicware.prolog.UnknownTermError;
-import org.worklogic.logging.LoggerConstants;
-import org.worklogic.logging.LoggerUtils;
+import org.prolobjectlink.logging.LoggerConstants;
+import org.prolobjectlink.logging.LoggerUtils;
+import org.prolobjectlink.prolog.UnknownTermError;
 
 import com.declarativa.interprolog.TermModel;
 import com.igormaznitsa.prologparser.DefaultParserContext;

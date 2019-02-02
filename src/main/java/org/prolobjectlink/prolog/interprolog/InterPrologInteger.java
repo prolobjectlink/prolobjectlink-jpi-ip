@@ -17,13 +17,13 @@
  * limitations under the License.
  * #L%
  */
-package org.worklogic.prolog.interprolog;
+package org.prolobjectlink.prolog.interprolog;
 
-import static org.logicware.prolog.PrologTermType.INTEGER_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.INTEGER_TYPE;
 
-import org.logicware.prolog.PrologInteger;
-import org.logicware.prolog.PrologProvider;
-import org.logicware.prolog.PrologTerm;
+import org.prolobjectlink.prolog.PrologInteger;
+import org.prolobjectlink.prolog.PrologProvider;
+import org.prolobjectlink.prolog.PrologTerm;
 
 import com.declarativa.interprolog.TermModel;
 

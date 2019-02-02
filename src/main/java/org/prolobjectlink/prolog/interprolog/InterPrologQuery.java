@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package org.worklogic.prolog.interprolog;
+package org.prolobjectlink.prolog.interprolog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,10 +26,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.logicware.prolog.AbstractEngine;
-import org.logicware.prolog.AbstractQuery;
-import org.logicware.prolog.PrologQuery;
-import org.logicware.prolog.PrologTerm;
+import org.prolobjectlink.prolog.AbstractEngine;
+import org.prolobjectlink.prolog.AbstractQuery;
+import org.prolobjectlink.prolog.PrologQuery;
+import org.prolobjectlink.prolog.PrologTerm;
 
 import com.declarativa.interprolog.SolutionIterator;
 import com.declarativa.interprolog.TermModel;

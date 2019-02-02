@@ -17,12 +17,12 @@
  * limitations under the License.
  * #L%
  */
-package org.worklogic.prolog.interprolog;
+package org.prolobjectlink.prolog.interprolog;
 
-import static org.logicware.prolog.PrologTermType.DOUBLE_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.DOUBLE_TYPE;
 
-import org.logicware.prolog.PrologDouble;
-import org.logicware.prolog.PrologProvider;
+import org.prolobjectlink.prolog.PrologDouble;
+import org.prolobjectlink.prolog.PrologProvider;
 
 import com.declarativa.interprolog.TermModel;
 

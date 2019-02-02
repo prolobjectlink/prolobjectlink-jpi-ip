@@ -17,19 +17,23 @@
  * limitations under the License.
  * #L%
  */
-package org.worklogic.prolog.interprolog;
+package org.prolobjectlink.prolog.interprolog;
 
-import static org.logicware.prolog.PrologTermType.FAIL_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.LONG_TYPE;
 
-import org.logicware.prolog.PrologProvider;
-import org.logicware.prolog.PrologTerm;
+import org.prolobjectlink.prolog.PrologLong;
+import org.prolobjectlink.prolog.PrologProvider;
 
 import com.declarativa.interprolog.TermModel;
 
-public final class InterPrologFail extends InterPrologTerm implements PrologTerm {
+public final class InterPrologLong extends InterPrologInteger implements PrologLong {
 
-	protected InterPrologFail(PrologProvider provider) {
-		super(FAIL_TYPE, provider, new TermModel("fail"));
+	public InterPrologLong(PrologProvider provider) {
+		super(LONG_TYPE, provider, new TermModel(0L));
+	}
+
+	public InterPrologLong(PrologProvider provider, Number value) {
+		super(LONG_TYPE, provider, new TermModel(value.longValue()));
 	}
 
 }

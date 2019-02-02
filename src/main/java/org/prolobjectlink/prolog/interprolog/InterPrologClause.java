@@ -17,12 +17,12 @@
  * limitations under the License.
  * #L%
  */
-package org.worklogic.prolog.interprolog;
+package org.prolobjectlink.prolog.interprolog;
 
-import org.logicware.prolog.AbstractClause;
-import org.logicware.prolog.PrologClause;
-import org.logicware.prolog.PrologProvider;
-import org.logicware.prolog.PrologTerm;
+import org.prolobjectlink.prolog.AbstractClause;
+import org.prolobjectlink.prolog.PrologClause;
+import org.prolobjectlink.prolog.PrologProvider;
+import org.prolobjectlink.prolog.PrologTerm;
 
 public final class InterPrologClause extends AbstractClause implements PrologClause {
 

@@ -17,30 +17,30 @@
  * limitations under the License.
  * #L%
  */
-package org.worklogic.prolog.interprolog;
+package org.prolobjectlink.prolog.interprolog;
 
-import static org.logicware.prolog.PrologTermType.ATOM_TYPE;
-import static org.logicware.prolog.PrologTermType.CUT_TYPE;
-import static org.logicware.prolog.PrologTermType.DOUBLE_TYPE;
-import static org.logicware.prolog.PrologTermType.EMPTY_TYPE;
-import static org.logicware.prolog.PrologTermType.FAIL_TYPE;
-import static org.logicware.prolog.PrologTermType.FALSE_TYPE;
-import static org.logicware.prolog.PrologTermType.FLOAT_TYPE;
-import static org.logicware.prolog.PrologTermType.INTEGER_TYPE;
-import static org.logicware.prolog.PrologTermType.LIST_TYPE;
-import static org.logicware.prolog.PrologTermType.LONG_TYPE;
-import static org.logicware.prolog.PrologTermType.NIL_TYPE;
-import static org.logicware.prolog.PrologTermType.STRUCTURE_TYPE;
-import static org.logicware.prolog.PrologTermType.TRUE_TYPE;
-import static org.logicware.prolog.PrologTermType.VARIABLE_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.ATOM_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.CUT_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.DOUBLE_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.EMPTY_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.FAIL_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.FALSE_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.FLOAT_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.INTEGER_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.LIST_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.LONG_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.NIL_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.STRUCTURE_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.TRUE_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.VARIABLE_TYPE;
 
 import java.util.Map;
 
-import org.logicware.prolog.AbstractTerm;
-import org.logicware.prolog.PrologEngine;
-import org.logicware.prolog.PrologNumber;
-import org.logicware.prolog.PrologProvider;
-import org.logicware.prolog.PrologTerm;
+import org.prolobjectlink.prolog.AbstractTerm;
+import org.prolobjectlink.prolog.PrologEngine;
+import org.prolobjectlink.prolog.PrologNumber;
+import org.prolobjectlink.prolog.PrologProvider;
+import org.prolobjectlink.prolog.PrologTerm;
 
 import com.declarativa.interprolog.SolutionIterator;
 import com.declarativa.interprolog.TermModel;

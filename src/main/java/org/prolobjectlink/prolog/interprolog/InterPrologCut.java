@@ -17,20 +17,19 @@
  * limitations under the License.
  * #L%
  */
-package org.worklogic.prolog.interprolog;
+package org.prolobjectlink.prolog.interprolog;
 
-import static org.logicware.prolog.PrologTermType.TRUE_TYPE;
+import static org.prolobjectlink.prolog.PrologTermType.CUT_TYPE;
 
-import org.logicware.prolog.PrologProvider;
-import org.logicware.prolog.PrologTerm;
+import org.prolobjectlink.prolog.PrologProvider;
+import org.prolobjectlink.prolog.PrologTerm;
 
 import com.declarativa.interprolog.TermModel;
 
-public final class InterPrologTrue extends InterPrologTerm implements PrologTerm {
+public final class InterPrologCut extends InterPrologTerm implements PrologTerm {
 
-	protected InterPrologTrue(PrologProvider provider) {
-		super(TRUE_TYPE, provider, new TermModel("true"));
+	protected InterPrologCut(PrologProvider provider) {
+		super(CUT_TYPE, provider, new TermModel("!"));
 	}
 
-	
 }
