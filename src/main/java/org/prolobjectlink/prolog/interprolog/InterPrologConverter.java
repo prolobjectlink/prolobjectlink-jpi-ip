@@ -172,8 +172,7 @@ public abstract class InterPrologConverter extends AbstractConverter<TermModel> 
 			return variable;
 		case LIST_TYPE:
 			PrologTerm[] array = term.getArguments();
-			TermModel list = new TermModel(".", fromTermArray(array));
-			return list;
+			return TermModel.makeList(fromTermArray(array));
 		case STRUCTURE_TYPE:
 			String functor = term.getFunctor();
 			TermModel[] arguments = fromTermArray(((PrologStructure) term).getArguments());

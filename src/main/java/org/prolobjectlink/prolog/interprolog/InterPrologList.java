@@ -44,9 +44,11 @@ public class InterPrologList extends InterPrologTerm implements PrologList {
 	protected InterPrologList(PrologProvider provider, TermModel[] arguments) {
 		super(LIST_TYPE, provider);
 		if (arguments == null || arguments.length == 0) {
-			value = new TermModel(EMPTY_FUNCTOR, arguments, true);
+			value = TermModel.makeList(arguments);
+			// value = new TermModel(EMPTY_FUNCTOR, arguments, true);
 		} else {
-			value = new TermModel(LIST_FUNCTOR, arguments, true);
+			value = TermModel.makeList(arguments);
+			// value = new TermModel(LIST_FUNCTOR, arguments, true);
 		}
 	}
 
@@ -55,7 +57,9 @@ public class InterPrologList extends InterPrologTerm implements PrologList {
 		if (arguments == null || arguments.length == 0) {
 			value = new TermModel(EMPTY_FUNCTOR, null, true);
 		} else {
-			value = new TermModel(LIST_FUNCTOR, fromTermArray(arguments, TermModel[].class), true);
+			value = TermModel.makeList(fromTermArray(arguments, TermModel[].class));
+			// value = new TermModel(LIST_FUNCTOR, fromTermArray(arguments,
+			// TermModel[].class), true);
 		}
 	}
 
@@ -63,16 +67,23 @@ public class InterPrologList extends InterPrologTerm implements PrologList {
 		super(LIST_TYPE, provider);
 		TermModel h = unwrap(head, InterPrologTerm.class).value;
 		TermModel t = unwrap(tail, InterPrologTerm.class).value;
-		value = new TermModel(LIST_FUNCTOR, new TermModel[] { h, t }, true);
+		// value = new TermModel(LIST_FUNCTOR, new TermModel[] { h, t }, true);
+		value = TermModel.makeList(new TermModel[] { h, t });
 	}
 
 	protected InterPrologList(PrologProvider provider, PrologTerm[] arguments, PrologTerm tail) {
 		super(LIST_TYPE, provider);
-		value = fromTerm(tail, TermModel.class);
-		for (int i = arguments.length - 1; i >= 0; --i) {
-			TermModel[] args = { fromTerm(arguments[i], TermModel.class), value };
-			value = new TermModel(LIST_FUNCTOR, args);
+		TermModel[] terms = new TermModel[arguments.length + 1];
+		terms[arguments.length] = fromTerm(tail, TermModel.class);
+		for (int i = 0; i < arguments.length; i++) {
+			terms[i] = fromTerm(arguments[i], TermModel.class);
 		}
+		value = TermModel.makeList(terms);
+//		value = fromTerm(tail, TermModel.class);
+//		for (int i = arguments.length - 1; i >= 0; --i) {
+//			TermModel[] args = { fromTerm(arguments[i], TermModel.class), value };
+//			value = new TermModel(LIST_FUNCTOR, args);
+//		}
 	}
 
 	public int size() {

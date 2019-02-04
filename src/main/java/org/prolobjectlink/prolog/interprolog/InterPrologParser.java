@@ -167,14 +167,12 @@ public final class InterPrologParser {
 			if (l.getArity() < 1) {
 				return new TermModel("[]", new TermModel[0]);
 			}
-			List<TermModel> arrayList = new ArrayList<TermModel>();
+			ArrayList<TermModel> arrayList = new ArrayList<TermModel>();
 			while (l.getArity() > 0) {
 				arrayList.add(fromTerm(l.getTermAt(0)));
 				l = (PrologCompound) l.getTermAt(1);
 			}
-			TermModel[] array = arrayList.toArray(new TermModel[0]);
-			TermModel list = new TermModel(".", array, true);
-			return list;
+			return TermModel.makeList(arrayList);
 		case STRUCT:
 			PrologCompound compound = (PrologCompound) term;
 			PrologTerm[] args = new PrologTerm[compound.getArity()];
