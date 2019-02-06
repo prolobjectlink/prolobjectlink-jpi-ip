@@ -71,8 +71,7 @@ public final class InterPrologQuery extends AbstractQuery implements PrologQuery
 		}
 
 		// formulating find all query
-		InterPrologEngine pe = engine.unwrap(InterPrologEngine.class);
-		pe.engine.consultAbsolute(cache);
+		InterPrologEngine.engine.consultAbsolute(cache);
 		String key = "_KEY_";
 		StringBuilder b = new StringBuilder();
 		b.append("findall(");
@@ -92,7 +91,7 @@ public final class InterPrologQuery extends AbstractQuery implements PrologQuery
 		b.append(')');
 
 		// query and create term model
-		SolutionIterator si = pe.engine.goal(b + ", buildTermModel(" + key + ",TM)", "[TM]");
+		SolutionIterator si = InterPrologEngine.engine.goal(b + ", buildTermModel(" + key + ",TM)", "[TM]");
 		while (si.hasNext()) {
 			Object[] bindings = si.next();
 			for (Object object : bindings) {

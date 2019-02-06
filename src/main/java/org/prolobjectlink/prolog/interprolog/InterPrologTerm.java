@@ -34,10 +34,13 @@ import static org.prolobjectlink.prolog.PrologTermType.STRUCTURE_TYPE;
 import static org.prolobjectlink.prolog.PrologTermType.TRUE_TYPE;
 import static org.prolobjectlink.prolog.PrologTermType.VARIABLE_TYPE;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.prolobjectlink.prolog.AbstractTerm;
-import org.prolobjectlink.prolog.PrologEngine;
 import org.prolobjectlink.prolog.PrologNumber;
 import org.prolobjectlink.prolog.PrologProvider;
 import org.prolobjectlink.prolog.PrologTerm;
@@ -102,7 +105,7 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	public boolean isStructure() {
-		return isCompound() && !isList() && !isEmptyList();
+		return !isVariable() && isCompound() && !isList() && !isEmptyList();
 	}
 
 	public final boolean isNil() {
@@ -125,22 +128,23 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	public boolean isEvaluable() {
-		String key = "X";
-		PrologEngine engine = provider.newEngine();
-		String stringQuery = "findall(P/S/O,current_op(P,S,O)," + key + "), buildTermModel(" + key + ",TM)";
-		SolutionIterator si = engine.unwrap(InterPrologEngine.class).engine.goal(stringQuery, "[TM]");
-		while (si.hasNext()) {
-			Object[] bindings = si.next();
-			for (Object object : bindings) {
-				if (object instanceof TermModel) {
-					TermModel list = (TermModel) object;
-					while (list.getChildCount() > 0) {
-						TermModel solvedTerm = (TermModel) list.getChild(0);
-						String n = (String) solvedTerm.children[1].node;
-						if (!isNumber() && getFunctor().equals(n)) {
-							return true;
+		if (isStructure()) {
+			String key = "X";
+			String stringQuery = "findall(P/S/O,current_op(P,S,O)," + key + "), buildTermModel(" + key + ",TM)";
+			SolutionIterator si = InterPrologEngine.engine.goal(stringQuery, "[TM]");
+			while (si.hasNext()) {
+				Object[] bindings = si.next();
+				for (Object object : bindings) {
+					if (object instanceof TermModel) {
+						TermModel list = (TermModel) object;
+						while (list.getChildCount() > 0) {
+							TermModel solvedTerm = (TermModel) list.getChild(0);
+							String n = (String) solvedTerm.children[1].node;
+							if (!isNumber() && getFunctor().equals(n)) {
+								return true;
+							}
+							list = (TermModel) list.getChild(1);
 						}
-						list = (TermModel) list.getChild(1);
 					}
 				}
 			}
@@ -165,8 +169,54 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	public Map<String, PrologTerm> match(PrologTerm term) {
-		// TODO Auto-generated method stub
-		return null;
+		String key = "_KEY_";
+		Map<String, PrologTerm> map = new HashMap<String, PrologTerm>();
+		String string = "unify_with_occurs_check(" + value + "," + term + ")";
+
+		// parse the string query and enumerates variable
+		List<String> variables = new ArrayList<String>();
+		InterPrologParser ip = new InterPrologParser();
+		TermModel[] models = ip.parseTerms(string);
+		for (TermModel termModels : models) {
+			enumerateVariables(variables, termModels);
+		}
+
+		StringBuilder b = new StringBuilder();
+		Iterator<?> j = variables.iterator();
+		if (j.hasNext()) {
+			while (j.hasNext()) {
+				b.append(j.next());
+				if (j.hasNext()) {
+					b.append('/');
+				}
+			}
+		} else {
+			b.append('_');
+		}
+
+		String stringQuery = "findall(" + b + "," + string + "," + key + "), buildTermModel(" + key + ",TM)";
+		SolutionIterator si = InterPrologEngine.engine.goal(stringQuery, "[TM]");
+		while (si.hasNext()) {
+			Object[] bindings = si.next();
+			for (Object object : bindings) {
+				if (object instanceof TermModel) {
+					TermModel list = (TermModel) object;
+					while (list.getChildCount() > 0) {
+						int index = variables.size() - 1;
+						TermModel solvedTerm = (TermModel) list.getChild(0);
+						while (solvedTerm.getChildCount() > 0 && index >= 0) {
+							map.put(variables.get(index--), InterPrologUtil.toTerm(provider, solvedTerm.getChild(1)));
+							solvedTerm = (TermModel) solvedTerm.getChild(0);
+						}
+						if (index >= 0) {
+							map.put(variables.get(index), InterPrologUtil.toTerm(provider, solvedTerm));
+						}
+						list = (TermModel) list.getChild(1);
+					}
+				}
+			}
+		}
+		return map;
 	}
 
 	public final int compareTo(PrologTerm term) {
@@ -338,6 +388,19 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 			return false;
 		}
 		return true;
+	}
+
+	private void enumerateVariables(List<String> vector, TermModel term) {
+		if (!(term instanceof TermVariable)) {
+			TermModel[] terms = term.children;
+			if (terms != null && terms.length > 0) {
+				for (TermModel t : terms) {
+					enumerateVariables(vector, t);
+				}
+			}
+		} else if (!vector.contains(((TermVariable) term).getName())) {
+			vector.add(((TermVariable) term).getName());
+		}
 	}
 
 }

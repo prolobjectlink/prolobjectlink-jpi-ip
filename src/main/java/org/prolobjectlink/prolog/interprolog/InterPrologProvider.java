@@ -19,6 +19,8 @@
  */
 package org.prolobjectlink.prolog.interprolog;
 
+import static org.prolobjectlink.prolog.AbstractConverter.SIMPLE_ATOM_REGEX;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -80,6 +82,9 @@ public abstract class InterPrologProvider extends AbstractProvider implements Pr
 	}
 
 	public PrologAtom newAtom(String functor) {
+		if (!functor.matches(SIMPLE_ATOM_REGEX)) {
+			return new InterPrologAtom(this, "'" + functor + "'");
+		}
 		return new InterPrologAtom(this, functor);
 	}
 

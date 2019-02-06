@@ -82,7 +82,7 @@ public abstract class InterPrologNumber extends InterPrologTerm implements Prolo
 	}
 
 	public final int getIntValue() {
-		return value.intValue();
+		return value.isLong() ? (int) value.longValue() : value.intValue();
 	}
 
 	public final float getFloatValue() {

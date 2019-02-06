@@ -48,6 +48,7 @@ import org.prolobjectlink.prolog.PrologTermType;
 import com.declarativa.interprolog.AbstractPrologEngine;
 import com.declarativa.interprolog.SolutionIterator;
 import com.declarativa.interprolog.TermModel;
+import com.xsb.interprolog.NativeEngine;
 
 /**
  * 
@@ -66,7 +67,7 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	private static String cache = null;
 
 	// XSB native engine
-	public final AbstractPrologEngine engine;
+	public static AbstractPrologEngine engine;
 
 	// parser to obtain terms from text
 	private final InterPrologParser parser = new InterPrologParser();
@@ -74,23 +75,28 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	// main memory prolog program
 	protected InterPrologProgram program = new InterPrologProgram();
 
+	// path to binary engine directory
+//	private static String xsbPath = "C:\\Program Files (x86)\\XSB\\bin";
+	private static String xsbPath = "C:\\Program Files (x86)\\XSB\\config\\x64-pc-windows\\bin";
+
 	static {
 		try {
 			File f = File.createTempFile("prolobjectlink-jpi-ip-cache-", ".pl");
 			cache = f.getCanonicalPath().replace(File.separatorChar, '/');
+			InterPrologEngine.engine = new NativeEngine(xsbPath);
+//			InterPrologEngine.engine = new XSBSubprocessEngine(xsbPath);
+			InterPrologEngine.engine.setAllowSimultaneousThreads(true);
 		} catch (IOException e) {
 			LoggerUtils.error(InterPrologEngine.class, IO, e);
 		}
 	}
 
-	protected InterPrologEngine(PrologProvider provider, AbstractPrologEngine engine) {
+	protected InterPrologEngine(PrologProvider provider) {
 		super(provider);
-		this.engine = engine;
 	}
 
-	protected InterPrologEngine(PrologProvider provider, AbstractPrologEngine engine, String path) {
+	protected InterPrologEngine(PrologProvider provider, String path) {
 		super(provider);
-		this.engine = engine;
 		consult(path);
 	}
 

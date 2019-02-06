@@ -19,6 +19,8 @@
  */
 package org.prolobjectlink.prolog.interprolog;
 
+import static org.prolobjectlink.prolog.AbstractConverter.SIMPLE_ATOM_REGEX;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -27,7 +29,6 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 
 import org.prolobjectlink.logging.LoggerConstants;
 import org.prolobjectlink.logging.LoggerUtils;
@@ -48,6 +49,7 @@ import com.igormaznitsa.prologparser.tokenizer.Op;
 
 public final class InterPrologParser {
 
+	private static final PrologAtom op = new PrologAtom("op");
 	protected final HashMap<String, TermVariable> sharedPrologVariables;
 
 	protected InterPrologParser() {
@@ -149,6 +151,8 @@ public final class InterPrologParser {
 					return new TermModel("true");
 				} else if (functor.equals("false")) {
 					return new TermModel("false");
+				} else if (!functor.matches(SIMPLE_ATOM_REGEX)) {
+					return new TermModel("'" + ((PrologAtom) term).getText() + "'");
 				} else {
 					return new TermModel(((PrologAtom) term).getText());
 				}
@@ -181,6 +185,13 @@ public final class InterPrologParser {
 				args[i] = compound.getTermAt(i);
 			}
 			TermModel[] arguments = fromTermArray(args);
+			if (compound.getFunctor().equals(op) && compound.getArity() == 3) {
+				String operator = compound.getTermAt(2).toString();
+				return new TermModel(operator, arguments);
+			} else if (compound.getFunctor() instanceof Op) {
+				String operator = compound.getFunctor().getText();
+				return new TermModel(operator, arguments);
+			}
 			return new TermModel(functor, arguments);
 		default:
 			throw new UnknownTermError(term);

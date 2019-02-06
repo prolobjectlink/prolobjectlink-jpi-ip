@@ -31,6 +31,7 @@ import org.prolobjectlink.ArrayIterator;
 import org.prolobjectlink.RuntimeError;
 import org.prolobjectlink.prolog.PrologClauses;
 
+import com.declarativa.interprolog.PrologOperatorsContext;
 import com.declarativa.interprolog.TermModel;
 
 public final class InterPrologProgram extends AbstractSet<List<TermModel>> {
@@ -209,7 +210,10 @@ public final class InterPrologProgram extends AbstractSet<List<TermModel>> {
 						Iterator<TermModel> k = new ArrayIterator<TermModel>(array);
 						while (k.hasNext()) {
 							TermModel item = k.next();
-							families.append(item);
+
+							String s = item.toString().replace("op(1000, xfy, ',').", "','");
+							
+							families.append(s);
 							if (k.hasNext()) {
 								families.append(',');
 								families.append('\n');

@@ -35,6 +35,7 @@ import static org.prolobjectlink.prolog.PrologTermType.TRUE_TYPE;
 import static org.prolobjectlink.prolog.PrologTermType.VARIABLE_TYPE;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import org.prolobjectlink.prolog.AbstractConverter;
 import org.prolobjectlink.prolog.PrologAtom;
@@ -57,6 +58,8 @@ import com.declarativa.interprolog.TermModel;
  * @since 1.0
  */
 public abstract class InterPrologConverter extends AbstractConverter<TermModel> implements PrologConverter<TermModel> {
+
+	private InterPrologParser parser = new InterPrologParser();
 
 	public final PrologTerm toTerm(TermModel prologTerm) {
 		if (prologTerm.isAtom()) {
@@ -81,9 +84,9 @@ public abstract class InterPrologConverter extends AbstractConverter<TermModel> 
 			return new InterPrologFloat(provider, ((Number) prologTerm.node).floatValue());
 		} else if ((prologTerm.node instanceof Double) || (prologTerm.node instanceof BigDecimal)) {
 			return new InterPrologDouble(provider, ((Number) prologTerm.node).doubleValue());
-		} else if (prologTerm.isInteger()) {
+		} else if (prologTerm.isInteger() || prologTerm.node instanceof BigInteger) {
 			return new InterPrologInteger(provider, prologTerm.intValue());
-		} else if (prologTerm.isLong()) {
+		} else if (prologTerm.isLong() || prologTerm.node instanceof BigInteger) {
 			return new InterPrologLong(provider, prologTerm.longValue());
 		} else if (prologTerm.isVar()) {
 			String name = ((TermVariable) prologTerm).getName();
@@ -105,8 +108,13 @@ public abstract class InterPrologConverter extends AbstractConverter<TermModel> 
 			if (arity == 2) {
 				String key = "LIST";
 				String stringQuery = "findall(P/S/O,current_op(P,S,O)," + key + "), buildTermModel(" + key + ",TM)";
-				SolutionIterator si = provider.newEngine().unwrap(InterPrologEngine.class).engine.goal(stringQuery,
-						"[TM]");
+
+				// busy wait necessary to wait engine disposition
+				if (!InterPrologEngine.engine.isIdle()) {
+					InterPrologEngine.engine.waitUntilIdle();
+				}
+
+				SolutionIterator si = InterPrologEngine.engine.goal(stringQuery, "[TM]");
 				while (si.hasNext()) {
 					Object[] bindings = si.next();
 					for (Object object : bindings) {
@@ -115,10 +123,10 @@ public abstract class InterPrologConverter extends AbstractConverter<TermModel> 
 							while (list.getChildCount() > 0) {
 								TermModel solvedTerm = (TermModel) list.getChild(0);
 								String n = (String) solvedTerm.children[1].node;
-								if (n.equals(functor)) {
+								if (functor.contains("'" + n + "'")) {
 									TermModel left = (TermModel) compound.getChild(0);
 									TermModel right = (TermModel) compound.getChild(1);
-									return new InterPrologStructure(provider, left, functor, right);
+									return new InterPrologStructure(provider, left, n, right);
 								}
 								list = (TermModel) list.getChild(1);
 							}
@@ -172,10 +180,18 @@ public abstract class InterPrologConverter extends AbstractConverter<TermModel> 
 			return variable;
 		case LIST_TYPE:
 			PrologTerm[] array = term.getArguments();
+			if (array.length < 1) {
+				return InterPrologEmpty.EMPTY;
+			}
 			return TermModel.makeList(fromTermArray(array));
 		case STRUCTURE_TYPE:
 			String functor = term.getFunctor();
 			TermModel[] arguments = fromTermArray(((PrologStructure) term).getArguments());
+			if (functor.contains("op")) {
+				TermModel x = parser.parseTerm(functor);
+				TermModel ox = (TermModel) x.getChild(2);
+				return new TermModel(ox.node, arguments);
+			}
 			return new TermModel(functor, arguments);
 		default:
 			throw new UnknownTermError(term);
