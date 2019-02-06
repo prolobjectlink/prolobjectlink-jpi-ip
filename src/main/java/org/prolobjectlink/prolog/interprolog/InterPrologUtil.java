@@ -19,6 +19,8 @@
  */
 package org.prolobjectlink.prolog.interprolog;
 
+import static org.prolobjectlink.prolog.AbstractConverter.SIMPLE_ATOM_REGEX;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +58,9 @@ final class InterPrologUtil {
 		// string data type
 		else if (object instanceof String) {
 			String string = (String) object;
+			if (!string.matches(SIMPLE_ATOM_REGEX)) {
+				return new InterPrologAtom(provider, "'" + string + "'");
+			}
 			return new InterPrologAtom(provider, string);
 		}
 
@@ -69,7 +74,8 @@ final class InterPrologUtil {
 		} else if (object.getClass() == long.class || object instanceof Long) {
 			return new InterPrologLong(provider, (Long) object);
 		} else if (object.getClass() == double.class || object instanceof Double) {
-			return new InterPrologDouble(provider, (Double) object);
+			// return new InterPrologDouble(provider, (Double) object);
+			return new InterPrologFloat(provider, (Double) object);
 		}
 
 		//
