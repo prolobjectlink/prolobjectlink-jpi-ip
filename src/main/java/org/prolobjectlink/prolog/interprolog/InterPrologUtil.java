@@ -27,6 +27,7 @@ import java.util.Map;
 import org.prolobjectlink.prolog.PrologProvider;
 import org.prolobjectlink.prolog.PrologTerm;
 
+import com.declarativa.interprolog.SolutionIterator;
 import com.declarativa.interprolog.TermModel;
 
 /**
@@ -47,6 +48,51 @@ final class InterPrologUtil {
 
 		if (object instanceof TermModel) {
 			TermModel xt = (TermModel) object;
+			if (xt.getChildCount() > 0) {
+				if (xt.isList()) {
+					return new InterPrologList(provider, xt.flatList());
+				}
+
+				int arity = xt.getChildCount();
+				String functor = xt.node.toString();
+				TermModel[] arguments = new TermModel[arity];
+
+				if (arity == 2) {
+					String key = "LIST";
+					String stringQuery = "findall(P/S/O,current_op(P,S,O)," + key + "), buildTermModel(" + key + ",TM)";
+
+					// busy wait necessary to wait engine disposition
+					if (!InterPrologEngine.engine.isIdle()) {
+						InterPrologEngine.engine.waitUntilIdle();
+					}
+
+					SolutionIterator si = InterPrologEngine.engine.goal(stringQuery, "[TM]");
+					while (si.hasNext()) {
+						Object[] bindings = si.next();
+						for (Object o : bindings) {
+							if (o instanceof TermModel) {
+								TermModel list = (TermModel) o;
+								while (list.getChildCount() > 0) {
+									TermModel solvedTerm = (TermModel) list.getChild(0);
+									String n = (String) solvedTerm.children[1].node;
+									if (functor.contains("'" + n + "'")) {
+										TermModel left = (TermModel) xt.getChild(0);
+										TermModel right = (TermModel) xt.getChild(1);
+										return new InterPrologStructure(provider, left, n, right);
+									}
+									list = (TermModel) list.getChild(1);
+								}
+							}
+						}
+					}
+				}
+
+				for (int i = 0; i < arity; i++) {
+					arguments[i] = (TermModel) xt.getChild(i);
+				}
+				return new InterPrologStructure(provider, functor, arguments);
+
+			}
 			object = xt.node;
 		}
 
@@ -58,7 +104,7 @@ final class InterPrologUtil {
 		// string data type
 		else if (object instanceof String) {
 			String string = (String) object;
-			if (!string.matches(SIMPLE_ATOM_REGEX)) {
+			if (!string.equals("[]") && !string.matches(SIMPLE_ATOM_REGEX)) {
 				return new InterPrologAtom(provider, "'" + string + "'");
 			}
 			return new InterPrologAtom(provider, string);

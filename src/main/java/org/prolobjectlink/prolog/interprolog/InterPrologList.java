@@ -158,6 +158,7 @@ public class InterPrologList extends InterPrologTerm implements PrologList {
 			TermModel t = (TermModel) ptr.getChild(0);
 			ptr = (TermModel) ptr.getChild(1);
 			return toTerm(t, PrologTerm.class);
+			
 		}
 
 	}
