@@ -85,7 +85,6 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 			cache = f.getCanonicalPath().replace(File.separatorChar, '/');
 			InterPrologEngine.engine = new NativeEngine(xsbPath);
 //			InterPrologEngine.engine = new XSBSubprocessEngine(xsbPath);
-			InterPrologEngine.engine.setAllowSimultaneousThreads(true);
 		} catch (IOException e) {
 			LoggerUtils.error(InterPrologEngine.class, IO, e);
 		}
@@ -93,10 +92,12 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 
 	protected InterPrologEngine(PrologProvider provider) {
 		super(provider);
+//		InterPrologEngine.engine = new XSBSubprocessEngine(xsbPath);
 	}
 
 	protected InterPrologEngine(PrologProvider provider, String path) {
 		super(provider);
+//		InterPrologEngine.engine = new XSBSubprocessEngine(xsbPath);
 		consult(path);
 	}
 
@@ -328,7 +329,6 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	public final void dispose() {
 		File c = new File(cache);
 		c.deleteOnExit();
-		engine.shutdown();
 		program.clear();
 	}
 

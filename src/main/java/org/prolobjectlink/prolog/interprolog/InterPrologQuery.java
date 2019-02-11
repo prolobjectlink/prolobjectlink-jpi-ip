@@ -67,6 +67,7 @@ public final class InterPrologQuery extends AbstractQuery implements PrologQuery
 
 		// formulating find all query
 		InterPrologEngine.engine.consultAbsolute(cache);
+
 		String key = "_KEY_";
 		StringBuilder b = new StringBuilder();
 		b.append("findall(");
