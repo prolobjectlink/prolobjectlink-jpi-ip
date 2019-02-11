@@ -92,12 +92,10 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 
 	protected InterPrologEngine(PrologProvider provider) {
 		super(provider);
-//		InterPrologEngine.engine = new XSBSubprocessEngine(xsbPath);
 	}
 
 	protected InterPrologEngine(PrologProvider provider, String path) {
 		super(provider);
-//		InterPrologEngine.engine = new XSBSubprocessEngine(xsbPath);
 		consult(path);
 	}
 
@@ -327,6 +325,7 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	}
 
 	public final void dispose() {
+		// engine.deleteTempFiles();
 		File c = new File(cache);
 		c.deleteOnExit();
 		program.clear();
