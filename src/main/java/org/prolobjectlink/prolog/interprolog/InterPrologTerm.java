@@ -48,7 +48,7 @@ import org.prolobjectlink.prolog.PrologTerm;
 import com.declarativa.interprolog.SolutionIterator;
 import com.declarativa.interprolog.TermModel;
 
-public class InterPrologTerm extends AbstractTerm implements PrologTerm {
+public abstract class InterPrologTerm extends AbstractTerm implements PrologTerm {
 
 	protected int vIndex;
 	protected TermModel value;
@@ -72,39 +72,39 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 		return getIndicator().equals(functor + "/" + arity);
 	}
 
-	public boolean isAtom() {
+	public final boolean isAtom() {
 		return value.isAtom();
 	}
 
-	public boolean isNumber() {
+	public final boolean isNumber() {
 		return value.isNumber();
 	}
 
-	public boolean isFloat() {
+	public final boolean isFloat() {
 		return value.node instanceof Float;
 	}
 
-	public boolean isInteger() {
+	public final boolean isInteger() {
 		return value.isInteger();
 	}
 
-	public boolean isDouble() {
+	public final boolean isDouble() {
 		return value.node instanceof Double;
 	}
 
-	public boolean isLong() {
+	public final boolean isLong() {
 		return value.isLong();
 	}
 
-	public boolean isVariable() {
+	public final boolean isVariable() {
 		return value.isVar();
 	}
 
-	public boolean isList() {
+	public final boolean isList() {
 		return value.isList();
 	}
 
-	public boolean isStructure() {
+	public final boolean isStructure() {
 		return !isVariable() && isCompound() && !isList() && !isEmptyList();
 	}
 
@@ -115,19 +115,19 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 		return false;
 	}
 
-	public boolean isEmptyList() {
+	public final boolean isEmptyList() {
 		return value.isListEnd();
 	}
 
-	public boolean isAtomic() {
+	public final boolean isAtomic() {
 		return !isCompound() && !isList();
 	}
 
-	public boolean isCompound() {
+	public final boolean isCompound() {
 		return !isNumber() && getArity() > 0;
 	}
 
-	public boolean isEvaluable() {
+	public final boolean isEvaluable() {
 		if (isStructure()) {
 			String key = "X";
 			String stringQuery = "findall(P/S/O,current_op(P,S,O)," + key + "), buildTermModel(" + key + ",TM)";
@@ -164,11 +164,15 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 		return getArity() > 0 ? toTermArray(value.children, PrologTerm[].class) : new PrologTerm[0];
 	}
 
-	public boolean unify(PrologTerm term) {
-		return value.unifies(fromTerm(term, TermModel.class));
+	public final boolean unify(PrologTerm term) {
+		return unify(fromTerm(term, TermModel.class));
 	}
 
-	public Map<String, PrologTerm> match(PrologTerm term) {
+	protected final boolean unify(TermModel o) {
+		return value.unifies(o);
+	}
+
+	public final Map<String, PrologTerm> match(PrologTerm term) {
 		String key = "_KEY_";
 		Map<String, PrologTerm> map = new HashMap<String, PrologTerm>();
 		String string = "unify_with_occurs_check(" + value + "," + term + ")";
@@ -195,6 +199,12 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 		}
 
 		String stringQuery = "findall(" + b + "," + string + "," + key + "), buildTermModel(" + key + ",TM)";
+
+		// busy wait necessary to wait engine disposition
+		if (!InterPrologEngine.engine.isIdle()) {
+			InterPrologEngine.engine.waitUntilIdle();
+		}
+
 		SolutionIterator si = InterPrologEngine.engine.goal(stringQuery, "[TM]");
 		while (si.hasNext()) {
 			Object[] bindings = si.next();
@@ -361,7 +371,7 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	@Override
-	public int hashCode() {
+	public final int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((value == null) ? 0 : value.hashCode());
@@ -369,7 +379,7 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public final boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -380,7 +390,9 @@ public class InterPrologTerm extends AbstractTerm implements PrologTerm {
 		if (value == null) {
 			if (other.value != null)
 				return false;
-		} else if (!value.equals(other.value)) {
+		} else if (value.toString().equals(other.value.toString())) {
+			return true;
+		} else if (!unify(other.value)) {
 			return false;
 		}
 		return true;

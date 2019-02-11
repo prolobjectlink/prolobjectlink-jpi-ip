@@ -42,10 +42,6 @@ public class InterPrologVariable extends InterPrologTerm implements PrologVariab
 		super(VARIABLE_TYPE, provider, new TermVariable(name, position));
 	}
 
-	public PrologTerm[] getArguments() {
-		return new InterPrologVariable[0];
-	}
-
 	public int getArity() {
 		throw new ArityError(this);
 	}
@@ -77,6 +73,10 @@ public class InterPrologVariable extends InterPrologTerm implements PrologVariab
 	public final void setName(String name) {
 		TermVariable old = (TermVariable) value;
 		value = new TermVariable(name, old.getPosition());
+	}
+
+	public final PrologTerm[] getArguments() {
+		return new InterPrologFloat[0];
 	}
 
 }

@@ -104,7 +104,9 @@ final class InterPrologUtil {
 		// string data type
 		else if (object instanceof String) {
 			String string = (String) object;
-			if (!string.equals("[]") && !string.matches(SIMPLE_ATOM_REGEX)) {
+			if (string.equals("[]")) {
+				return new InterPrologEmpty(provider);
+			} else if (!string.matches(SIMPLE_ATOM_REGEX)) {
 				return new InterPrologAtom(provider, "'" + string + "'");
 			}
 			return new InterPrologAtom(provider, string);

@@ -19,6 +19,8 @@
  */
 package org.prolobjectlink.prolog.interprolog;
 
+import java.util.Iterator;
+
 import org.prolobjectlink.prolog.AbstractClause;
 import org.prolobjectlink.prolog.PrologClause;
 import org.prolobjectlink.prolog.PrologProvider;
@@ -42,5 +44,23 @@ public final class InterPrologClause extends AbstractClause implements PrologCla
 	protected InterPrologClause(PrologProvider provider, PrologTerm head, PrologTerm body, boolean dynamic,
 			boolean multifile, boolean discontiguous) {
 		super(provider, head, body, dynamic, multifile, discontiguous);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder b = new StringBuilder();
+		b.append(getHead());
+		if (isRule()) {
+			b.append(":-\n\t");
+			Iterator<PrologTerm> i = getBodyIterator();
+			while (i.hasNext()) {
+				b.append(i.next());
+				if (i.hasNext()) {
+					b.append(",\n\t");
+				}
+			}
+		}
+		b.append('.');
+		return "" + b + "";
 	}
 }
