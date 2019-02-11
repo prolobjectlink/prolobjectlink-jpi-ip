@@ -20,6 +20,7 @@
 package org.prolobjectlink.prolog.interprolog;
 
 import java.util.Iterator;
+import java.util.Map.Entry;
 
 import org.prolobjectlink.prolog.AbstractClause;
 import org.prolobjectlink.prolog.PrologClause;
@@ -61,6 +62,8 @@ public final class InterPrologClause extends AbstractClause implements PrologCla
 			}
 		}
 		b.append('.');
-		return "" + b + "";
+		String c = b.toString();
+		c = InterPrologUtil.replace(c);
+		return "" + c + "";
 	}
 }

@@ -107,11 +107,13 @@ public class InterPrologList extends InterPrologTerm implements PrologList {
 	}
 
 	public final int getArity() {
-		return value.children == null || value.children.length == 0 ? 0 : 2;
+		return value.children == null || value.children.length == 0 || value.children[0] == EMPTY
+				|| value.children[1] == EMPTY ? 0 : 2;
 	}
 
 	public final String getFunctor() {
-		return value.children == null || value.children.length == 0 ? "[]" : "" + value.node + "";
+		return value.children == null || value.children.length == 0 || value.children[0] == EMPTY
+				|| value.children[1] == EMPTY ? "[]" : "" + value.node + "";
 	}
 
 	@Override
@@ -158,7 +160,7 @@ public class InterPrologList extends InterPrologTerm implements PrologList {
 			TermModel t = (TermModel) ptr.getChild(0);
 			ptr = (TermModel) ptr.getChild(1);
 			return toTerm(t, PrologTerm.class);
-			
+
 		}
 
 	}

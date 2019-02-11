@@ -23,6 +23,7 @@ import static org.prolobjectlink.prolog.AbstractConverter.SIMPLE_ATOM_REGEX;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.prolobjectlink.prolog.PrologProvider;
 import org.prolobjectlink.prolog.PrologTerm;
@@ -43,6 +44,22 @@ final class InterPrologUtil {
 	}
 
 	static final Map<String, String> FUNCTORS = new HashMap<String, String>();
+
+	/**
+	 * replace cached inter-prolog variables with real variable name
+	 * 
+	 * @param string with inter-prolog variables
+	 * @return string with variable replacement
+	 * @since 1.0
+	 */
+	static final String replace(String string) {
+		for (Entry<String, String> entry : InterPrologProvider.varCache.entrySet()) {
+			if (string.contains(entry.getKey())) {
+				string = string.replace(entry.getKey(), entry.getValue());
+			}
+		}
+		return string;
+	}
 
 	static final PrologTerm toTerm(PrologProvider provider, Object object) {
 

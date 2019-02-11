@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.prolobjectlink.prolog.AbstractEngine;
 import org.prolobjectlink.prolog.AbstractQuery;
@@ -54,15 +53,11 @@ public final class InterPrologQuery extends AbstractQuery implements PrologQuery
 		}
 	}
 
-	InterPrologQuery(AbstractEngine engine, String cache, String string) {
+	InterPrologQuery(AbstractEngine engine, String cache, String stringQuery) {
 		super(engine);
 
 		// replace cached inter-prolog variables with real variable name
-		for (Entry<String, String> entry : InterPrologProvider.varCache.entrySet()) {
-			if (string.contains(entry.getKey())) {
-				string = string.replace(entry.getKey(), entry.getValue());
-			}
-		}
+		String string = InterPrologUtil.replace(stringQuery);
 
 		// parse the string query and enumerates variable
 		TermModel[] models = ip.parseTerms(string);
