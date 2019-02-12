@@ -27,9 +27,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.prolobjectlink.ArrayIterator;
-import org.prolobjectlink.RuntimeError;
+import org.prolobjectlink.prolog.ArrayIterator;
 import org.prolobjectlink.prolog.PrologClauses;
+import org.prolobjectlink.prolog.RuntimeError;
 
 import com.declarativa.interprolog.TermModel;
 
