@@ -46,11 +46,11 @@ public abstract class InterPrologProvider extends AbstractProvider implements Pr
 	}
 
 	public PrologTerm parseTerm(String term) {
-		return toTerm(new InterPrologParser().parseTerm(term), PrologTerm.class);
+		return toTerm(InterPrologUtil.parseTerm(term), PrologTerm.class);
 	}
 
 	public PrologTerm[] parseTerms(String stringTerms) {
-		return toTermArray(new InterPrologParser().parseTerms(stringTerms), PrologTerm[].class);
+		return toTermArray(InterPrologUtil.parseTerms(stringTerms), PrologTerm[].class);
 	}
 
 	public boolean isCompliant() {

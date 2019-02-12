@@ -43,12 +43,14 @@ import com.igormaznitsa.prologparser.terms.PrologAtom;
 import com.igormaznitsa.prologparser.terms.PrologCompound;
 import com.igormaznitsa.prologparser.terms.PrologFloat;
 import com.igormaznitsa.prologparser.terms.PrologInt;
+import com.igormaznitsa.prologparser.terms.PrologStruct;
 import com.igormaznitsa.prologparser.terms.PrologTerm;
 import com.igormaznitsa.prologparser.terms.PrologVar;
 import com.igormaznitsa.prologparser.tokenizer.Op;
 
 public final class InterPrologParser {
 
+	private int varIndex;
 	private static final PrologAtom op = new PrologAtom("op");
 	protected final HashMap<String, TermVariable> sharedPrologVariables;
 
@@ -74,6 +76,7 @@ public final class InterPrologParser {
 		} catch (IOException e) {
 			LoggerUtils.error(getClass(), LoggerConstants.IO, e);
 		}
+		varIndex = 0;
 		return result;
 	}
 
@@ -92,13 +95,23 @@ public final class InterPrologParser {
 			Reader reader = new StringReader(temp);
 			PrologParser parser = new GenericPrologParser(reader,
 					new DefaultParserContext(ParserContext.FLAG_CURLY_BRACKETS, Op.SWI));
-			for (PrologTerm prologTerm : parser) {
-				list.add(fromTerm(prologTerm));
+			for (PrologTerm ptr : parser) {
+				while (ptr instanceof PrologStruct) {
+					PrologStruct struct = (PrologStruct) ptr;
+					if (struct.getText().equals(",") && struct.getArity() == 2) {
+						list.add(fromTerm(struct.getTermAt(0)));
+						ptr = struct.getTermAt(1);
+					} else {
+						list.add(fromTerm(ptr));
+						break;
+					}
+				}
 			}
 			parser.close();
 		} catch (IOException e) {
 			LoggerUtils.error(getClass(), LoggerConstants.IO, e);
 		}
+		varIndex = 0;
 		return list.toArray(result);
 	}
 
@@ -159,10 +172,10 @@ public final class InterPrologParser {
 			}
 		case VAR:
 			String name = ((PrologVar) term).getText();
-			int position = ((PrologVar) term).getPos();// FIXME CATCH THE VAR POSITION IN STRUCTURE ???
+//			int position = ((PrologVar) term).getPos();// FIXME CATCH THE VAR POSITION IN STRUCTURE ???
 			TermVariable variable = sharedPrologVariables.get(name);
 			if (variable == null) {
-				variable = new TermVariable(name, position);
+				variable = new TermVariable(name, varIndex++);
 				sharedPrologVariables.put(name, variable);
 			}
 			return variable;

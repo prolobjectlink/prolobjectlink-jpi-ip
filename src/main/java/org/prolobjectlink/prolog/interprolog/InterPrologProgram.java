@@ -31,7 +31,6 @@ import org.prolobjectlink.ArrayIterator;
 import org.prolobjectlink.RuntimeError;
 import org.prolobjectlink.prolog.PrologClauses;
 
-import com.declarativa.interprolog.PrologOperatorsContext;
 import com.declarativa.interprolog.TermModel;
 
 public final class InterPrologProgram extends AbstractSet<List<TermModel>> {
@@ -60,8 +59,7 @@ public final class InterPrologProgram extends AbstractSet<List<TermModel>> {
 		String msg = "Empty clause list";
 		if (!cls.isEmpty()) {
 			TermModel t = cls.get(0);
-			String key = t.getFunctorArity();
-			return key;
+			return t.getFunctorArity();
 		}
 		throw new RuntimeError(msg);
 	}
@@ -212,7 +210,7 @@ public final class InterPrologProgram extends AbstractSet<List<TermModel>> {
 							TermModel item = k.next();
 
 							String s = item.toString().replace("op(1000, xfy, ',').", "','");
-							
+
 							families.append(s);
 							if (k.hasNext()) {
 								families.append(',');

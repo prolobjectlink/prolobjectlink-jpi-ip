@@ -215,7 +215,12 @@ public abstract class InterPrologTerm extends AbstractTerm implements PrologTerm
 						if (variables.size() - 1 >= 0) {
 							int index = variables.size() - 1;
 							TermModel solvedTerm = (TermModel) list.getChild(0);
-							map.put(variables.get(index), InterPrologUtil.toTerm(provider, solvedTerm));
+							String x = InterPrologProvider.varCache.get(variables.get(index));
+							if (x == null) {
+								map.put(variables.get(index), InterPrologUtil.toTerm(provider, solvedTerm));
+							} else {
+								map.put(x, InterPrologUtil.toTerm(provider, solvedTerm));
+							}
 						}
 						list = (TermModel) list.getChild(1);
 					}

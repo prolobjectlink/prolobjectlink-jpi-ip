@@ -20,7 +20,6 @@
 package org.prolobjectlink.prolog.interprolog;
 
 import java.util.Iterator;
-import java.util.Map.Entry;
 
 import org.prolobjectlink.prolog.AbstractClause;
 import org.prolobjectlink.prolog.PrologClause;
