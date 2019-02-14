@@ -24,7 +24,7 @@ import static org.prolobjectlink.prolog.PrologTermType.LIST_TYPE;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import org.prolobjectlink.AbstractIterator;
+import org.prolobjectlink.prolog.AbstractIterator;
 import org.prolobjectlink.prolog.PrologList;
 import org.prolobjectlink.prolog.PrologProvider;
 import org.prolobjectlink.prolog.PrologTerm;
@@ -61,8 +61,8 @@ public class InterPrologList extends InterPrologTerm implements PrologList {
 
 	protected InterPrologList(PrologProvider provider, PrologTerm head, PrologTerm tail) {
 		super(LIST_TYPE, provider);
-		TermModel h = unwrap(head, InterPrologTerm.class).value;
-		TermModel t = unwrap(tail, InterPrologTerm.class).value;
+		TermModel h = ((InterPrologTerm) head).value;
+		TermModel t = ((InterPrologTerm) tail).value;
 		value = TermModel.makeList(new TermModel[] { h, t });
 	}
 

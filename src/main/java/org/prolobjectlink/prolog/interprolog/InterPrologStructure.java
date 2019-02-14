@@ -33,7 +33,7 @@ public class InterPrologStructure extends InterPrologTerm implements PrologStruc
 		super(STRUCTURE_TYPE, provider);
 		TermModel[] terms = new TermModel[arguments.length];
 		for (int i = 0; i < arguments.length; i++) {
-			terms[i] = unwrap(arguments[i], InterPrologTerm.class).value;
+			terms[i] = ((InterPrologTerm) arguments[i]).value;
 		}
 		value = new TermModel(functor, terms);
 	}
@@ -45,8 +45,8 @@ public class InterPrologStructure extends InterPrologTerm implements PrologStruc
 
 	InterPrologStructure(PrologProvider provider, PrologTerm left, String operator, PrologTerm right) {
 		super(STRUCTURE_TYPE, provider);
-		TermModel leftOperand = left.unwrap(InterPrologTerm.class).value;
-		TermModel rightOperand = right.unwrap(InterPrologTerm.class).value;
+		TermModel leftOperand = ((InterPrologTerm) left).value;
+		TermModel rightOperand = ((InterPrologTerm) right).value;
 		value = new TermModel(operator, new TermModel[] { leftOperand, rightOperand });
 	}
 

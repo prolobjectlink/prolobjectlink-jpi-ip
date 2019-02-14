@@ -353,8 +353,8 @@ public abstract class InterPrologTerm extends AbstractTerm implements PrologTerm
 
 		case VARIABLE_TYPE:
 
-			InterPrologTerm thisVariable = unwrap(InterPrologTerm.class);
-			InterPrologTerm otherVariable = unwrap(term, InterPrologTerm.class);
+			InterPrologTerm thisVariable = this;
+			InterPrologTerm otherVariable = ((InterPrologTerm) term);
 			if (thisVariable.vIndex < otherVariable.vIndex) {
 				return -1;
 			} else if (thisVariable.vIndex > otherVariable.vIndex) {
