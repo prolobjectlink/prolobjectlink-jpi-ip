@@ -31,6 +31,7 @@ import org.prolobjectlink.prolog.PrologDouble;
 import org.prolobjectlink.prolog.PrologFloat;
 import org.prolobjectlink.prolog.PrologInteger;
 import org.prolobjectlink.prolog.PrologList;
+import org.prolobjectlink.prolog.PrologLogger;
 import org.prolobjectlink.prolog.PrologLong;
 import org.prolobjectlink.prolog.PrologProvider;
 import org.prolobjectlink.prolog.PrologStructure;
@@ -40,6 +41,7 @@ import org.prolobjectlink.prolog.PrologVariable;
 public abstract class InterPrologProvider extends AbstractProvider implements PrologProvider {
 
 	protected static final Map<String, String> varCache = new HashMap<String, String>();
+	private static final PrologLogger logger = new InterPrologLogger();
 
 	public InterPrologProvider(PrologConverter<?> converter) {
 		super(converter);
@@ -134,5 +136,9 @@ public abstract class InterPrologProvider extends AbstractProvider implements Pr
 
 	public PrologTerm newStructure(PrologTerm left, String operator, PrologTerm right) {
 		return new InterPrologStructure(this, left, operator, right);
+	}
+
+	public PrologLogger getLogger() {
+		return logger;
 	}
 }
