@@ -19,7 +19,7 @@
  */
 package org.prolobjectlink.prolog.interprolog;
 
-import static org.prolobjectlink.logging.LoggerConstants.IO;
+import static org.prolobjectlink.prolog.LoggerConstants.IO;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,7 +32,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.prolobjectlink.logging.LoggerUtils;
 import org.prolobjectlink.prolog.AbstractEngine;
 import org.prolobjectlink.prolog.ArrayIterator;
 import org.prolobjectlink.prolog.PredicateIndicator;
@@ -86,7 +85,7 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 			InterPrologEngine.engine = new NativeEngine(xsbPath);
 //			InterPrologEngine.engine = new XSBSubprocessEngine(xsbPath);
 		} catch (IOException e) {
-			LoggerUtils.error(InterPrologEngine.class, IO, e);
+			InterPrologProvider.logger.error(InterPrologEngine.class, IO, e);
 		}
 	}
 
@@ -115,7 +114,7 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 			writer = new PrintWriter(new FileOutputStream(path, false));
 			writer.print(program);
 		} catch (FileNotFoundException e) {
-			LoggerUtils.error(getClass(), IO + cache, e);
+			getLogger().error(getClass(), IO + cache, e);
 		}
 
 		finally {

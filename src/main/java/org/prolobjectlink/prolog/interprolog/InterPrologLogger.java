@@ -28,8 +28,8 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.prolobjectlink.logging.LoggerFormatter;
 import org.prolobjectlink.prolog.AbstractLogger;
+import org.prolobjectlink.prolog.LoggerFormatter;
 import org.prolobjectlink.prolog.PrologLogger;
 
 public final class InterPrologLogger extends AbstractLogger implements PrologLogger {

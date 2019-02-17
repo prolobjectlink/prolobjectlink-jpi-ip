@@ -41,7 +41,7 @@ import org.prolobjectlink.prolog.PrologVariable;
 public abstract class InterPrologProvider extends AbstractProvider implements PrologProvider {
 
 	protected static final Map<String, String> varCache = new HashMap<String, String>();
-	private static final PrologLogger logger = new InterPrologLogger();
+	static final PrologLogger logger = new InterPrologLogger();
 
 	public InterPrologProvider(PrologConverter<?> converter) {
 		super(converter);
