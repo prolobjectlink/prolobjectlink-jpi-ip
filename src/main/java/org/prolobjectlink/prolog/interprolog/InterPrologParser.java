@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import org.prolobjectlink.prolog.LoggerConstants;
+import org.prolobjectlink.prolog.PrologLogger;
 import org.prolobjectlink.prolog.UnknownTermError;
 
 import com.declarativa.interprolog.TermModel;
@@ -73,7 +73,7 @@ public final class InterPrologParser {
 			}
 			parser.close();
 		} catch (IOException e) {
-			InterPrologProvider.logger.error(getClass(), LoggerConstants.IO, e);
+			InterPrologProvider.logger.error(getClass(), PrologLogger.IO, e);
 		}
 		varIndex = 0;
 		return result;
@@ -108,7 +108,7 @@ public final class InterPrologParser {
 			}
 			parser.close();
 		} catch (IOException e) {
-			InterPrologProvider.logger.error(getClass(), LoggerConstants.IO, e);
+			InterPrologProvider.logger.error(getClass(), PrologLogger.IO, e);
 		}
 		varIndex = 0;
 		return list.toArray(result);
@@ -129,13 +129,13 @@ public final class InterPrologParser {
 				program.add(fromTerm(prologTerm));
 			}
 		} catch (IOException e) {
-			InterPrologProvider.logger.error(getClass(), LoggerConstants.IO, e);
+			InterPrologProvider.logger.error(getClass(), PrologLogger.IO, e);
 		} finally {
 			if (parser != null) {
 				try {
 					parser.close();
 				} catch (IOException e) {
-					InterPrologProvider.logger.error(getClass(), LoggerConstants.IO, e);
+					InterPrologProvider.logger.error(getClass(), PrologLogger.IO, e);
 				}
 			}
 		}
