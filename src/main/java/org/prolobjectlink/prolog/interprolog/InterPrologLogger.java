@@ -29,7 +29,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.prolobjectlink.prolog.AbstractLogger;
-import org.prolobjectlink.prolog.LoggerFormatter;
+import org.prolobjectlink.prolog.PrologFormatter;
 import org.prolobjectlink.prolog.PrologLogger;
 
 public final class InterPrologLogger extends AbstractLogger implements PrologLogger {
@@ -46,7 +46,7 @@ public final class InterPrologLogger extends AbstractLogger implements PrologLog
 		Logger rootlogger = LOGGER.getParent();
 		SimpleDateFormat f = new SimpleDateFormat("yyyy.MM.dd");
 		String date = f.format(new Date());
-		Formatter formatter = new LoggerFormatter();
+		Formatter formatter = new PrologFormatter();
 		for (Handler h : rootlogger.getHandlers()) {
 			h.setFormatter(formatter);
 			h.setLevel(level);

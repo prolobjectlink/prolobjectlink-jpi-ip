@@ -29,7 +29,7 @@ import java.util.Set;
 
 import org.prolobjectlink.prolog.ArrayIterator;
 import org.prolobjectlink.prolog.PrologClauses;
-import org.prolobjectlink.prolog.RuntimeError;
+import org.prolobjectlink.prolog.PrologError;
 
 import com.declarativa.interprolog.TermModel;
 
@@ -61,7 +61,7 @@ public final class InterPrologProgram extends AbstractSet<List<TermModel>> {
 			TermModel t = cls.get(0);
 			return t.getFunctorArity();
 		}
-		throw new RuntimeError(msg);
+		throw new PrologError(msg);
 	}
 
 	public List<TermModel> get(String key) {
