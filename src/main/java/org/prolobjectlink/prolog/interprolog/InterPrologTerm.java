@@ -259,7 +259,6 @@ public abstract class InterPrologTerm extends AbstractTerm implements PrologTerm
 
 		case FLOAT_TYPE:
 
-			checkNumberType(term);
 			float thisFloatValue = ((Number) value.node).floatValue();
 			float otherFloatValue = ((PrologNumber) term).getFloatValue();
 
@@ -273,7 +272,6 @@ public abstract class InterPrologTerm extends AbstractTerm implements PrologTerm
 
 		case LONG_TYPE:
 
-			checkNumberType(term);
 			long thisValue = value.longValue();
 			long otherValue = ((PrologNumber) term).getLongValue();
 
@@ -287,7 +285,6 @@ public abstract class InterPrologTerm extends AbstractTerm implements PrologTerm
 
 		case DOUBLE_TYPE:
 
-			checkNumberType(term);
 			double thisDoubleValue = ((Number) value.node).doubleValue();
 			double otherDoubleValue = ((PrologNumber) term).getDoubleValue();
 
@@ -301,7 +298,6 @@ public abstract class InterPrologTerm extends AbstractTerm implements PrologTerm
 
 		case INTEGER_TYPE:
 
-			checkNumberType(term);
 			int thisIntergerValue = value.intValue();
 			int otherIntegerValue = ((PrologNumber) term).getIntValue();
 
