@@ -34,7 +34,6 @@ import java.util.Set;
 
 import org.prolobjectlink.prolog.AbstractEngine;
 import org.prolobjectlink.prolog.ArrayIterator;
-import org.prolobjectlink.prolog.PredicateIndicator;
 import org.prolobjectlink.prolog.PrologClause;
 import org.prolobjectlink.prolog.PrologEngine;
 import org.prolobjectlink.prolog.PrologIndicator;
@@ -293,7 +292,7 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 						TermModel solvedTerm = (TermModel) list.getChild(0);
 						String functor = (String) solvedTerm.children[0].node;
 						Integer arity = (Integer) solvedTerm.children[1].node;
-						PredicateIndicator pi = new PredicateIndicator(functor, arity);
+						InterPrologIndicator pi = new InterPrologIndicator(functor, arity);
 						list = (TermModel) list.getChild(1);
 						indicators.add(pi);
 					}

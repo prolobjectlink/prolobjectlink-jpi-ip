@@ -23,27 +23,28 @@ import java.util.Iterator;
 
 import org.prolobjectlink.prolog.AbstractClause;
 import org.prolobjectlink.prolog.PrologClause;
+import org.prolobjectlink.prolog.PrologIndicator;
 import org.prolobjectlink.prolog.PrologProvider;
 import org.prolobjectlink.prolog.PrologTerm;
 
 public final class InterPrologClause extends AbstractClause implements PrologClause {
 
-	protected InterPrologClause(PrologProvider provider, PrologTerm head) {
-		super(provider, head, false, false, false);
-	}
-
-	protected InterPrologClause(PrologProvider provider, PrologTerm head, PrologTerm body) {
-		super(provider, head, body, false, false, false);
-	}
+	private final PrologIndicator indicator;
 
 	protected InterPrologClause(PrologProvider provider, PrologTerm head, boolean dynamic, boolean multifile,
 			boolean discontiguous) {
 		super(provider, head, dynamic, multifile, discontiguous);
+		this.indicator = new InterPrologIndicator(head.getFunctor(), head.getArity());
 	}
 
 	protected InterPrologClause(PrologProvider provider, PrologTerm head, PrologTerm body, boolean dynamic,
 			boolean multifile, boolean discontiguous) {
 		super(provider, head, body, dynamic, multifile, discontiguous);
+		this.indicator = new InterPrologIndicator(head.getFunctor(), head.getArity());
+	}
+
+	public PrologIndicator getPrologIndicator() {
+		return indicator;
 	}
 
 	@Override
@@ -65,4 +66,30 @@ public final class InterPrologClause extends AbstractClause implements PrologCla
 		c = InterPrologUtil.replace(c);
 		return "" + c + "";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((indicator == null) ? 0 : indicator.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		InterPrologClause other = (InterPrologClause) obj;
+		if (indicator == null) {
+			if (other.indicator != null)
+				return false;
+		} else if (!indicator.equals(other.indicator))
+			return false;
+		return true;
+	}
+
 }
