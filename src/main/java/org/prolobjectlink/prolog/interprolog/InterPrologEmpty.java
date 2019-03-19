@@ -22,6 +22,11 @@ package org.prolobjectlink.prolog.interprolog;
 import org.prolobjectlink.prolog.PrologList;
 import org.prolobjectlink.prolog.PrologProvider;
 
+/**
+ * 
+ * @author Jose Zalacain
+ * @since 1.0
+ */
 public class InterPrologEmpty extends InterPrologList implements PrologList {
 
 	protected InterPrologEmpty(PrologProvider provider) {

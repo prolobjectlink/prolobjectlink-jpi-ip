@@ -48,6 +48,11 @@ import org.prolobjectlink.prolog.PrologTerm;
 import com.declarativa.interprolog.SolutionIterator;
 import com.declarativa.interprolog.TermModel;
 
+/**
+ * 
+ * @author Jose Zalacain
+ * @since 1.0
+ */
 public abstract class InterPrologTerm extends AbstractTerm implements PrologTerm {
 
 	protected int vIndex;

@@ -27,6 +27,11 @@ import org.prolobjectlink.prolog.PrologTerm;
 
 import com.declarativa.interprolog.TermModel;
 
+/**
+ * 
+ * @author Jose Zalacain
+ * @since 1.0
+ */
 public class InterPrologFloat extends InterPrologNumber implements PrologFloat {
 
 	public InterPrologFloat(PrologProvider provider) {

@@ -22,6 +22,11 @@ package org.prolobjectlink.prolog.interprolog;
 import org.prolobjectlink.prolog.AbstractIndicator;
 import org.prolobjectlink.prolog.PrologIndicator;
 
+/**
+ * 
+ * @author Jose Zalacain
+ * @since 1.0
+ */
 public class InterPrologIndicator extends AbstractIndicator implements PrologIndicator {
 
 	public InterPrologIndicator(String functor, int arity) {

@@ -26,6 +26,11 @@ import org.prolobjectlink.prolog.PrologProvider;
 
 import com.declarativa.interprolog.TermModel;
 
+/**
+ * 
+ * @author Jose Zalacain
+ * @since 1.0
+ */
 public final class InterPrologDouble extends InterPrologFloat implements PrologDouble {
 
 	public InterPrologDouble(PrologProvider provider) {

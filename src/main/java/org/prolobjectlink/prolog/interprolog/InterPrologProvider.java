@@ -38,6 +38,11 @@ import org.prolobjectlink.prolog.PrologStructure;
 import org.prolobjectlink.prolog.PrologTerm;
 import org.prolobjectlink.prolog.PrologVariable;
 
+/**
+ * 
+ * @author Jose Zalacain
+ * @since 1.0
+ */
 public abstract class InterPrologProvider extends AbstractProvider implements PrologProvider {
 
 	protected static final Map<String, String> varCache = new HashMap<String, String>();

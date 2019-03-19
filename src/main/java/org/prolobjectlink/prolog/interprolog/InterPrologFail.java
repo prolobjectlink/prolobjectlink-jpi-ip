@@ -26,6 +26,11 @@ import org.prolobjectlink.prolog.PrologTerm;
 
 import com.declarativa.interprolog.TermModel;
 
+/**
+ * 
+ * @author Jose Zalacain
+ * @since 1.0
+ */
 public final class InterPrologFail extends InterPrologTerm implements PrologTerm {
 
 	protected InterPrologFail(PrologProvider provider) {

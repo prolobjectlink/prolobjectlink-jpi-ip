@@ -26,6 +26,11 @@ import java.io.Serializable;
 import com.declarativa.interprolog.TermModel;
 import com.declarativa.interprolog.util.VariableNode;
 
+/**
+ * 
+ * @author Jose Zalacain
+ * @since 1.0
+ */
 public class TermVariable extends TermModel implements Serializable {
 
 	private static final long serialVersionUID = -4471030713129859522L;

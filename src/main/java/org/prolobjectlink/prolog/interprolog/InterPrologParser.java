@@ -47,6 +47,11 @@ import com.igormaznitsa.prologparser.terms.PrologTerm;
 import com.igormaznitsa.prologparser.terms.PrologVar;
 import com.igormaznitsa.prologparser.tokenizer.Op;
 
+/**
+ * 
+ * @author Jose Zalacain
+ * @since 1.0
+ */
 public final class InterPrologParser {
 
 	private int varIndex;
