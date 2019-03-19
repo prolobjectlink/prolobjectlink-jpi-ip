@@ -83,6 +83,10 @@ public abstract class InterPrologProvider extends AbstractProvider implements Pr
 		return new InterPrologEmpty(this);
 	}
 
+	public PrologTerm prologInclude(String file) {
+		return newStructure("consult", newAtom(file));
+	}
+
 	public PrologAtom newAtom(String functor) {
 		if (!functor.matches(SIMPLE_ATOM_REGEX)) {
 			return new InterPrologAtom(this, "'" + functor + "'");
