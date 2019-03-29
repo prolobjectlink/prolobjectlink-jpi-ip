@@ -42,7 +42,7 @@ import org.prolobjectlink.prolog.PrologIndicator;
 import org.prolobjectlink.prolog.PrologOperator;
 import org.prolobjectlink.prolog.PrologProvider;
 import org.prolobjectlink.prolog.PrologQuery;
-import org.prolobjectlink.prolog.PrologScript;
+import org.prolobjectlink.prolog.PrologScriptEngine;
 import org.prolobjectlink.prolog.PrologTerm;
 import org.prolobjectlink.prolog.PrologTermType;
 
@@ -256,7 +256,7 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	}
 
 	public final ScriptEngine getPrologScript() {
-		return new PrologScript(new InterPrologScriptFactory(this));
+		return new PrologScriptEngine(new InterPrologScriptFactory(this));
 	}
 
 	public final int getProgramSize() {

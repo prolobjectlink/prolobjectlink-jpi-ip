@@ -24,6 +24,8 @@ import static org.prolobjectlink.prolog.AbstractConverter.SIMPLE_ATOM_REGEX;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.script.ScriptEngineFactory;
+
 import org.prolobjectlink.prolog.AbstractProvider;
 import org.prolobjectlink.prolog.PrologAtom;
 import org.prolobjectlink.prolog.PrologConverter;
@@ -52,102 +54,106 @@ public abstract class InterPrologProvider extends AbstractProvider implements Pr
 		super(converter);
 	}
 
-	public PrologTerm parseTerm(String term) {
+	public final PrologTerm parseTerm(String term) {
 		return toTerm(InterPrologUtil.parseTerm(term), PrologTerm.class);
 	}
 
-	public PrologTerm[] parseTerms(String stringTerms) {
+	public final PrologTerm[] parseTerms(String stringTerms) {
 		return toTermArray(InterPrologUtil.parseTerms(stringTerms), PrologTerm[].class);
 	}
 
-	public boolean isCompliant() {
+	public final boolean isCompliant() {
 		return false;
 	}
 
-	public PrologTerm prologNil() {
+	public final PrologTerm prologNil() {
 		return new InterPrologNil(this);
 	}
 
-	public PrologTerm prologCut() {
+	public final PrologTerm prologCut() {
 		return new InterPrologCut(this);
 	}
 
-	public PrologTerm prologFail() {
+	public final PrologTerm prologFail() {
 		return new InterPrologFail(this);
 	}
 
-	public PrologTerm prologTrue() {
+	public final PrologTerm prologTrue() {
 		return new InterPrologTrue(this);
 	}
 
-	public PrologTerm prologFalse() {
+	public final PrologTerm prologFalse() {
 		return new InterPrologFalse(this);
 	}
 
-	public PrologTerm prologEmpty() {
+	public final PrologTerm prologEmpty() {
 		return new InterPrologEmpty(this);
 	}
 
-	public PrologTerm prologInclude(String file) {
+	public final PrologTerm prologInclude(String file) {
 		return newStructure("consult", newAtom(file));
 	}
 
-	public PrologAtom newAtom(String functor) {
+	public final PrologAtom newAtom(String functor) {
 		if (!functor.matches(SIMPLE_ATOM_REGEX)) {
 			return new InterPrologAtom(this, "'" + functor + "'");
 		}
 		return new InterPrologAtom(this, functor);
 	}
 
-	public PrologFloat newFloat(Number value) {
+	public final PrologFloat newFloat(Number value) {
 		return new InterPrologFloat(this, value);
 	}
 
-	public PrologDouble newDouble(Number value) {
+	public final PrologDouble newDouble(Number value) {
 		return new InterPrologDouble(this, value);
 	}
 
-	public PrologInteger newInteger(Number value) {
+	public final PrologInteger newInteger(Number value) {
 		return new InterPrologInteger(this, value);
 	}
 
-	public PrologLong newLong(Number value) {
+	public final PrologLong newLong(Number value) {
 		return new InterPrologLong(this, value);
 	}
 
-	public PrologVariable newVariable(int position) {
+	public final PrologVariable newVariable(int position) {
 		return new InterPrologVariable(this, position);
 	}
 
-	public PrologVariable newVariable(String name, int position) {
+	public final PrologVariable newVariable(String name, int position) {
 		return new InterPrologVariable(this, name, position);
 	}
 
-	public PrologList newList() {
+	public final PrologList newList() {
 		return new InterPrologList(this);
 	}
 
-	public PrologList newList(PrologTerm[] arguments) {
+	public final PrologList newList(PrologTerm[] arguments) {
 		return new InterPrologList(this, arguments);
 	}
 
-	public PrologList newList(PrologTerm head, PrologTerm tail) {
+	public final PrologList newList(PrologTerm head, PrologTerm tail) {
 		return new InterPrologList(this, head, tail);
 	}
 
-	public PrologList newList(PrologTerm[] arguments, PrologTerm tail) {
+	public final PrologList newList(PrologTerm[] arguments, PrologTerm tail) {
 		return new InterPrologList(this, arguments, tail);
 	}
 
-	public PrologStructure newStructure(String functor, PrologTerm... arguments) {
+	public final PrologStructure newStructure(String functor, PrologTerm... arguments) {
 		return new InterPrologStructure(this, functor, arguments);
 	}
 
-	public PrologTerm newStructure(PrologTerm left, String operator, PrologTerm right) {
+	public final PrologTerm newStructure(PrologTerm left, String operator, PrologTerm right) {
 		return new InterPrologStructure(this, left, operator, right);
 	}
 
-	public PrologLogger getLogger() {
+	public final ScriptEngineFactory getScriptFactory() {
+		return new InterPrologScriptFactory(newEngine());
+	}
+
+	public final PrologLogger getLogger() {
 		return logger;
 	}
 }

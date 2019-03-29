@@ -22,9 +22,9 @@ package org.prolobjectlink.prolog.interprolog;
 import javax.script.ScriptEngineFactory;
 
 import org.prolobjectlink.prolog.PrologEngine;
-import org.prolobjectlink.prolog.PrologScriptFactory;
+import org.prolobjectlink.prolog.PrologScriptEngineFactory;
 
-public final class InterPrologScriptFactory extends PrologScriptFactory implements ScriptEngineFactory {
+public final class InterPrologScriptFactory extends PrologScriptEngineFactory implements ScriptEngineFactory {
 
 	public InterPrologScriptFactory(PrologEngine engine) {
 		super(engine);
