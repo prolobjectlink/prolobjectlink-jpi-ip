@@ -24,8 +24,6 @@ import static org.prolobjectlink.prolog.AbstractConverter.SIMPLE_ATOM_REGEX;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.script.ScriptEngineFactory;
-
 import org.prolobjectlink.prolog.AbstractProvider;
 import org.prolobjectlink.prolog.PrologAtom;
 import org.prolobjectlink.prolog.PrologConverter;
@@ -147,10 +145,6 @@ public abstract class InterPrologProvider extends AbstractProvider implements Pr
 
 	public final PrologTerm newStructure(PrologTerm left, String operator, PrologTerm right) {
 		return new InterPrologStructure(this, left, operator, right);
-	}
-
-	public final ScriptEngineFactory getScriptFactory() {
-		return new InterPrologScriptFactory(newEngine());
 	}
 
 	public final PrologLogger getLogger() {

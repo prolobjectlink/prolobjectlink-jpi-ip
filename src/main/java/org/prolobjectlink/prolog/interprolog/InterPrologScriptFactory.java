@@ -24,13 +24,13 @@ import javax.script.ScriptEngineFactory;
 import org.prolobjectlink.prolog.PrologEngine;
 import org.prolobjectlink.prolog.PrologScriptEngineFactory;
 
-public final class InterPrologScriptFactory extends PrologScriptEngineFactory implements ScriptEngineFactory {
+public abstract class InterPrologScriptFactory extends PrologScriptEngineFactory implements ScriptEngineFactory {
 
 	public InterPrologScriptFactory(PrologEngine engine) {
 		super(engine);
 	}
 
-	public String getMethodCallSyntax(String obj, String m, String... args) {
+	public final String getMethodCallSyntax(String obj, String m, String... args) {
 		throw new UnsupportedOperationException("getMethodCallSyntax(String obj, String m, String... args)");
 	}
 

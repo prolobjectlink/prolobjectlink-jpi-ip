@@ -32,8 +32,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import javax.script.ScriptEngine;
-
 import org.prolobjectlink.prolog.AbstractEngine;
 import org.prolobjectlink.prolog.ArrayIterator;
 import org.prolobjectlink.prolog.PrologClause;
@@ -42,7 +40,6 @@ import org.prolobjectlink.prolog.PrologIndicator;
 import org.prolobjectlink.prolog.PrologOperator;
 import org.prolobjectlink.prolog.PrologProvider;
 import org.prolobjectlink.prolog.PrologQuery;
-import org.prolobjectlink.prolog.PrologScriptEngine;
 import org.prolobjectlink.prolog.PrologTerm;
 import org.prolobjectlink.prolog.PrologTermType;
 
@@ -253,10 +250,6 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 			}
 		}
 		return operators;
-	}
-
-	public final ScriptEngine getPrologScript() {
-		return new PrologScriptEngine(new InterPrologScriptFactory(this));
 	}
 
 	public final int getProgramSize() {
