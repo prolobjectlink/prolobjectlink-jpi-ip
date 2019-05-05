@@ -34,11 +34,7 @@ import static org.prolobjectlink.prolog.PrologTermType.STRUCTURE_TYPE;
 import static org.prolobjectlink.prolog.PrologTermType.TRUE_TYPE;
 import static org.prolobjectlink.prolog.PrologTermType.VARIABLE_TYPE;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.prolobjectlink.prolog.AbstractTerm;
 import org.prolobjectlink.prolog.PrologNumber;
@@ -175,64 +171,6 @@ public abstract class InterPrologTerm extends AbstractTerm implements PrologTerm
 
 	protected final boolean unify(TermModel o) {
 		return value.unifies(o);
-	}
-
-	public final Map<String, PrologTerm> match(PrologTerm term) {
-		String key = "_KEY_";
-		Map<String, PrologTerm> map = new HashMap<String, PrologTerm>();
-		String string = "unify_with_occurs_check(" + value + "," + term + ")";
-
-		// parse the string query and enumerates variable
-		List<String> variables = new ArrayList<String>();
-		InterPrologParser ip = new InterPrologParser();
-		TermModel[] models = ip.parseTerms(string);
-		for (TermModel termModels : models) {
-			enumerateVariables(variables, termModels);
-		}
-
-		StringBuilder b = new StringBuilder();
-		Iterator<?> j = variables.iterator();
-		if (j.hasNext()) {
-			while (j.hasNext()) {
-				b.append(j.next());
-				if (j.hasNext()) {
-					b.append('/');
-				}
-			}
-		} else {
-			b.append('_');
-		}
-
-		String stringQuery = "findall(" + b + "," + string + "," + key + "), buildTermModel(" + key + ",TM)";
-
-		// busy wait necessary to wait engine disposition
-		if (!InterPrologEngine.engine.isIdle()) {
-			InterPrologEngine.engine.waitUntilIdle();
-		}
-
-		SolutionIterator si = InterPrologEngine.engine.goal(stringQuery, "[TM]");
-		while (si.hasNext()) {
-			Object[] bindings = si.next();
-			for (Object object : bindings) {
-				if (object instanceof TermModel) {
-					TermModel list = (TermModel) object;
-					while (list.getChildCount() > 0) {
-						if (variables.size() - 1 >= 0) {
-							int index = variables.size() - 1;
-							TermModel solvedTerm = (TermModel) list.getChild(0);
-							String x = InterPrologProvider.varCache.get(variables.get(index));
-							if (x == null) {
-								map.put(variables.get(index), InterPrologUtil.toTerm(provider, solvedTerm));
-							} else {
-								map.put(x, InterPrologUtil.toTerm(provider, solvedTerm));
-							}
-						}
-						list = (TermModel) list.getChild(1);
-					}
-				}
-			}
-		}
-		return map;
 	}
 
 	public final int compareTo(PrologTerm term) {
