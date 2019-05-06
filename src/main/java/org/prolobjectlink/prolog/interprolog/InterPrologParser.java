@@ -147,6 +147,21 @@ public final class InterPrologParser {
 		return program;
 	}
 
+	public InterPrologProgram parseProgram(Reader in) {
+		InterPrologProgram program = new InterPrologProgram();
+		PrologParser parser = new GenericPrologParser(in,
+				new DefaultParserContext(ParserContext.FLAG_CURLY_BRACKETS, Op.SWI));
+		for (PrologTerm prologTerm : parser) {
+			program.add(fromTerm(prologTerm));
+		}
+		try {
+			parser.close();
+		} catch (IOException e) {
+			InterPrologProvider.logger.error(getClass(), PrologLogger.IO, e);
+		}
+		return program;
+	}
+
 	public TermModel fromTerm(PrologTerm term) {
 		switch (term.getType()) {
 		case ATOM:

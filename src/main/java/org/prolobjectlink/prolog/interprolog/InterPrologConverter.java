@@ -164,7 +164,7 @@ public abstract class InterPrologConverter extends AbstractConverter<TermModel> 
 		case FLOAT_TYPE:
 			return new TermModel(((PrologFloat) term).getFloatValue());
 		case INTEGER_TYPE:
-			return new TermModel(((PrologInteger) term).getIntValue());
+			return new TermModel(((PrologInteger) term).getIntegerValue());
 		case DOUBLE_TYPE:
 			return new TermModel(((PrologDouble) term).getDoubleValue());
 		case LONG_TYPE:

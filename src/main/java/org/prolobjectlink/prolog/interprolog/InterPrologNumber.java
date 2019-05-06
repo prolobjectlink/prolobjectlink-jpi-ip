@@ -42,7 +42,7 @@ public abstract class InterPrologNumber extends InterPrologTerm implements Prolo
 	}
 
 	public final PrologInteger getPrologInteger() {
-		return new InterPrologInteger(provider, getIntValue());
+		return new InterPrologInteger(provider, getIntegerValue());
 	}
 
 	public final PrologFloat getPrologFloat() {
@@ -81,7 +81,7 @@ public abstract class InterPrologNumber extends InterPrologTerm implements Prolo
 		return ((Number) value.node).doubleValue();
 	}
 
-	public final int getIntValue() {
+	public final int getIntegerValue() {
 		return value.isLong() ? (int) value.longValue() : value.intValue();
 	}
 

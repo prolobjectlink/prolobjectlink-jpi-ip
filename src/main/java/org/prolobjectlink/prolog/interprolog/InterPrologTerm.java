@@ -242,7 +242,7 @@ public abstract class InterPrologTerm extends AbstractTerm implements PrologTerm
 		case INTEGER_TYPE:
 
 			int thisIntergerValue = value.intValue();
-			int otherIntegerValue = ((PrologNumber) term).getIntValue();
+			int otherIntegerValue = ((PrologNumber) term).getIntegerValue();
 
 			if (thisIntergerValue < otherIntegerValue) {
 				return -1;
