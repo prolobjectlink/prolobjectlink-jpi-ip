@@ -103,6 +103,11 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 		persist(cache);
 	}
 
+	public final void consult(Reader reader) {
+		program = parser.parseProgram(reader);
+		persist(cache);
+	}
+
 	public final void include(String path) {
 		program.add(parser.parseProgram(path));
 		persist(cache);
