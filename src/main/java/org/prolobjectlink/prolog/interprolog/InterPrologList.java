@@ -36,11 +36,11 @@ import com.declarativa.interprolog.TermModel;
  * @author Jose Zalacain
  * @since 1.0
  */
-public class InterPrologList extends InterPrologTerm implements PrologList {
+class InterPrologList extends InterPrologTerm implements PrologList {
 
-	public static final TermModel EMPTY = new TermModel("[]", true);
-	public static final String EMPTY_FUNCTOR = "[]";
-	public static final String LIST_FUNCTOR = ".";
+	static final TermModel EMPTY = new TermModel("[]", true);
+	private static final String EMPTY_FUNCTOR = "[]";
+	private static final String LIST_FUNCTOR = ".";
 
 	protected InterPrologList(PrologProvider provider) {
 		super(LIST_TYPE, provider, EMPTY);

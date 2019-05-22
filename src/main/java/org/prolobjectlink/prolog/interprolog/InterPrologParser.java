@@ -52,17 +52,17 @@ import com.igormaznitsa.prologparser.tokenizer.Op;
  * @author Jose Zalacain
  * @since 1.0
  */
-public final class InterPrologParser {
+final class InterPrologParser {
 
 	private int varIndex;
 	private static final PrologAtom op = new PrologAtom("op");
-	protected final HashMap<String, TermVariable> sharedPrologVariables;
+	private final HashMap<String, TermVariable> sharedPrologVariables;
 
 	protected InterPrologParser() {
 		sharedPrologVariables = new HashMap<String, TermVariable>();
 	}
 
-	public TermModel parseTerm(final String term) {
+	TermModel parseTerm(final String term) {
 		TermModel result = null;
 		try {
 			String temp = term;
@@ -84,11 +84,11 @@ public final class InterPrologParser {
 		return result;
 	}
 
-	public TermModel[] parseTerms(TermModel term) {
+	 TermModel[] parseTerms(TermModel term) {
 		return parseTerms("" + term + "");
 	}
 
-	public TermModel[] parseTerms(final String stringTerms) {
+	 TermModel[] parseTerms(final String stringTerms) {
 		TermModel[] result = new TermModel[0];
 		LinkedList<TermModel> list = new LinkedList<TermModel>();
 		try {
@@ -119,11 +119,11 @@ public final class InterPrologParser {
 		return list.toArray(result);
 	}
 
-	public InterPrologProgram parseProgram(String file) {
+	 InterPrologProgram parseProgram(String file) {
 		return parseProgram(new File(file));
 	}
 
-	public InterPrologProgram parseProgram(File in) {
+	 InterPrologProgram parseProgram(File in) {
 		PrologParser parser = null;
 		InterPrologProgram program = new InterPrologProgram();
 		try {
@@ -147,7 +147,7 @@ public final class InterPrologParser {
 		return program;
 	}
 
-	public InterPrologProgram parseProgram(Reader in) {
+	 InterPrologProgram parseProgram(Reader in) {
 		InterPrologProgram program = new InterPrologProgram();
 		PrologParser parser = new GenericPrologParser(in,
 				new DefaultParserContext(ParserContext.FLAG_CURLY_BRACKETS, Op.SWI));
@@ -162,7 +162,7 @@ public final class InterPrologParser {
 		return program;
 	}
 
-	public TermModel fromTerm(PrologTerm term) {
+	private TermModel fromTerm(PrologTerm term) {
 		switch (term.getType()) {
 		case ATOM:
 			if (term instanceof PrologInt) {
@@ -230,7 +230,7 @@ public final class InterPrologParser {
 		}
 	}
 
-	public TermModel[] fromTermArray(PrologTerm[] terms) {
+	private TermModel[] fromTermArray(PrologTerm[] terms) {
 		TermModel[] prologTerms = new TermModel[terms.length];
 		for (int i = 0; i < terms.length; i++) {
 			prologTerms[i] = fromTerm(terms[i]);

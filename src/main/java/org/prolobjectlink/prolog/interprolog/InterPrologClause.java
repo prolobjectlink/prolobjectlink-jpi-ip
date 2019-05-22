@@ -32,7 +32,7 @@ import org.prolobjectlink.prolog.PrologTerm;
  * @author Jose Zalacain
  * @since 1.0
  */
-public final class InterPrologClause extends AbstractClause implements PrologClause {
+final class InterPrologClause extends AbstractClause implements PrologClause {
 
 	private final PrologIndicator indicator;
 
@@ -92,8 +92,9 @@ public final class InterPrologClause extends AbstractClause implements PrologCla
 		if (indicator == null) {
 			if (other.indicator != null)
 				return false;
-		} else if (!indicator.equals(other.indicator))
+		} else if (!indicator.equals(other.indicator)) {
 			return false;
+		}
 		return true;
 	}
 

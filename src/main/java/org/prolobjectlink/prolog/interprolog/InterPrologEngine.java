@@ -57,10 +57,10 @@ import com.xsb.interprolog.NativeEngine;
 public abstract class InterPrologEngine extends AbstractEngine implements PrologEngine {
 
 	// used only for findall list result
-	protected static final String KEY = "X";
+	private static final String KEY = "X";
 
 	// JPL use for fact clauses true prolog term
-	protected static final TermModel BODY = new TermModel("true");
+	private static final TermModel BODY = new TermModel("true");
 
 	// cache file in OS temporal directory
 	private static String cache = null;
@@ -72,7 +72,7 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	private final InterPrologParser parser = new InterPrologParser();
 
 	// main memory prolog program
-	protected InterPrologProgram program = new InterPrologProgram();
+	private InterPrologProgram program = new InterPrologProgram();
 
 	// path to binary engine directory
 //	private static String xsbPath = "C:\\Program Files (x86)\\XSB\\bin";

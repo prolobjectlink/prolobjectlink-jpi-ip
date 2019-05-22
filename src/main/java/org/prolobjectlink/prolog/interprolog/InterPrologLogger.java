@@ -36,7 +36,7 @@ import org.prolobjectlink.prolog.PrologLogger;
  * @author Jose Zalacain
  * @since 1.0
  */
-public final class InterPrologLogger extends AbstractLogger implements PrologLogger {
+final class InterPrologLogger extends AbstractLogger implements PrologLogger {
 
 	private static final String MESSAGE = "Logger File Handler can't be created";
 	private static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -45,7 +45,7 @@ public final class InterPrologLogger extends AbstractLogger implements PrologLog
 		this(Level.INFO);
 	}
 
-	public InterPrologLogger(Level level) {
+	private InterPrologLogger(Level level) {
 		LOGGER.setLevel(level);
 		Logger rootlogger = LOGGER.getParent();
 		SimpleDateFormat f = new SimpleDateFormat("yyyy.MM.dd");

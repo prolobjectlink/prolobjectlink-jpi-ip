@@ -32,9 +32,9 @@ import com.declarativa.interprolog.TermModel;
  * @author Jose Zalacain
  * @since 1.0
  */
-public final class InterPrologAtom extends InterPrologTerm implements PrologAtom {
+final class InterPrologAtom extends InterPrologTerm implements PrologAtom {
 
-	public InterPrologAtom(PrologProvider provider, String value) {
+	InterPrologAtom(PrologProvider provider, String value) {
 		super(ATOM_TYPE, provider, new TermModel(value));
 	}
 

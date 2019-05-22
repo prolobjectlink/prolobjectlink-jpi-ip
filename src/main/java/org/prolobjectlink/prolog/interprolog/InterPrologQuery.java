@@ -38,7 +38,7 @@ import com.declarativa.interprolog.TermModel;
  * @author Jose Zalacain
  * @since 1.0
  */
-public final class InterPrologQuery extends AbstractQuery implements PrologQuery {
+final class InterPrologQuery extends AbstractQuery implements PrologQuery {
 
 	private InterPrologParser ip = new InterPrologParser();
 	private final List<String> variables = new ArrayList<String>();

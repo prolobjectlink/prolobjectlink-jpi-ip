@@ -49,11 +49,10 @@ import com.declarativa.interprolog.TermModel;
  * @author Jose Zalacain
  * @since 1.0
  */
-public abstract class InterPrologTerm extends AbstractTerm implements PrologTerm {
+abstract class InterPrologTerm extends AbstractTerm implements PrologTerm {
 
 	protected int vIndex;
 	protected TermModel value;
-	protected PrologTerm vValue;
 	protected static int vIndexer = 0;
 
 	protected InterPrologTerm(int type, PrologProvider provider) {
@@ -169,7 +168,7 @@ public abstract class InterPrologTerm extends AbstractTerm implements PrologTerm
 		return unify(fromTerm(term, TermModel.class));
 	}
 
-	protected final boolean unify(TermModel o) {
+	private final boolean unify(TermModel o) {
 		return value.unifies(o);
 	}
 

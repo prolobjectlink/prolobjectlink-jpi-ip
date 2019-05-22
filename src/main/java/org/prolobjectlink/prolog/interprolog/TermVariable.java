@@ -31,13 +31,13 @@ import com.declarativa.interprolog.util.VariableNode;
  * @author Jose Zalacain
  * @since 1.0
  */
-public class TermVariable extends TermModel implements Serializable {
+class TermVariable extends TermModel implements Serializable {
 
 	private static final long serialVersionUID = -4471030713129859522L;
 	private final int position;
 	private final String name;
 
-	public TermVariable(String name, int position) {
+	TermVariable(String name, int position) {
 		super(new VariableNode(position));
 		varCache.put("Var" + position, name);
 		this.position = position;

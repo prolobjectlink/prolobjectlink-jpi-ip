@@ -32,17 +32,17 @@ import com.declarativa.interprolog.TermModel;
  * @author Jose Zalacain
  * @since 1.0
  */
-public class InterPrologFloat extends InterPrologNumber implements PrologFloat {
+class InterPrologFloat extends InterPrologNumber implements PrologFloat {
 
-	public InterPrologFloat(PrologProvider provider) {
+	InterPrologFloat(PrologProvider provider) {
 		super(FLOAT_TYPE, provider, new TermModel(0F));
 	}
 
-	public InterPrologFloat(PrologProvider provider, Number value) {
+	InterPrologFloat(PrologProvider provider, Number value) {
 		super(FLOAT_TYPE, provider, new TermModel(value.floatValue()));
 	}
 
-	public InterPrologFloat(int type, PrologProvider provider, TermModel value) {
+	InterPrologFloat(int type, PrologProvider provider, TermModel value) {
 		super(type, provider, value);
 	}
 

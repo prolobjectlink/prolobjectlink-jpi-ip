@@ -35,7 +35,7 @@ import com.declarativa.interprolog.TermModel;
  * @author Jose Zalacain
  * @since 1.0
  */
-public abstract class InterPrologNumber extends InterPrologTerm implements PrologNumber {
+abstract class InterPrologNumber extends InterPrologTerm implements PrologNumber {
 
 	protected InterPrologNumber(int type, PrologProvider provider, TermModel value) {
 		super(type, provider, value);

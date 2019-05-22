@@ -32,21 +32,19 @@ import com.declarativa.interprolog.TermModel;
  * @author Jose Zalacain
  * @since 1.0
  */
-public class InterPrologInteger extends InterPrologNumber implements PrologInteger {
+class InterPrologInteger extends InterPrologNumber implements PrologInteger {
 
-	public InterPrologInteger(PrologProvider provider) {
+	InterPrologInteger(PrologProvider provider) {
 		super(INTEGER_TYPE, provider, new TermModel(0));
 	}
 
-	public InterPrologInteger(PrologProvider provider, Number value) {
+	InterPrologInteger(PrologProvider provider, Number value) {
 		super(INTEGER_TYPE, provider, new TermModel(value.intValue()));
 	}
 
-	public InterPrologInteger(int type, PrologProvider provider, TermModel value) {
+	InterPrologInteger(int type, PrologProvider provider, TermModel value) {
 		super(type, provider, value);
 	}
-
-	
 
 	public final PrologTerm[] getArguments() {
 		return new InterPrologInteger[0];

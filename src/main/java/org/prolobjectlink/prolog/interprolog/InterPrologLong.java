@@ -31,13 +31,13 @@ import com.declarativa.interprolog.TermModel;
  * @author Jose Zalacain
  * @since 1.0
  */
-public final class InterPrologLong extends InterPrologInteger implements PrologLong {
+final class InterPrologLong extends InterPrologInteger implements PrologLong {
 
-	public InterPrologLong(PrologProvider provider) {
+	InterPrologLong(PrologProvider provider) {
 		super(LONG_TYPE, provider, new TermModel(0L));
 	}
 
-	public InterPrologLong(PrologProvider provider, Number value) {
+	InterPrologLong(PrologProvider provider, Number value) {
 		super(LONG_TYPE, provider, new TermModel(value.longValue()));
 	}
 

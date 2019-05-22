@@ -31,7 +31,7 @@ import com.declarativa.interprolog.TermModel;
  * @author Jose Zalacain
  * @since 1.0
  */
-public final class InterPrologNil extends InterPrologTerm implements PrologTerm {
+final class InterPrologNil extends InterPrologTerm implements PrologTerm {
 
 	InterPrologNil(PrologProvider provider) {
 		super(NIL_TYPE, provider, new TermModel("nil"));

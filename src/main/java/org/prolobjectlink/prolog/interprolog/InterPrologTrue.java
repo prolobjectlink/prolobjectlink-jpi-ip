@@ -31,11 +31,10 @@ import com.declarativa.interprolog.TermModel;
  * @author Jose Zalacain
  * @since 1.0
  */
-public final class InterPrologTrue extends InterPrologTerm implements PrologTerm {
+final class InterPrologTrue extends InterPrologTerm implements PrologTerm {
 
 	protected InterPrologTrue(PrologProvider provider) {
 		super(TRUE_TYPE, provider, new TermModel("true"));
 	}
 
-	
 }

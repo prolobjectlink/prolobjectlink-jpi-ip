@@ -31,7 +31,7 @@ import com.declarativa.interprolog.TermModel;
  * @author Jose Zalacain
  * @since 1.0
  */
-public final class InterPrologFalse extends InterPrologTerm implements PrologTerm {
+final class InterPrologFalse extends InterPrologTerm implements PrologTerm {
 
 	protected InterPrologFalse(PrologProvider provider) {
 		super(FALSE_TYPE, provider, new TermModel("false"));

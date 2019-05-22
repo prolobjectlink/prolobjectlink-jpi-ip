@@ -31,13 +31,13 @@ import com.declarativa.interprolog.TermModel;
  * @author Jose Zalacain
  * @since 1.0
  */
-public final class InterPrologDouble extends InterPrologFloat implements PrologDouble {
+final class InterPrologDouble extends InterPrologFloat implements PrologDouble {
 
-	public InterPrologDouble(PrologProvider provider) {
+	InterPrologDouble(PrologProvider provider) {
 		super(DOUBLE_TYPE, provider, new TermModel(0));
 	}
 
-	public InterPrologDouble(PrologProvider provider, Number value) {
+	InterPrologDouble(PrologProvider provider, Number value) {
 		super(DOUBLE_TYPE, provider, new TermModel(value.doubleValue()));
 	}
 

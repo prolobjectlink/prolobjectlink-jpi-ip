@@ -31,7 +31,7 @@ import com.declarativa.interprolog.TermModel;
  * @author Jose Zalacain
  * @since 1.0
  */
-public final class InterPrologCut extends InterPrologTerm implements PrologTerm {
+final class InterPrologCut extends InterPrologTerm implements PrologTerm {
 
 	protected InterPrologCut(PrologProvider provider) {
 		super(CUT_TYPE, provider, new TermModel("!"));

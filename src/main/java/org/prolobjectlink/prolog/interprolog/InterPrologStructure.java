@@ -32,7 +32,7 @@ import com.declarativa.interprolog.TermModel;
  * @author Jose Zalacain
  * @since 1.0
  */
-public class InterPrologStructure extends InterPrologTerm implements PrologStructure {
+class InterPrologStructure extends InterPrologTerm implements PrologStructure {
 
 	InterPrologStructure(PrologProvider provider, String functor, PrologTerm... arguments) {
 		super(STRUCTURE_TYPE, provider);

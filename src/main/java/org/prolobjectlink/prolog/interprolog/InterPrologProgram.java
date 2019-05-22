@@ -38,7 +38,7 @@ import com.declarativa.interprolog.TermModel;
  * @author Jose Zalacain
  * @since 1.0
  */
-public final class InterPrologProgram extends AbstractSet<List<TermModel>> {
+final class InterPrologProgram extends AbstractSet<List<TermModel>> {
 
 	//
 	private final InterPrologParser parser = new InterPrologParser();

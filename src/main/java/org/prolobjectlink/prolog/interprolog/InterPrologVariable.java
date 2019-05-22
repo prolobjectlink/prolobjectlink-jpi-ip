@@ -33,17 +33,17 @@ import org.prolobjectlink.prolog.PrologVariable;
  * @author Jose Zalacain
  * @since 1.0
  */
-public class InterPrologVariable extends InterPrologTerm implements PrologVariable {
+class InterPrologVariable extends InterPrologTerm implements PrologVariable {
 
-	public InterPrologVariable(PrologProvider provider, int position) {
+	InterPrologVariable(PrologProvider provider, int position) {
 		super(VARIABLE_TYPE, provider, new TermVariable("_", position));
 	}
 
-	public InterPrologVariable(PrologProvider provider, String name) {
+	InterPrologVariable(PrologProvider provider, String name) {
 		super(VARIABLE_TYPE, provider, new TermVariable(name, vIndexer++));
 	}
 
-	public InterPrologVariable(PrologProvider provider, String name, int position) {
+	InterPrologVariable(PrologProvider provider, String name, int position) {
 		super(VARIABLE_TYPE, provider, new TermVariable(name, position));
 	}
 
