@@ -22,7 +22,6 @@ package org.prolobjectlink.prolog.interprolog;
 import static org.prolobjectlink.prolog.PrologTermType.ATOM_TYPE;
 import static org.prolobjectlink.prolog.PrologTermType.CUT_TYPE;
 import static org.prolobjectlink.prolog.PrologTermType.DOUBLE_TYPE;
-import static org.prolobjectlink.prolog.PrologTermType.EMPTY_TYPE;
 import static org.prolobjectlink.prolog.PrologTermType.FAIL_TYPE;
 import static org.prolobjectlink.prolog.PrologTermType.FALSE_TYPE;
 import static org.prolobjectlink.prolog.PrologTermType.FLOAT_TYPE;
@@ -157,8 +156,6 @@ public abstract class InterPrologConverter extends AbstractConverter<TermModel> 
 			return new TermModel("true");
 		case FALSE_TYPE:
 			return new TermModel("false");
-		case EMPTY_TYPE:
-			return InterPrologEmpty.EMPTY;
 		case ATOM_TYPE:
 			return new TermModel(removeQuoted(((PrologAtom) term).getStringValue()));
 		case FLOAT_TYPE:

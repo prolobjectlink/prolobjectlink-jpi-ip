@@ -22,7 +22,6 @@ package org.prolobjectlink.prolog.interprolog;
 import static org.prolobjectlink.prolog.PrologTermType.ATOM_TYPE;
 import static org.prolobjectlink.prolog.PrologTermType.CUT_TYPE;
 import static org.prolobjectlink.prolog.PrologTermType.DOUBLE_TYPE;
-import static org.prolobjectlink.prolog.PrologTermType.EMPTY_TYPE;
 import static org.prolobjectlink.prolog.PrologTermType.FAIL_TYPE;
 import static org.prolobjectlink.prolog.PrologTermType.FALSE_TYPE;
 import static org.prolobjectlink.prolog.PrologTermType.FLOAT_TYPE;
@@ -252,7 +251,6 @@ abstract class InterPrologTerm extends AbstractTerm implements PrologTerm {
 			break;
 
 		case LIST_TYPE:
-		case EMPTY_TYPE:
 		case STRUCTURE_TYPE:
 
 			PrologTerm thisCompound = this;

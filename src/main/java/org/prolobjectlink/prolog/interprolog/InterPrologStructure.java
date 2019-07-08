@@ -64,4 +64,16 @@ class InterPrologStructure extends InterPrologTerm implements PrologStructure {
 		return getArguments()[index];
 	}
 
+	public final PrologTerm getRight() {
+		return getArgument(1);
+	}
+
+	public final PrologTerm getLeft() {
+		return getArgument(0);
+	}
+
+	public final String getOperator() {
+		return getFunctor();
+	}
+
 }
