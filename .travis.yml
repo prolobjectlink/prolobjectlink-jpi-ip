@@ -13,8 +13,8 @@ before_install:
   - export M2_HOME=$PWD/apache-maven-3.5.0
   - export PATH=$M2_HOME/bin:$PATH
   - echo "MAVEN_OPTS='-Dmaven.repo.local=$HOME/.m2/repository -Xmx1g -Dorg.slf4j.simpleLogger.showDateTime=true -Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss:SSS'" > ~/.mavenrc
-  - wget https://www.dropbox.com/s/m4pgwk81p3w9cxr/interprolog.jar?dl=0 -P /home/travis/build/prolobjectlink/prolobjectlink-jpi-ip/
-  - mvn install:install-file -Dfile=https://www.dropbox.com/s/m4pgwk81p3w9cxr/interprolog.jar?dl=0 -DgroupId=com.declarativa.interprolog -DartifactId=interprolog -Dversion=2.2a4 -Dpackaging=jar
+  - wget https://www.dropbox.com/s/m4pgwk81p3w9cxr/interprolog.jar?dl=0 -P /home/travis/build/prolobjectlink/prolobjectlink-jpi-ip/ -O interprolog.jar
+  - mvn install:install-file -Dfile=interprolog.jar -DgroupId=com.declarativa.interprolog -DartifactId=interprolog -Dversion=2.2a4 -Dpackaging=jar
 
 install:
   -
