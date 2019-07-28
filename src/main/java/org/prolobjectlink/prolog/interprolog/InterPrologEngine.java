@@ -24,7 +24,6 @@ import static org.prolobjectlink.prolog.PrologLogger.IO;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -47,7 +46,6 @@ import org.prolobjectlink.prolog.PrologTermType;
 import com.declarativa.interprolog.AbstractPrologEngine;
 import com.declarativa.interprolog.SolutionIterator;
 import com.declarativa.interprolog.TermModel;
-import com.xsb.interprolog.NativeEngine;
 
 /**
  * 
@@ -63,7 +61,7 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	private static final TermModel BODY = new TermModel("true");
 
 	// cache file in OS temporal directory
-	private static String cache = null;
+	public static String cache = null;
 
 	// XSB native engine
 	public static AbstractPrologEngine engine;
@@ -73,21 +71,6 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 
 	// main memory prolog program
 	private InterPrologProgram program = new InterPrologProgram();
-
-	// path to binary engine directory
-//	private static String xsbPath = "C:\\Program Files (x86)\\XSB\\bin";
-	private static String xsbPath = "C:\\Program Files (x86)\\XSB\\config\\x64-pc-windows\\bin";
-
-	static {
-		try {
-			File f = File.createTempFile("prolobjectlink-jpi-ip-cache-", ".pl");
-			cache = f.getCanonicalPath().replace(File.separatorChar, '/');
-			InterPrologEngine.engine = new NativeEngine(xsbPath);
-//			InterPrologEngine.engine = new XSBSubprocessEngine(xsbPath);
-		} catch (IOException e) {
-			InterPrologProvider.logger.error(InterPrologEngine.class, IO, e);
-		}
-	}
 
 	protected InterPrologEngine(PrologProvider provider) {
 		super(provider);
