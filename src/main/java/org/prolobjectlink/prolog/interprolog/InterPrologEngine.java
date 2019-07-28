@@ -24,6 +24,7 @@ import static org.prolobjectlink.prolog.PrologLogger.IO;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -71,6 +72,15 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 
 	// main memory prolog program
 	private InterPrologProgram program = new InterPrologProgram();
+
+	static {
+		try {
+			File f = File.createTempFile("prolobjectlink-jpi-ip-cache-", ".pl");
+			cache = f.getCanonicalPath().replace(File.separatorChar, '/');
+		} catch (IOException e) {
+			InterPrologProvider.logger.error(InterPrologEngine.class, IO, e);
+		}
+	}
 
 	protected InterPrologEngine(PrologProvider provider) {
 		super(provider);
