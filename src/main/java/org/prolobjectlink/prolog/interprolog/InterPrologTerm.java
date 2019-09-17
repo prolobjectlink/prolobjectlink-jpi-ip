@@ -151,6 +151,34 @@ abstract class InterPrologTerm extends AbstractTerm implements PrologTerm {
 		return false;
 	}
 
+	public final boolean isTrueType() {
+		return false;
+	}
+
+	public final boolean isFalseType() {
+		return false;
+	}
+
+	public final boolean isNullType() {
+		return false;
+	}
+
+	public final boolean isVoidType() {
+		return false;
+	}
+
+	public final boolean isObjectType() {
+		return false;
+	}
+
+	public final boolean isReference() {
+		return false;
+	}
+
+	public final Object getObject() {
+		return null;
+	}
+
 	public int getArity() {
 		return value.getChildCount();
 	}
