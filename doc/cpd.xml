@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd>
+<duplication lines="8" tokens="105">
+<file line="247" path="D:\Programacion\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\org\prolobjectlink\prolog\interprolog\InterPrologQuery.java"/>
+<file line="261" path="D:\Programacion\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\org\prolobjectlink\prolog\interprolog\InterPrologQuery.java"/>
+<codefragment>
+<![CDATA[
+		for (int i = 0; i < allSolutions.size(); i++) {
+			Map<String, Object> map = allSolutions.get(i);
+			Map<String, PrologTerm> varMap = new HashMap<String, PrologTerm>(map.size());
+			for (Iterator<String> e = variables.iterator(); e.hasNext();) {
+				String key = e.next();
+				varMap.put(key, InterPrologUtil.toTerm(getProvider(), map.get(key)));
+			}
+			m.add(varMap);
+]]>
+</codefragment>
+</duplication>
+<duplication lines="12" tokens="100">
+<file line="48" path="D:\Programacion\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\org\prolobjectlink\prolog\interprolog\InterPrologQuery.java"/>
+<file line="370" path="D:\Programacion\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\org\prolobjectlink\prolog\interprolog\InterPrologTerm.java"/>
+<codefragment>
+<![CDATA[
+	private void enumerateVariables(List<String> vector, TermModel term) {
+		if (!(term instanceof TermVariable)) {
+			TermModel[] terms = term.children;
+			if (terms != null && terms.length > 0) {
+				for (TermModel t : terms) {
+					enumerateVariables(vector, t);
+				}
+			}
+		} else if (!vector.contains(((TermVariable) term).getName())) {
+			vector.add(((TermVariable) term).getName());
+		}
+	}
+]]>
+</codefragment>
+</duplication>
+</pmd-cpd>
