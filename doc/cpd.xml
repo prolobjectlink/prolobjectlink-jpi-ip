@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pmd-cpd>
 <duplication lines="8" tokens="105">
-<file line="247" path="D:\Programacion\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\org\prolobjectlink\prolog\interprolog\InterPrologQuery.java"/>
-<file line="261" path="D:\Programacion\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\org\prolobjectlink\prolog\interprolog\InterPrologQuery.java"/>
+<file line="247" path="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\org\prolobjectlink\prolog\interprolog\InterPrologQuery.java"/>
+<file line="261" path="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\org\prolobjectlink\prolog\interprolog\InterPrologQuery.java"/>
 <codefragment>
 <![CDATA[
 		for (int i = 0; i < allSolutions.size(); i++) {
@@ -17,8 +17,8 @@
 </codefragment>
 </duplication>
 <duplication lines="12" tokens="100">
-<file line="48" path="D:\Programacion\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\org\prolobjectlink\prolog\interprolog\InterPrologQuery.java"/>
-<file line="370" path="D:\Programacion\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\org\prolobjectlink\prolog\interprolog\InterPrologTerm.java"/>
+<file line="48" path="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\org\prolobjectlink\prolog\interprolog\InterPrologQuery.java"/>
+<file line="370" path="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\org\prolobjectlink\prolog\interprolog\InterPrologTerm.java"/>
 <codefragment>
 <![CDATA[
 	private void enumerateVariables(List<String> vector, TermModel term) {
