@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.2.5" timestamp="2020-03-28T10:38:31.046">
-<file name="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\org\prolobjectlink\prolog\interprolog\InterPrologConverter.java">
-<violation beginline="20" endline="218" begincolumn="1" endcolumn="3" rule="TooManyStaticImports" ruleset="Import Statement Rules" package="org.prolobjectlink.prolog.interprolog" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#TooManyStaticImports" priority="3">
+<pmd version="4.2.5" timestamp="2020-03-29T11:53:50.475">
+<file name="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologConverter.java">
+<violation beginline="20" endline="218" begincolumn="1" endcolumn="3" rule="TooManyStaticImports" ruleset="Import Statement Rules" package="io.github.prolobjectlink.prolog.interprolog" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#TooManyStaticImports" priority="3">
 Too many static imports may lead to messy code
 </violation>
 </file>
-<file name="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\org\prolobjectlink\prolog\interprolog\InterPrologList.java">
-<violation beginline="43" endline="43" begincolumn="37" endcolumn="48" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="org.prolobjectlink.prolog.interprolog" class="InterPrologList" variable="LIST_FUNCTOR" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
+<file name="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologList.java">
+<violation beginline="43" endline="43" begincolumn="37" endcolumn="48" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="io.github.prolobjectlink.prolog.interprolog" class="InterPrologList" variable="LIST_FUNCTOR" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
 Avoid unused private fields such as 'LIST_FUNCTOR'.
 </violation>
 </file>
-<file name="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\org\prolobjectlink\prolog\interprolog\InterPrologTerm.java">
-<violation beginline="20" endline="383" begincolumn="1" endcolumn="3" rule="TooManyStaticImports" ruleset="Import Statement Rules" package="org.prolobjectlink.prolog.interprolog" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#TooManyStaticImports" priority="3">
+<file name="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologTerm.java">
+<violation beginline="20" endline="383" begincolumn="1" endcolumn="3" rule="TooManyStaticImports" ruleset="Import Statement Rules" package="io.github.prolobjectlink.prolog.interprolog" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#TooManyStaticImports" priority="3">
 Too many static imports may lead to messy code
 </violation>
-<violation beginline="370" endline="370" begincolumn="22" endcolumn="76" rule="UnusedPrivateMethod" ruleset="Unused Code Rules" package="org.prolobjectlink.prolog.interprolog" class="InterPrologTerm" method="enumerateVariables" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateMethod" priority="3">
+<violation beginline="370" endline="370" begincolumn="22" endcolumn="76" rule="UnusedPrivateMethod" ruleset="Unused Code Rules" package="io.github.prolobjectlink.prolog.interprolog" class="InterPrologTerm" method="enumerateVariables" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateMethod" priority="3">
 Avoid unused private methods such as 'enumerateVariables(List,TermModel)'.
 </violation>
 </file>
-<file name="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\org\prolobjectlink\prolog\interprolog\InterPrologUtil.java">
-<violation beginline="46" endline="140" begincolumn="22" endcolumn="9" rule="UnnecessaryFinalModifier" ruleset="Basic Rules" package="org.prolobjectlink.prolog.interprolog" class="InterPrologUtil" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#UnnecessaryFinalModifier" priority="3">
+<file name="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologUtil.java">
+<violation beginline="46" endline="140" begincolumn="22" endcolumn="9" rule="UnnecessaryFinalModifier" ruleset="Basic Rules" package="io.github.prolobjectlink.prolog.interprolog" class="InterPrologUtil" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#UnnecessaryFinalModifier" priority="3">
 Unnecessary final modifier in final class
 </violation>
-<violation beginline="142" endline="144" begincolumn="22" endcolumn="9" rule="UnnecessaryFinalModifier" ruleset="Basic Rules" package="org.prolobjectlink.prolog.interprolog" class="InterPrologUtil" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#UnnecessaryFinalModifier" priority="3">
+<violation beginline="142" endline="144" begincolumn="22" endcolumn="9" rule="UnnecessaryFinalModifier" ruleset="Basic Rules" package="io.github.prolobjectlink.prolog.interprolog" class="InterPrologUtil" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#UnnecessaryFinalModifier" priority="3">
 Unnecessary final modifier in final class
 </violation>
-<violation beginline="146" endline="148" begincolumn="22" endcolumn="9" rule="UnnecessaryFinalModifier" ruleset="Basic Rules" package="org.prolobjectlink.prolog.interprolog" class="InterPrologUtil" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#UnnecessaryFinalModifier" priority="3">
+<violation beginline="146" endline="148" begincolumn="22" endcolumn="9" rule="UnnecessaryFinalModifier" ruleset="Basic Rules" package="io.github.prolobjectlink.prolog.interprolog" class="InterPrologUtil" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#UnnecessaryFinalModifier" priority="3">
 Unnecessary final modifier in final class
 </violation>
-<violation beginline="157" endline="164" begincolumn="22" endcolumn="9" rule="UnnecessaryFinalModifier" ruleset="Basic Rules" package="org.prolobjectlink.prolog.interprolog" class="InterPrologUtil" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#UnnecessaryFinalModifier" priority="3">
+<violation beginline="157" endline="164" begincolumn="22" endcolumn="9" rule="UnnecessaryFinalModifier" ruleset="Basic Rules" package="io.github.prolobjectlink.prolog.interprolog" class="InterPrologUtil" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#UnnecessaryFinalModifier" priority="3">
 Unnecessary final modifier in final class
 </violation>
 </file>
