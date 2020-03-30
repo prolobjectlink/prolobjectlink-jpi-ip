@@ -3,7 +3,7 @@
 <rss version="0.91">
   <channel>
     <title>prolobjectlink-jpi-ip - Checkstyle report</title>
-    <link>https://github.com/prolobjectlink/prolobjectlink-jpi-ip</link>
+    <link>https://prolobjectlink.github.io/prolobjectlink-jpi-ip</link>
     <description>prolobjectlink-jpi-ip - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2012 - 2020 Prolobjectlink Project</copyright>
@@ -13,9 +13,9 @@
              Warnings: 0,
              Infos: 0
       </title>
-            <link>https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html</link>
+            <link>https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html</link>
       <description>
-        <p>Click <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -29,7 +29,7 @@
           <tbody>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologIndicator.java">io/github/prolobjectlink/prolog/interprolog/InterPrologIndicator.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologIndicator.java">io/github/prolobjectlink/prolog/interprolog/InterPrologIndicator.java</a>
                 </td>
                 <td>
                   0
@@ -43,7 +43,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologEmpty.java">io/github/prolobjectlink/prolog/interprolog/InterPrologEmpty.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologEmpty.java">io/github/prolobjectlink/prolog/interprolog/InterPrologEmpty.java</a>
                 </td>
                 <td>
                   0
@@ -57,7 +57,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologProgram.java">io/github/prolobjectlink/prolog/interprolog/InterPrologProgram.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologProgram.java">io/github/prolobjectlink/prolog/interprolog/InterPrologProgram.java</a>
                 </td>
                 <td>
                   0
@@ -71,7 +71,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologLogger.java">io/github/prolobjectlink/prolog/interprolog/InterPrologLogger.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologLogger.java">io/github/prolobjectlink/prolog/interprolog/InterPrologLogger.java</a>
                 </td>
                 <td>
                   0
@@ -85,7 +85,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologQuery.java">io/github/prolobjectlink/prolog/interprolog/InterPrologQuery.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologQuery.java">io/github/prolobjectlink/prolog/interprolog/InterPrologQuery.java</a>
                 </td>
                 <td>
                   0
@@ -99,7 +99,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologStructure.java">io/github/prolobjectlink/prolog/interprolog/InterPrologStructure.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologStructure.java">io/github/prolobjectlink/prolog/interprolog/InterPrologStructure.java</a>
                 </td>
                 <td>
                   0
@@ -113,7 +113,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologCut.java">io/github/prolobjectlink/prolog/interprolog/InterPrologCut.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologCut.java">io/github/prolobjectlink/prolog/interprolog/InterPrologCut.java</a>
                 </td>
                 <td>
                   0
@@ -127,7 +127,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologNumber.java">io/github/prolobjectlink/prolog/interprolog/InterPrologNumber.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologNumber.java">io/github/prolobjectlink/prolog/interprolog/InterPrologNumber.java</a>
                 </td>
                 <td>
                   0
@@ -141,7 +141,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologParser.java">io/github/prolobjectlink/prolog/interprolog/InterPrologParser.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologParser.java">io/github/prolobjectlink/prolog/interprolog/InterPrologParser.java</a>
                 </td>
                 <td>
                   0
@@ -155,7 +155,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologTerm.java">io/github/prolobjectlink/prolog/interprolog/InterPrologTerm.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologTerm.java">io/github/prolobjectlink/prolog/interprolog/InterPrologTerm.java</a>
                 </td>
                 <td>
                   0
@@ -169,7 +169,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologUtil.java">io/github/prolobjectlink/prolog/interprolog/InterPrologUtil.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologUtil.java">io/github/prolobjectlink/prolog/interprolog/InterPrologUtil.java</a>
                 </td>
                 <td>
                   0
@@ -183,7 +183,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologLong.java">io/github/prolobjectlink/prolog/interprolog/InterPrologLong.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologLong.java">io/github/prolobjectlink/prolog/interprolog/InterPrologLong.java</a>
                 </td>
                 <td>
                   0
@@ -197,7 +197,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologTrue.java">io/github/prolobjectlink/prolog/interprolog/InterPrologTrue.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologTrue.java">io/github/prolobjectlink/prolog/interprolog/InterPrologTrue.java</a>
                 </td>
                 <td>
                   0
@@ -211,7 +211,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.TermVariable.java">io/github/prolobjectlink/prolog/interprolog/TermVariable.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.TermVariable.java">io/github/prolobjectlink/prolog/interprolog/TermVariable.java</a>
                 </td>
                 <td>
                   0
@@ -225,7 +225,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologScriptFactory.java">io/github/prolobjectlink/prolog/interprolog/InterPrologScriptFactory.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologScriptFactory.java">io/github/prolobjectlink/prolog/interprolog/InterPrologScriptFactory.java</a>
                 </td>
                 <td>
                   0
@@ -239,7 +239,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologNil.java">io/github/prolobjectlink/prolog/interprolog/InterPrologNil.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologNil.java">io/github/prolobjectlink/prolog/interprolog/InterPrologNil.java</a>
                 </td>
                 <td>
                   0
@@ -253,7 +253,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologProvider.java">io/github/prolobjectlink/prolog/interprolog/InterPrologProvider.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologProvider.java">io/github/prolobjectlink/prolog/interprolog/InterPrologProvider.java</a>
                 </td>
                 <td>
                   0
@@ -267,7 +267,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologFalse.java">io/github/prolobjectlink/prolog/interprolog/InterPrologFalse.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologFalse.java">io/github/prolobjectlink/prolog/interprolog/InterPrologFalse.java</a>
                 </td>
                 <td>
                   0
@@ -281,7 +281,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologAtom.java">io/github/prolobjectlink/prolog/interprolog/InterPrologAtom.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologAtom.java">io/github/prolobjectlink/prolog/interprolog/InterPrologAtom.java</a>
                 </td>
                 <td>
                   0
@@ -295,7 +295,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologList.java">io/github/prolobjectlink/prolog/interprolog/InterPrologList.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologList.java">io/github/prolobjectlink/prolog/interprolog/InterPrologList.java</a>
                 </td>
                 <td>
                   0
@@ -309,7 +309,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologVariable.java">io/github/prolobjectlink/prolog/interprolog/InterPrologVariable.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologVariable.java">io/github/prolobjectlink/prolog/interprolog/InterPrologVariable.java</a>
                 </td>
                 <td>
                   0
@@ -323,7 +323,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologInteger.java">io/github/prolobjectlink/prolog/interprolog/InterPrologInteger.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologInteger.java">io/github/prolobjectlink/prolog/interprolog/InterPrologInteger.java</a>
                 </td>
                 <td>
                   0
@@ -337,7 +337,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologFail.java">io/github/prolobjectlink/prolog/interprolog/InterPrologFail.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologFail.java">io/github/prolobjectlink/prolog/interprolog/InterPrologFail.java</a>
                 </td>
                 <td>
                   0
@@ -351,7 +351,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologConverter.java">io/github/prolobjectlink/prolog/interprolog/InterPrologConverter.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologConverter.java">io/github/prolobjectlink/prolog/interprolog/InterPrologConverter.java</a>
                 </td>
                 <td>
                   0
@@ -365,7 +365,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologOperator.java">io/github/prolobjectlink/prolog/interprolog/InterPrologOperator.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologOperator.java">io/github/prolobjectlink/prolog/interprolog/InterPrologOperator.java</a>
                 </td>
                 <td>
                   0
@@ -379,7 +379,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologClause.java">io/github/prolobjectlink/prolog/interprolog/InterPrologClause.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologClause.java">io/github/prolobjectlink/prolog/interprolog/InterPrologClause.java</a>
                 </td>
                 <td>
                   0
@@ -393,7 +393,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologFormatter.java">io/github/prolobjectlink/prolog/interprolog/InterPrologFormatter.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologFormatter.java">io/github/prolobjectlink/prolog/interprolog/InterPrologFormatter.java</a>
                 </td>
                 <td>
                   0
@@ -407,7 +407,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologFloat.java">io/github/prolobjectlink/prolog/interprolog/InterPrologFloat.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologFloat.java">io/github/prolobjectlink/prolog/interprolog/InterPrologFloat.java</a>
                 </td>
                 <td>
                   0
@@ -421,7 +421,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologEngine.java">io/github/prolobjectlink/prolog/interprolog/InterPrologEngine.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologEngine.java">io/github/prolobjectlink/prolog/interprolog/InterPrologEngine.java</a>
                 </td>
                 <td>
                   0
@@ -435,7 +435,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/prolobjectlink/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologDouble.java">io/github/prolobjectlink/prolog/interprolog/InterPrologDouble.java</a>
+                  <a href="https://prolobjectlink.github.io/prolobjectlink-jpi-ip/checkstyle.html#io.github.prolobjectlink.prolog.interprolog.InterPrologDouble.java">io/github/prolobjectlink/prolog/interprolog/InterPrologDouble.java</a>
                 </td>
                 <td>
                   0
