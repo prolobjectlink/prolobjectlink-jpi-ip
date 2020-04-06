@@ -7,11 +7,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Jose Zalacain" />
-    <meta name="Date-Creation-yyyymmdd" content="20190331" />
     <meta name="Date-Revision-yyyymmdd" content="20200426" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>prolobjectlink-jpi-ip &#x2013; Title</title>
+    <title>prolobjectlink-jpi-ip &#x2013; Project Mailing Lists</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.5.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -234,10 +232,12 @@
         Development Tools</a>
             </li>
                 
-      <li class="active">
+      <li>
   
-            <a href="#"><span class="none"></span>Contribution</a>
-          </li>
+                          <a href="contribution.html" title="Contribution">
+          <span class="none"></span>
+        Contribution</a>
+            </li>
                 
       <li>
   
@@ -267,13 +267,104 @@
         FAQ</a>
             </li>
                               <li class="nav-header">Project Documentation</li>
-                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                  
       <li>
   
                           <a href="project-info.html" title="Project Information">
-          <span class="icon-chevron-right"></span>
+          <span class="icon-chevron-down"></span>
         Project Information</a>
-                  </li>
+                    <ul class="nav nav-list">
+                    
+      <li>
+  
+                          <a href="project-summary.html" title="Project Summary">
+          <span class="none"></span>
+        Project Summary</a>
+            </li>
+                    
+      <li>
+  
+                          <a href="index.html" title="About">
+          <span class="none"></span>
+        About</a>
+            </li>
+                    
+      <li>
+  
+                          <a href="dependencies.html" title="Dependencies">
+          <span class="none"></span>
+        Dependencies</a>
+            </li>
+                    
+      <li>
+  
+                          <a href="team-list.html" title="Project Team">
+          <span class="none"></span>
+        Project Team</a>
+            </li>
+                    
+      <li>
+  
+                          <a href="license.html" title="Project License">
+          <span class="none"></span>
+        Project License</a>
+            </li>
+                    
+      <li>
+  
+                          <a href="source-repository.html" title="Source Repository">
+          <span class="none"></span>
+        Source Repository</a>
+            </li>
+                    
+      <li>
+  
+                          <a href="integration.html" title="Continuous Integration">
+          <span class="none"></span>
+        Continuous Integration</a>
+            </li>
+                    
+      <li class="active">
+  
+            <a href="#"><span class="none"></span>Mailing Lists</a>
+          </li>
+                    
+      <li>
+  
+                          <a href="issue-tracking.html" title="Issue Tracking">
+          <span class="none"></span>
+        Issue Tracking</a>
+            </li>
+                    
+      <li>
+  
+                          <a href="dependency-info.html" title="Dependency Information">
+          <span class="none"></span>
+        Dependency Information</a>
+            </li>
+                    
+      <li>
+  
+                          <a href="distribution-management.html" title="Distribution Management">
+          <span class="none"></span>
+        Distribution Management</a>
+            </li>
+                    
+      <li>
+  
+                          <a href="plugin-management.html" title="Plugin Management">
+          <span class="none"></span>
+        Plugin Management</a>
+            </li>
+                    
+      <li>
+  
+                          <a href="plugins.html" title="Project Plugins">
+          <span class="none"></span>
+        Project Plugins</a>
+            </li>
+              </ul>
+        </li>
                                                                                                                                                                                                                                                                                                                               
       <li>
   
@@ -308,72 +399,27 @@
         <div id="bodyColumn"  class="span10" >
                                   
             <div class="section">
-<h2><a name="Contribution"></a>Contribution</h2>
-<div class="section">
-<h3><a name="Issues"></a>Issues</h3>
-<p>See the issue tracker at https://github.com/prolobjectlink/$<a name="project.name">project.name</a> to create a new issue or take an existing one.</p></div>
-<div class="section">
-<h3><a name="Changes_and_Build"></a>Changes and Build</h3>
-<p>Fork the repository in GitHub.</p>
-<p>Clone your forked repository in your preferred IDE</p>
-<p>Prolobjectlink development requires.</p>
-<p>- Java 1.8 - Maven 3.1.0 or above</p>
-<p>Make changes in your cloned repository</p>
-<p>Run all test to see if the system still consistent after your changes</p>
-<p>Create unit-tests and make sure that the include changes are covered to 100%</p>
-<p>Run the benchmark to see if the system performance still consistent after your changes</p>
-<p>Add a description of your changes in CHANGELOG.txt and src/changes/changes.xml</p>
-<p>Commit the changes.</p>
-<p>Run an integration test on Travis-CI</p>
-<p>Submit a pull request.</p></div>
-<div class="section">
-<h3><a name="New_Implementations"></a>New Implementations</h3>
-<p>The project start with some adapters implementations over most used open source prolog engines.</p>
-<p>We accept any new adapter implementation of another prolog engine not covered at this moment.</p>
-<p>For this propose create a new GitHub source code repository naming this follow the project convesion:</p>
-<p>prolobjectlink-jpi-<i>new engine implementation name</i></p>
-<p>Create an new maven project in your preferred IDE named like repository.</p>
-<p>Copy the src/assembly/dist.xml descriptor</p>
-<p>Copy the src/build/filters folder and change by your console main entry point</p>
-<p>Copy and clean src/changes/changes.xml to go reporting every change</p>
-<p>Copy src/site folder to generate a similar project site.</p>
-<p>Copy the pom.xml properties, build, report, etc... from another implementation</p>
-<p>Change the project information.</p>
-<p>Add your dependencies including Java Prolog Interface API</p>
-<div class="source"><pre class="prettyprint">&lt;dependencies&gt;
-        ...
-        &lt;dependency&gt;
-                &lt;groupId&gt;org.prolobjectlink&lt;/groupId&gt;
-                &lt;artifactId&gt;prolobjectlink-jpi&lt;/artifactId&gt;
-                &lt;version&gt;[1.0.0, )&lt;/version&gt;
-        &lt;/dependency&gt;
-        ...
-        &lt;dependency&gt;
-                &lt;groupId&gt;junit&lt;/groupId&gt;
-                &lt;artifactId&gt;junit&lt;/artifactId&gt;
-                &lt;version&gt;[4.10, )&lt;/version&gt;
-                &lt;scope&gt;test&lt;/scope&gt;
-        &lt;/dependency&gt;
-        ...
-&lt;/dependencies&gt;
-</pre></div>
-<p>In test package copy the unit-tests cases from another implementation to develop in test driven mode.</p>
-<p>We suggest like adapter implementation order begin with data types, parsers, engine and finally query.</p>
-<p>Run all test to see if the system to see if your implementation pass all.</p>
-<p>Create unit-tests and make sure that the include changes are covered to 100%</p>
-<p>Create the benchmark to see if the system performance.</p>
-<p>Add a description of your changes in CHANGELOG.txt and src/changes/changes.xml</p>
-<p>Commit the changes.</p>
-<p>Run an integration test on Travis-CI or another CI system</p></div>
-<div class="section">
-<h3><a name="Version_Numbering"></a>Version Numbering</h3>
-<p>Prolobjectlink version signature is Major.Minor.Micro.</p>
-<p>Major version is change when the API compatibility is broken. Minor version is change when a new feature is include in the release. Micro version is change when some bug is fixed or some maintenance take place</p>
-<p>Prolobjectlink suggest work over the started 1.Y.Z version to preserve compatibility all the time. You are free of make any change adding new features, fixing bugs or code maintenance.</p></div>
-<div class="section">
-<h3><a name="Contact_us"></a>Contact us</h3>
-<p>Please contact us at our project mailing list https://groups.google.com/group/prolobjectlink to debat over project evolution</p>
-<p>Thanks for contributing to Prolobjectlink!</p></div></div>
+<h2><a name="Project_Mailing_Lists"></a>Project Mailing Lists</h2><a name="Project_Mailing_Lists"></a>
+<p>These are the mailing lists that have been established for this project. For each list, there is a subscribe, unsubscribe, and an archive link.</p>
+<table border="0" class="table table-striped">
+<tr class="a">
+<th>Name</th>
+<th>Subscribe</th>
+<th>Unsubscribe</th>
+<th>Post</th>
+<th>Archive</th></tr>
+<tr class="b">
+<td>Developer List</td>
+<td><a class="externalLink" href="mailto:prolobjectlink+subscribe@googlegroups.com">Subscribe</a></td>
+<td><a class="externalLink" href="mailto:prolobjectlink+unsubscribe@googlegroups.com">Unsubscribe</a></td>
+<td><a class="externalLink" href="mailto:prolobjectlink@googlegroups.com">Post</a></td>
+<td><a class="externalLink" href="http://groups.google.com/group/prolobjectlink">groups.google.com</a></td></tr>
+<tr class="a">
+<td>Users List</td>
+<td><a class="externalLink" href="mailto:prolobjectlink+subscribe@googlegroups.com">Subscribe</a></td>
+<td><a class="externalLink" href="mailto:prolobjectlink+unsubscribe@googlegroups.com">Unsubscribe</a></td>
+<td><a class="externalLink" href="mailto:prolobjectlink@googlegroups.com">Post</a></td>
+<td><a class="externalLink" href="http://groups.google.com/group/prolobjectlink">groups.google.com</a></td></tr></table></div>
                   </div>
             </div>
           </div>

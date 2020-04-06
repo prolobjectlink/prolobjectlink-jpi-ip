@@ -147,7 +147,7 @@ public abstract class InterPrologProvider extends AbstractProvider implements Pr
 		return new InterPrologStructure(this, left, operator, right);
 	}
 
-	public PrologTerm newReference(Object reference) {
+	public final PrologTerm newReference(Object reference) {
 		throw new UnsupportedOperationException("newReference(Object reference)");
 	}
 
