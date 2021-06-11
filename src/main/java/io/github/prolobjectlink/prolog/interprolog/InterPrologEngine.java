@@ -43,6 +43,7 @@ import io.github.prolobjectlink.prolog.PrologClause;
 import io.github.prolobjectlink.prolog.PrologEngine;
 import io.github.prolobjectlink.prolog.PrologIndicator;
 import io.github.prolobjectlink.prolog.PrologOperator;
+import io.github.prolobjectlink.prolog.PrologProgram;
 import io.github.prolobjectlink.prolog.PrologProvider;
 import io.github.prolobjectlink.prolog.PrologQuery;
 import io.github.prolobjectlink.prolog.PrologTerm;
@@ -280,6 +281,10 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 
 	public final int getProgramSize() {
 		return program.size();
+	}
+
+	public PrologProgram getProgram() {
+		return new InterPrologScript(this);
 	}
 
 	public final Set<PrologIndicator> getPredicates() {
