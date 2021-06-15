@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.2.5" timestamp="2021-06-15T01:16:09.681">
+<pmd version="4.2.5" timestamp="2021-06-19T23:01:35.933">
 <file name="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologConverter.java">
 <violation beginline="20" endline="218" begincolumn="1" endcolumn="3" rule="TooManyStaticImports" ruleset="Import Statement Rules" package="io.github.prolobjectlink.prolog.interprolog" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#TooManyStaticImports" priority="3">
 Too many static imports may lead to messy code
@@ -11,10 +11,10 @@ Avoid unused private fields such as 'LIST_FUNCTOR'.
 </violation>
 </file>
 <file name="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologTerm.java">
-<violation beginline="20" endline="376" begincolumn="1" endcolumn="3" rule="TooManyStaticImports" ruleset="Import Statement Rules" package="io.github.prolobjectlink.prolog.interprolog" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#TooManyStaticImports" priority="3">
+<violation beginline="20" endline="372" begincolumn="1" endcolumn="3" rule="TooManyStaticImports" ruleset="Import Statement Rules" package="io.github.prolobjectlink.prolog.interprolog" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#TooManyStaticImports" priority="3">
 Too many static imports may lead to messy code
 </violation>
-<violation beginline="363" endline="363" begincolumn="22" endcolumn="76" rule="UnusedPrivateMethod" ruleset="Unused Code Rules" package="io.github.prolobjectlink.prolog.interprolog" class="InterPrologTerm" method="enumerateVariables" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateMethod" priority="3">
+<violation beginline="359" endline="359" begincolumn="22" endcolumn="76" rule="UnusedPrivateMethod" ruleset="Unused Code Rules" package="io.github.prolobjectlink.prolog.interprolog" class="InterPrologTerm" method="enumerateVariables" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateMethod" priority="3">
 Avoid unused private methods such as 'enumerateVariables(List,TermModel)'.
 </violation>
 </file>

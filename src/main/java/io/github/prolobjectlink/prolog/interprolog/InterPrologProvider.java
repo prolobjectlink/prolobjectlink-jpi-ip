@@ -61,10 +61,6 @@ public abstract class InterPrologProvider extends AbstractProvider implements Pr
 		return toTermArray(InterPrologUtil.parseTerms(stringTerms), PrologTerm[].class);
 	}
 
-	public final boolean isCompliant() {
-		return false;
-	}
-
 	public final PrologTerm prologNil() {
 		return new InterPrologNil(this);
 	}

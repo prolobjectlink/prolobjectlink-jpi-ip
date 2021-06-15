@@ -168,10 +168,6 @@ abstract class InterPrologTerm extends AbstractTerm implements PrologTerm {
 		return isObjectType() || isNullType();
 	}
 
-	public final Object getObject() {
-		return null;
-	}
-
 	public int getArity() {
 		return value.getChildCount();
 	}
