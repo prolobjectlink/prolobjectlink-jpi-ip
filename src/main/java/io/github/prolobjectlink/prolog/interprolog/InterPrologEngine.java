@@ -62,7 +62,7 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	private static final TermModel BODY = new TermModel("true");
 
 	// cache file in OS temporal directory
-	public static String cache = null;
+	private static String cache = null;
 
 	// XSB native engine
 	public static AbstractPrologEngine engine;
@@ -136,6 +136,10 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 		asserta(parser.parseTerm(stringClause));
 	}
 
+	public final void asserta(PrologTerm term) {
+		asserta(fromTerm(term, TermModel.class));
+	}
+
 	public final void asserta(PrologTerm head, PrologTerm... body) {
 		asserta(fromTerm(head, body, TermModel.class));
 	}
@@ -149,6 +153,10 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 		assertz(parser.parseTerm(stringClause));
 	}
 
+	public final void assertz(PrologTerm term) {
+		assertz(fromTerm(term, TermModel.class));
+	}
+
 	public final void assertz(PrologTerm head, PrologTerm... body) {
 		assertz(fromTerm(head, body, TermModel.class));
 	}
@@ -160,6 +168,10 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 
 	public final boolean clause(String stringClause) {
 		return clause(parser.parseTerm(stringClause));
+	}
+
+	public final boolean clause(PrologTerm term) {
+		return clause(fromTerm(term, TermModel.class));
 	}
 
 	public final boolean clause(PrologTerm head, PrologTerm... body) {
@@ -184,17 +196,27 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 		retract(parser.parseTerm(stringClause));
 	}
 
+	public final void retract(PrologTerm term) {
+		retract(fromTerm(term, TermModel.class));
+	}
+
 	public final void retract(PrologTerm head, PrologTerm... body) {
 		retract(provider.fromTerm(head, body, TermModel.class));
 	}
 
 	private void retract(TermModel t) {
-		program.remove(t);
+		program.remove((Object) t);
 		persist(cache);
 	}
 
 	public final PrologQuery query(String stringQuery) {
 		return new InterPrologQuery(this, cache, stringQuery);
+	}
+
+	public final PrologQuery query(PrologTerm term) {
+		StringBuilder buffer = new StringBuilder();
+		buffer.append("" + term + ".");
+		return query("" + buffer + "");
 	}
 
 	public final PrologQuery query(PrologTerm[] terms) {
@@ -327,7 +349,7 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	}
 
 	public final void dispose() {
-		// engine.deleteTempFiles();
+		// engine.deleteTempFiles()
 		File c = new File(cache);
 		c.deleteOnExit();
 		program.clear();

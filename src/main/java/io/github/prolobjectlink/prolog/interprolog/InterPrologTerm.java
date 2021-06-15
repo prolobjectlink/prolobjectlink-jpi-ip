@@ -29,6 +29,7 @@ import static io.github.prolobjectlink.prolog.PrologTermType.INTEGER_TYPE;
 import static io.github.prolobjectlink.prolog.PrologTermType.LIST_TYPE;
 import static io.github.prolobjectlink.prolog.PrologTermType.LONG_TYPE;
 import static io.github.prolobjectlink.prolog.PrologTermType.NIL_TYPE;
+import static io.github.prolobjectlink.prolog.PrologTermType.OBJECT_TYPE;
 import static io.github.prolobjectlink.prolog.PrologTermType.STRUCTURE_TYPE;
 import static io.github.prolobjectlink.prolog.PrologTermType.TRUE_TYPE;
 import static io.github.prolobjectlink.prolog.PrologTermType.VARIABLE_TYPE;
@@ -61,14 +62,6 @@ abstract class InterPrologTerm extends AbstractTerm implements PrologTerm {
 	protected InterPrologTerm(int type, PrologProvider provider, TermModel value) {
 		super(type, provider);
 		this.value = value;
-	}
-
-	public String getIndicator() {
-		return value.getFunctorArity();
-	}
-
-	public boolean hasIndicator(String functor, int arity) {
-		return getIndicator().equals(functor + "/" + arity);
 	}
 
 	public final boolean isAtom() {
@@ -152,27 +145,27 @@ abstract class InterPrologTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	public final boolean isTrueType() {
-		return false;
+		return getObject().equals(true);
 	}
 
 	public final boolean isFalseType() {
-		return false;
+		return getObject().equals(false);
 	}
 
 	public final boolean isNullType() {
-		return false;
+		return getObject() == null;
 	}
 
 	public final boolean isVoidType() {
-		return false;
+		return getObject() == void.class;
 	}
 
 	public final boolean isObjectType() {
-		return false;
+		return getType() == OBJECT_TYPE;
 	}
 
 	public final boolean isReference() {
-		return false;
+		return isObjectType() || isNullType();
 	}
 
 	public final Object getObject() {

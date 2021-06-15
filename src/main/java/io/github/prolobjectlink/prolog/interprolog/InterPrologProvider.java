@@ -30,6 +30,7 @@ import io.github.prolobjectlink.prolog.PrologConverter;
 import io.github.prolobjectlink.prolog.PrologDouble;
 import io.github.prolobjectlink.prolog.PrologFloat;
 import io.github.prolobjectlink.prolog.PrologInteger;
+import io.github.prolobjectlink.prolog.PrologJavaConverter;
 import io.github.prolobjectlink.prolog.PrologList;
 import io.github.prolobjectlink.prolog.PrologLogger;
 import io.github.prolobjectlink.prolog.PrologLong;
@@ -147,8 +148,47 @@ public abstract class InterPrologProvider extends AbstractProvider implements Pr
 		return new InterPrologStructure(this, left, operator, right);
 	}
 
+	public final PrologTerm newEntry(PrologTerm key, PrologTerm value) {
+		return new InterPrologEntry(this, key, value);
+	}
+
+	public final PrologTerm newEntry(Object key, Object value) {
+		PrologJavaConverter transformer = getJavaConverter();
+		PrologTerm keyTerm = transformer.toTerm(key);
+		PrologTerm valueTerm = transformer.toTerm(value);
+		return new InterPrologEntry(this, keyTerm, valueTerm);
+	}
+
+	public final PrologTerm newMap(Map<PrologTerm, PrologTerm> map) {
+		return new InterPrologMap(this, map);
+	}
+
+	public final PrologTerm newMap(int initialCapacity) {
+		return new InterPrologMap(this, initialCapacity);
+	}
+
+	public final PrologTerm newMap() {
+		return new InterPrologMap(this);
+	}
+
 	public final PrologTerm newReference(Object reference) {
-		throw new UnsupportedOperationException("newReference(Object reference)");
+		return new InterPrologReference(this, reference);
+	}
+
+	public PrologTerm falseReference() {
+		return newReference(false);
+	}
+
+	public PrologTerm trueReference() {
+		return newReference(true);
+	}
+
+	public PrologTerm nullReference() {
+		return newReference(null);
+	}
+
+	public PrologTerm voidReference() {
+		return newReference(void.class);
 	}
 
 	public final PrologLogger getLogger() {

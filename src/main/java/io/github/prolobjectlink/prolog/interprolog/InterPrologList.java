@@ -127,10 +127,6 @@ class InterPrologList extends InterPrologTerm implements PrologList {
 	}
 
 	@Override
-	public final String getIndicator() {
-		return getFunctor() + "/" + getArity();
-	}
-
 	public String toString() {
 		StringBuilder string = new StringBuilder("[");
 		Iterator<PrologTerm> i = iterator();

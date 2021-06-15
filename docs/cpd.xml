@@ -18,7 +18,7 @@
 </duplication>
 <duplication lines="12" tokens="100">
 <file line="48" path="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologQuery.java"/>
-<file line="370" path="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologTerm.java"/>
+<file line="363" path="C:\Users\Jose Zalacain\Documents\eclipse-java-photon-workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologTerm.java"/>
 <codefragment>
 <![CDATA[
 	private void enumerateVariables(List<String> vector, TermModel term) {
