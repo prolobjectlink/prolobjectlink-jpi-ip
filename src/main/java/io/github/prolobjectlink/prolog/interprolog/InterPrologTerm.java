@@ -116,7 +116,7 @@ abstract class InterPrologTerm extends AbstractTerm implements PrologTerm {
 	}
 
 	public final boolean isCompound() {
-		return !isNumber() && getArity() > 0;
+		return !isNumber() && !isVariable() && getArity() > 0;
 	}
 
 	public final boolean isEvaluable() {
