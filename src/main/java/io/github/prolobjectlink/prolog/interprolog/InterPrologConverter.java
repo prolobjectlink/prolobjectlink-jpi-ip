@@ -29,6 +29,7 @@ import static io.github.prolobjectlink.prolog.PrologTermType.INTEGER_TYPE;
 import static io.github.prolobjectlink.prolog.PrologTermType.LIST_TYPE;
 import static io.github.prolobjectlink.prolog.PrologTermType.LONG_TYPE;
 import static io.github.prolobjectlink.prolog.PrologTermType.NIL_TYPE;
+import static io.github.prolobjectlink.prolog.PrologTermType.OBJECT_TYPE;
 import static io.github.prolobjectlink.prolog.PrologTermType.STRUCTURE_TYPE;
 import static io.github.prolobjectlink.prolog.PrologTermType.TRUE_TYPE;
 import static io.github.prolobjectlink.prolog.PrologTermType.VARIABLE_TYPE;
@@ -190,6 +191,8 @@ public abstract class InterPrologConverter extends AbstractConverter<TermModel> 
 				return new TermModel(ox.node, arguments);
 			}
 			return new TermModel(functor, arguments);
+		case OBJECT_TYPE:
+			return InterPrologReference.set(term.getObject());
 		default:
 			throw new UnknownTermError(term);
 		}

@@ -40,7 +40,6 @@ class InterPrologList extends InterPrologTerm implements PrologList {
 
 	static final TermModel EMPTY = new TermModel("[]", true);
 	private static final String EMPTY_FUNCTOR = "[]";
-	private static final String LIST_FUNCTOR = ".";
 
 	protected InterPrologList(PrologProvider provider) {
 		super(LIST_TYPE, provider, EMPTY);
