@@ -21,6 +21,8 @@ package io.github.prolobjectlink.prolog.interprolog;
 
 import static io.github.prolobjectlink.prolog.PrologTermType.VARIABLE_TYPE;
 
+import com.declarativa.interprolog.TermModel;
+
 import io.github.prolobjectlink.prolog.ArityError;
 import io.github.prolobjectlink.prolog.FunctorError;
 import io.github.prolobjectlink.prolog.PrologProvider;
@@ -44,6 +46,18 @@ class InterPrologVariable extends InterPrologTerm implements PrologVariable {
 
 	InterPrologVariable(PrologProvider provider, String name, int position) {
 		super(VARIABLE_TYPE, provider, new TermVariable(name, position));
+	}
+
+	InterPrologVariable(int type, PrologProvider provider) {
+		super(type, provider);
+	}
+
+	InterPrologVariable(int type, PrologProvider provider, String name) {
+		super(type, provider, new TermVariable(name, vIndexer++));
+	}
+
+	InterPrologVariable(int type, PrologProvider provider, TermModel var) {
+		super(type, provider, var);
 	}
 
 	public int getArity() {
@@ -71,7 +85,7 @@ class InterPrologVariable extends InterPrologTerm implements PrologVariable {
 		value = new TermVariable(name, old.getPosition());
 	}
 
-	public final PrologTerm[] getArguments() {
+	public PrologTerm[] getArguments() {
 		return new InterPrologFloat[0];
 	}
 
