@@ -187,60 +187,6 @@ public abstract class InterPrologProvider extends AbstractProvider implements Pr
 		return newReference(void.class);
 	}
 
-	public PrologTerm newField(PrologTerm name) {
-		return new InterPrologField(this, name);
-	}
-
-	public PrologTerm newField(String name) {
-		return new InterPrologField(this, name);
-	}
-
-	public PrologTerm newField(PrologTerm name, PrologTerm type) {
-		return new InterPrologTypedField(this, name, type);
-	}
-
-	public PrologTerm newField(String name, String type) {
-		PrologTerm oname = newVariable(name, 0);
-		PrologTerm otype = newVariable(type, 1);
-		return new InterPrologTypedField(this, oname, otype);
-	}
-
-	public PrologTerm newResult(PrologTerm name) {
-		return new InterPrologResult(this, name);
-	}
-
-	public PrologTerm newResult(String name) {
-		return new InterPrologResult(this, name);
-	}
-
-	public PrologTerm newResult(PrologTerm name, PrologTerm type) {
-		return new InterPrologTypedResult(this, name, type);
-	}
-
-	public PrologTerm newResult(String name, String type) {
-		PrologTerm oname = newVariable(name, 0);
-		PrologTerm otype = newVariable(type, 1);
-		return new InterPrologTypedResult(this, oname, otype);
-	}
-
-	public PrologTerm newParameter(PrologTerm name) {
-		return new InterPrologParameter(this, name);
-	}
-
-	public PrologTerm newParameter(String name) {
-		return new InterPrologParameter(this, name);
-	}
-
-	public PrologTerm newParameter(PrologTerm name, PrologTerm type) {
-		return new InterPrologTypedParameter(this, name, type);
-	}
-
-	public PrologTerm newParameter(String name, String type) {
-		PrologTerm oname = newVariable(name, 0);
-		PrologTerm otype = newVariable(type, 1);
-		return new InterPrologTypedParameter(this, oname, otype);
-	}
-
 	public final PrologLogger getLogger() {
 		return logger;
 	}
