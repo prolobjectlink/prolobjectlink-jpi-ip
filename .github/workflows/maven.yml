@@ -15,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - run: wget https://www.dropbox.com/s/m4pgwk81p3w9cxr/interprolog.jar?dl=0 -O /home/travis/build/prolobjectlink/prolobjectlink-jpi-ip/interprolog.jar
+    - run: mvn install:install-file -Dfile=interprolog.jar -DgroupId=com.declarativa.interprolog -DartifactId=interprolog -Dversion=2.2a4 -Dpackaging=jar
+    
     - uses: actions/checkout@v3
     - name: Set up JDK 8
       uses: actions/setup-java@v3
