@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - run: wget https://www.dropbox.com/s/m4pgwk81p3w9cxr/interprolog.jar?dl=0 -O /home/travis/build/prolobjectlink/prolobjectlink-jpi-ip/interprolog.jar
+    - run: wget https://public.sn.files.1drv.com/y4mhest3q1iocPDCb7pbf7UuMHKMX_6dyyQ7nbbVKD6BBJuis68k_2kqigJ7CB2M0xsZqnr-H9tK1F9JxtCjlsLx9VDP28hVuCPFpA0oujYajf920llhrRtORSwae89jDnqtj7TsESu_Mcf_YEpQvsSR1FyOYx_sqnZCr5hJ2zEruVUUsW08xROOdqsTHrYJV2o72f9jGlGpC5shZOsZy6pwS1C9RxSYAwS659SqXeLl38 -O interprolog.jar
     - run: mvn install:install-file -Dfile=interprolog.jar -DgroupId=com.declarativa.interprolog -DartifactId=interprolog -Dversion=2.2a4 -Dpackaging=jar
     
     - uses: actions/checkout@v3
