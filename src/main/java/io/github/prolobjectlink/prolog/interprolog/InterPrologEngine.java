@@ -248,7 +248,18 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	}
 
 	public final boolean currentPredicate(String functor, int arity) {
-		return engine.deterministicGoal("current_predicate(" + functor + "/" + arity + ")");
+//		return engine.deterministicGoal("current_predicate(" + functor + "/" + arity + ")");
+		for (PrologClause clause : getProgramClauses()) {
+			if (clause.hasIndicator(functor, arity)) {
+				return true;
+			}
+		}
+		for (PrologIndicator indicator : getBuiltIns()) {
+			if (indicator.getFunctor().equals(functor) && indicator.getArity() == arity) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public final boolean currentOperator(int priority, String specifier, String operator) {

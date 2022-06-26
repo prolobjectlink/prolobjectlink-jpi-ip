@@ -22,6 +22,7 @@ package io.github.prolobjectlink.prolog.interprolog;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +43,8 @@ final class InterPrologQuery extends AbstractQuery implements PrologQuery {
 
 	private InterPrologParser ip = new InterPrologParser();
 	private final List<String> variables = new ArrayList<String>();
+	private final Map<String, String> directNames = new LinkedHashMap<String, String>();
+	private final Map<String, String> inverseNames = new LinkedHashMap<String, String>();
 	private List<Map<String, Object>> allSolutions = new ArrayList<Map<String, Object>>();
 	private Iterator<Map<String, Object>> itr;
 
