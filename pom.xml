@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.prolobjectlink</groupId>
 	<artifactId>prolobjectlink-jpi-ip</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.2-SNAPSHOT</version>
 	<name>prolobjectlink-jpi-ip</name>
 	<packaging>bundle</packaging>
 	<description>Java Prolog Interface Implementation over Interprolog</description>

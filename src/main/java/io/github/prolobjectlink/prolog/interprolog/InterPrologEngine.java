@@ -65,7 +65,6 @@ public abstract class InterPrologEngine extends AbstractEngine implements Prolog
 	// cache file in OS temporal directory
 	private static String cache = null;
 
-	// XSB native engine
 	public static AbstractPrologEngine engine;
 
 	// parser to obtain terms from text
