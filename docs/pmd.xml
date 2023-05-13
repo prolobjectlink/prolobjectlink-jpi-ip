@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.2.5" timestamp="2023-01-07T11:32:41.885">
-<file name="C:\eclipse-jee-2022-03-R-workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologConverter.java">
+<pmd version="4.2.5" timestamp="2023-05-13T12:53:10.481">
+<file name="C:\prolobjectlink-dev\workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologConverter.java">
 <violation beginline="20" endline="221" begincolumn="1" endcolumn="3" rule="TooManyStaticImports" ruleset="Import Statement Rules" package="io.github.prolobjectlink.prolog.interprolog" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#TooManyStaticImports" priority="3">
 Too many static imports may lead to messy code
 </violation>
 </file>
-<file name="C:\eclipse-jee-2022-03-R-workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologQuery.java">
+<file name="C:\prolobjectlink-dev\workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologQuery.java">
 <violation beginline="46" endline="46" begincolumn="43" endcolumn="53" rule="UnusedPrivateField" ruleset="Unused Code Rules" package="io.github.prolobjectlink.prolog.interprolog" class="InterPrologQuery" variable="directNames" externalInfoUrl="http://pmd.sourceforge.net/rules/unusedcode.html#UnusedPrivateField" priority="3">
 Avoid unused private fields such as 'directNames'.
 </violation>
@@ -13,7 +13,7 @@ Avoid unused private fields such as 'directNames'.
 Avoid unused private fields such as 'inverseNames'.
 </violation>
 </file>
-<file name="C:\eclipse-jee-2022-03-R-workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologTerm.java">
+<file name="C:\prolobjectlink-dev\workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologTerm.java">
 <violation beginline="20" endline="372" begincolumn="1" endcolumn="3" rule="TooManyStaticImports" ruleset="Import Statement Rules" package="io.github.prolobjectlink.prolog.interprolog" externalInfoUrl="http://pmd.sourceforge.net/rules/imports.html#TooManyStaticImports" priority="3">
 Too many static imports may lead to messy code
 </violation>
@@ -21,7 +21,7 @@ Too many static imports may lead to messy code
 Avoid unused private methods such as 'enumerateVariables(List,TermModel)'.
 </violation>
 </file>
-<file name="C:\eclipse-jee-2022-03-R-workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologUtil.java">
+<file name="C:\prolobjectlink-dev\workspace\prolobjectlink-jpi-ip\src\main\java\io\github\prolobjectlink\prolog\interprolog\InterPrologUtil.java">
 <violation beginline="46" endline="140" begincolumn="22" endcolumn="9" rule="UnnecessaryFinalModifier" ruleset="Basic Rules" package="io.github.prolobjectlink.prolog.interprolog" class="InterPrologUtil" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#UnnecessaryFinalModifier" priority="3">
 Unnecessary final modifier in final class
 </violation>
